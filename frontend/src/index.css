@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Poppins:wght@200&display=swap");
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+}
+
+:root {
+  --primary-color: #5bb7a8;
+  --secondary-color: white;
+  --text-color: black;
+  --shadow-color: #c7e0f0;
+}
+
+/* for pagecontainer */
+.pageContainer {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  /* border: 1px solid red; */
+}
+
+/* for navbar */
+.navbar {
+  height: 50px;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--primary-color);
+}
+
+/* for sidebar */
+.sidebarContainer {
+  width: 15%;
+  height: 100%;
+  border: 1px solid var(--primary-color);
+}
+
+/* for newsfeed container */
+.newsfeed_container {
+  width: 65%;
+  height: 100%;
+  border: 1px solid var(--primary-color);
+}
+
+/* for suggestionbar */
+.suggestionbar_container {
+  width: 30%;
+  height: 100%;
+  border: 1px solid var(--primary-color);
+}
