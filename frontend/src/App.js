@@ -1,21 +1,15 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Sidebar from "./components/Sidebar";
-import Newsfeed from "./components/Newsfeed";
-import SuggestionBar from "./components/SuggestionBar";
-import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
 
 const App = () => {
   return (
     <>
-      <Navbar />
-      <div className="pageContainer">
-        <Sidebar />
-        <Routes>
-          <Route path="/" element={<Newsfeed />} />
-        </Routes>
-        <SuggestionBar />
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </>
   );
 };
