@@ -11,7 +11,7 @@ const Home = () => {
     <div className="pageContainer">
       <Sidebar />
       <Routes>
-        <Route path="/" element={<Newsfeed />} />
+        <Route path="/" element={<UserProfile />} />
         {/* <Route path="/jobs" element={<Jobs />} /> */}
       </Routes>
       <SuggestionBar />

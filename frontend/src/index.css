@@ -30,7 +30,6 @@ html {
 }
 
 /* for sidebar */
-/* for sidebar */
 .sidebarContainer {
   width: 15%;
   height: 100%;
@@ -39,6 +38,7 @@ html {
 }
 
 .sidebarTitle {
+  margin-top: 20px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -59,6 +59,7 @@ html {
 .sidebar-menu {
   list-style-type: none;
   padding: 0;
+  margin-top: 30px;
   width: 100%;
 }
 
@@ -76,7 +77,9 @@ html {
 }
 
 .sidebar-item a:hover {
-  background-color: #34495e;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
 }
 
 .sidebar-icon {
