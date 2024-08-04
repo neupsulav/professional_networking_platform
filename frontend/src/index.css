@@ -67,16 +67,26 @@ html {
   width: 100%;
 }
 
-.sidebar-item a {
+.sidebar-item div {
   display: flex;
   align-items: center;
   padding: 15px;
   text-decoration: none;
   color: black;
   transition: background-color 0.3s;
+  cursor: pointer;
 }
 
-.sidebar-item a:hover {
+.active-link {
+  background-color: var(--primary-color);
+}
+
+.active-link div {
+  color: white;
+  font-weight: bold;
+}
+
+.sidebar-item div:hover {
   background-color: var(--primary-color);
   color: white;
   font-weight: bold;

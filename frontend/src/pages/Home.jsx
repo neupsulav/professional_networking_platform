@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
-import { Routes, Route } from "react-router-dom";
 import Newsfeed from "../components/Newsfeed";
 import SuggestionBar from "../components/SuggestionBar";
 import Jobs from "../components/Jobs";
 import UserProfile from "../components/userProfile";
 
 const Home = () => {
+  const [selectedPath, setSelectedPath] = useState(0);
+
+  //   to navigate using sidebar options
+  const navigateComponents = () => {
+    switch (selectedPath) {
+      case 0:
+        return <Newsfeed />;
+      case 1:
+        return <UserProfile />;
+      case 2:
+        return <Jobs />;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <div className="pageContainer">
-      <Sidebar />
-      <Routes>
-        <Route path="/" element={<UserProfile />} />
-        {/* <Route path="/jobs" element={<Jobs />} /> */}
-      </Routes>
+      <Sidebar selectedPath={selectedPath} setSelectedPath={setSelectedPath} />
+      {navigateComponents(selectedPath)}
       <SuggestionBar />
     </div>
   );

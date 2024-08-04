@@ -7,8 +7,9 @@ import {
   FaBell,
   FaCog,
 } from "react-icons/fa";
+
 // create a leftsidebar
-const Sidebar = () => { 
+const Sidebar = ({ selectedPath, setSelectedPath }) => {
   return (
     <div className="sidebarContainer">
       <div className="sidebarTitle">
@@ -16,41 +17,89 @@ const Sidebar = () => {
         <p>HamroSanjal</p>
       </div>
       <ul className="sidebar-menu">
-        <li className="sidebar-item">
-          <a href="#home">
+        <li
+          className={
+            selectedPath === 0 ? "active-link sidebar-item" : "sidebar-item"
+          }
+        >
+          <div
+            onClick={() => {
+              setSelectedPath(0);
+            }}
+          >
             <FaHome className="sidebar-icon" />
             Home
-          </a>
+          </div>
         </li>
-        <li className="sidebar-item">
-          <a href="#profile">
+        <li
+          className={
+            selectedPath === 1 ? "active-link sidebar-item" : "sidebar-item"
+          }
+        >
+          <div
+            onClick={() => {
+              setSelectedPath(1);
+            }}
+          >
             <FaUser className="sidebar-icon" />
             Profile
-          </a>
+          </div>
         </li>
-        <li className="sidebar-item">
-          <a href="#jobs">
+        <li
+          className={
+            selectedPath === 2 ? "active-link sidebar-item" : "sidebar-item"
+          }
+        >
+          <div
+            onClick={() => {
+              setSelectedPath(2);
+            }}
+          >
             <FaBriefcase className="sidebar-icon" />
             Jobs
-          </a>
+          </div>
         </li>
-        <li className="sidebar-item">
-          <a href="#network">
+        <li
+          className={
+            selectedPath === 3 ? "active-link sidebar-item" : "sidebar-item"
+          }
+        >
+          <div
+            onClick={() => {
+              setSelectedPath(3);
+            }}
+          >
             <FaUsers className="sidebar-icon" />
             Network
-          </a>
+          </div>
         </li>
-        <li className="sidebar-item">
-          <a href="#notification">
+        <li
+          className={
+            selectedPath === 4 ? "active-link sidebar-item" : "sidebar-item"
+          }
+        >
+          <div
+            onClick={() => {
+              setSelectedPath(4);
+            }}
+          >
             <FaBell className="sidebar-icon" />
             Notification
-          </a>
+          </div>
         </li>
-        <li className="sidebar-item">
-          <a href="#settings">
+        <li
+          className={
+            selectedPath === 5 ? "active-link sidebar-item" : "sidebar-item"
+          }
+        >
+          <div
+            onClick={() => {
+              setSelectedPath(5);
+            }}
+          >
             <FaCog className="sidebar-icon" />
             Settings
-          </a>
+          </div>
         </li>
       </ul>
     </div>
