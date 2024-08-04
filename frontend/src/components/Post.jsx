@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineLike } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
 import { CiShare2 } from "react-icons/ci";
 import { IoSend } from "react-icons/io5";
 
 const Post = () => {
+  const [seeComments, setSeeComments] = useState(false);
+
   return (
     <div className="postContainer">
       <div className="postIdentity">
@@ -37,7 +39,13 @@ const Post = () => {
       <div className="commentContainer">
         <div className="likeCommentCount">
           <p>100 Likes</p>
-          <p>20 Comments</p>
+          <p
+            onClick={() => {
+              setSeeComments(!seeComments);
+            }}
+          >
+            20 Comments
+          </p>
         </div>
 
         <div className="commentInputContainer">
@@ -48,6 +56,114 @@ const Post = () => {
             placeholder="Add a comment..."
           />
           <IoSend className="postCommentIcon" />
+        </div>
+      </div>
+
+      {/* {seeComments && (
+        
+      )} */}
+      <div
+        className={
+          seeComments ? "commentsContainer commentVisible" : "commentsContainer"
+        }
+      >
+        <p className="commentsContainerTitle">Comments</p>
+        <div className="commentItems">
+          <div className="commentItem">
+            <div>
+              <img
+                src="https://plus.unsplash.com/premium_photo-1664536392896-cd1743f9c02c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fHww"
+                alt="profile"
+              />
+              <div>
+                <p className="commentItem_name">
+                  Sandip Neupane <span>2h ago</span>
+                </p>
+                <p className="commentItem_position">Full Stack Developer</p>
+              </div>
+            </div>
+            <div className="commentItem_content">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+              quaerat ea rerum voluptatum at sit laborum eligendi sequi labore
+              ipsum.
+            </div>
+          </div>
+          <div className="commentItem">
+            <div>
+              <img
+                src="https://plus.unsplash.com/premium_photo-1664536392896-cd1743f9c02c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fHww"
+                alt="profile"
+              />
+              <div>
+                <p className="commentItem_name">
+                  Sandip Neupane <span>2h ago</span>
+                </p>
+                <p className="commentItem_position">Full Stack Developer</p>
+              </div>
+            </div>
+            <div className="commentItem_content">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+              quaerat ea rerum voluptatum at sit laborum eligendi sequi labore
+              ipsum.
+            </div>
+          </div>
+          <div className="commentItem">
+            <div>
+              <img
+                src="https://plus.unsplash.com/premium_photo-1664536392896-cd1743f9c02c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fHww"
+                alt="profile"
+              />
+              <div>
+                <p className="commentItem_name">
+                  Sandip Neupane <span>2h ago</span>
+                </p>
+                <p className="commentItem_position">Full Stack Developer</p>
+              </div>
+            </div>
+            <div className="commentItem_content">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+              quaerat ea rerum voluptatum at sit laborum eligendi sequi labore
+              ipsum.
+            </div>
+          </div>
+          <div className="commentItem">
+            <div>
+              <img
+                src="https://plus.unsplash.com/premium_photo-1664536392896-cd1743f9c02c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fHww"
+                alt="profile"
+              />
+              <div>
+                <p className="commentItem_name">
+                  Sandip Neupane <span>2h ago</span>
+                </p>
+                <p className="commentItem_position">Full Stack Developer</p>
+              </div>
+            </div>
+            <div className="commentItem_content">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+              quaerat ea rerum voluptatum at sit laborum eligendi sequi labore
+              ipsum.
+            </div>
+          </div>
+          <div className="commentItem">
+            <div>
+              <img
+                src="https://plus.unsplash.com/premium_photo-1664536392896-cd1743f9c02c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fHww"
+                alt="profile"
+              />
+              <div>
+                <p className="commentItem_name">
+                  Sandip Neupane <span>2h ago</span>
+                </p>
+                <p className="commentItem_position">Full Stack Developer</p>
+              </div>
+            </div>
+            <div className="commentItem_content">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+              quaerat ea rerum voluptatum at sit laborum eligendi sequi labore
+              ipsum.
+            </div>
+          </div>
         </div>
       </div>
     </div>
