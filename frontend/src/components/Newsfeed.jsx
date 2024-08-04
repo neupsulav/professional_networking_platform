@@ -1,9 +1,17 @@
 import React from "react";
+import Post from "./Post";
 
 const Newsfeed = () => {
   return (
     <div className="newsfeed_container">
-      <h1>This is newsfeed</h1>
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
     </div>
   );
 };
