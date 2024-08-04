@@ -7,8 +7,8 @@ import {
   FaBell,
   FaCog,
 } from "react-icons/fa";
-
-const Sidebar = () => {
+// create a leftsidebar
+const Sidebar = () => { 
   return (
     <div className="sidebarContainer">
       <div className="sidebarTitle">
