@@ -321,3 +321,80 @@ html {
   font-size: 30px;
   color: var(--primary-color);
 }
+
+/* for jobs container */
+.jobs_container {
+  width: 55%;
+  height: 100%;
+  background-color: #f3f3f3;
+  border-radius: 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  overflow-y: scroll;
+}
+
+.jobs_container::-webkit-scrollbar {
+  visibility: hidden;
+}
+
+/* for job container */
+.job_container {
+  width: 90%;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.job_basic_details {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 30px;
+  flex-direction: row;
+  margin-top: 15px;
+}
+
+.job_details_items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.job_details_items p {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.job_details_items_icon_location {
+  color: red;
+  font-size: 25px;
+}
+
+.job_details_items_icon_salary {
+  color: green;
+  font-size: 25px;
+}
+
+.see_job_details_btn {
+  margin-top: 15px;
+  padding: 3px;
+  width: 130px;
+  height: 30px;
+  background-color: var(--primary-color);
+  border: none;
+  color: var(--secondary-color);
+  border-radius: 5px;
+  font-weight: bold;
+  transition: 0.5s;
+}
+
+.see_job_details_btn:hover {
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+  box-shadow: 3px 3px 5px var(--shadow-color);
+  cursor: pointer;
+}

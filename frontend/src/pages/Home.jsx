@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar";
 import { Routes, Route } from "react-router-dom";
 import Newsfeed from "../components/Newsfeed";
 import SuggestionBar from "../components/SuggestionBar";
+import Jobs from "../components/Jobs";
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
       <Sidebar />
       <Routes>
         <Route path="/" element={<Newsfeed />} />
+        {/* <Route path="/jobs" element={<Jobs />} /> */}
       </Routes>
       <SuggestionBar />
     </div>
