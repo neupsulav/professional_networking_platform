@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Newsfeed from "../components/Newsfeed";
 import SuggestionBar from "../components/SuggestionBar";
 import Jobs from "../components/Jobs";
+import UserProfile from "../components/userProfile";
 
 const Home = () => {
   return (
