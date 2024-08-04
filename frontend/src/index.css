@@ -30,6 +30,7 @@ html {
 }
 
 /* for sidebar */
+/* for sidebar */
 .sidebarContainer {
   width: 15%;
   height: 100%;
@@ -53,6 +54,33 @@ html {
   height: 45px;
   width: 50px;
   border-radius: 30%;
+}
+
+.sidebar-menu {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+}
+
+.sidebar-item {
+  width: 100%;
+}
+
+.sidebar-item a {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  text-decoration: none;
+  color: black;
+  transition: background-color 0.3s;
+}
+
+.sidebar-item a:hover {
+  background-color: #34495e;
+}
+
+.sidebar-icon {
+  margin-right: 10px;
 }
 
 /* for newsfeed container */
