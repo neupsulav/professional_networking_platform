@@ -347,6 +347,15 @@ html {
   font-weight: bold;
 }
 
+.likeCommentCount p:nth-child(1) {
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.likeCommentCount p:nth-child(1):hover {
+  color: var(--primary-color);
+}
+
 .likeCommentCount p:nth-child(2) {
   cursor: pointer;
   transition: 0.8s;
@@ -457,6 +466,84 @@ html {
   margin-top: 15px;
   margin-bottom: 15px;
   width: 100%;
+}
+
+/* for liked by modal container */
+.overlay {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(243, 243, 243, 0.9);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.likedBYModalContainer {
+  /* display: none; */
+  position: absolute;
+  height: 400px;
+  width: 350px;
+  padding: 20px 10px 10px 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  overflow-y: scroll;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.likedBYModalContainer::-webkit-scrollbar {
+  visibility: hidden;
+}
+
+.likedBYModalContainer_title {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.closeModalBtn {
+  color: red;
+  font-size: 40px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.likedBYModalItems {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  width: 90%;
+}
+
+.likedBYModalItems img {
+  height: 50px;
+  width: 50px;
+}
+
+.likedByModalItem_name {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.likedByModal_position {
+  font-size: 12px;
+  color: var(--primary-color);
+  font-weight: bold;
 }
 
 /* for jobs container */
