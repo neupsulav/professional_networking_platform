@@ -43,8 +43,11 @@ const Job = () => {
           setSeeJobDetails(!seeJobDetails);
         }}
       >
-        {seeJobDetails ? "Hide details..." : "See details..."}
+        {seeJobDetails ? "Hide details" : "See details"}
       </button>
+
+      {/* job apply btn */}
+      <button className="apply_jobs_btn">Apply Job</button>
 
       {/* for job details */}
       <div
