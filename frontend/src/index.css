@@ -31,7 +31,7 @@ html {
 
 /* for sidebar */
 .sidebarContainer {
-  width: 15%;
+  width: 20%;
   height: 100%;
   background-color: white;
   border-radius: 15px;
@@ -623,6 +623,48 @@ html {
   cursor: pointer;
 }
 
+.jobDetailsContainer {
+  margin-top: 30px;
+  width: 95%;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+  opacity: 0;
+}
+
+.jobDetailsContainer::-webkit-scrollbar {
+  visibility: hidden;
+}
+
+.jobDetailsVisible {
+  overflow: scroll;
+  max-height: 1000px;
+  opacity: 1;
+}
+
+.jobDetailsContainerHeading {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.jobDetails_req {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.jobDetails_req p:nth-child(1) {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.jobDetails_req p:nth-child(2) {
+  font-size: 14px;
+}
+
 /* for profile container */
 .userProfileContainer {
   width: 55%;
@@ -650,6 +692,7 @@ html {
   padding: 10px 0px 90px 10px;
   background-color: rgb(228, 248, 216);
   border-radius: 20px;
+  width: 90%;
 }
 
 .profileDetails img {
@@ -708,6 +751,8 @@ html {
   font-size: 13px;
   font-weight: bold;
   margin-top: 20px;
+  text-align: justify;
+  width: 90%;
 }
 
 .profile_skills {
@@ -718,6 +763,7 @@ html {
   flex-wrap: wrap;
   gap: 15px;
   margin-top: 20px;
+  width: 90%;
 }
 
 .skill_item {

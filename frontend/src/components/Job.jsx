@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { GiTakeMyMoney } from "react-icons/gi";
 
 const Job = () => {
+  const [seeJobDetails, setSeeJobDetails] = useState(false);
+
   return (
     <div className="job_container">
       <div className="postIdentity">
@@ -35,7 +37,44 @@ const Job = () => {
           <p>Rs 20000</p>
         </div>
       </div>
-      <button className="see_job_details_btn">See details...</button>
+      <button
+        className="see_job_details_btn"
+        onClick={() => {
+          setSeeJobDetails(!seeJobDetails);
+        }}
+      >
+        {seeJobDetails ? "Hide details..." : "See details..."}
+      </button>
+
+      {/* for job details */}
+      <div
+        className={
+          seeJobDetails
+            ? "jobDetailsContainer jobDetailsVisible"
+            : "jobDetailsContainer"
+        }
+      >
+        <p className="jobDetailsContainerHeading">Job Description</p>
+        <div className="jobDetails_req">
+          <p>Requirements</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam
+            repellendus deserunt autem exercitationem odio atque nulla, rerum
+            error, temporibus illo possimus et excepturi! Ut tenetur libero quo
+            cupiditate quas neque.
+          </p>
+        </div>
+
+        <div className="jobDetails_req">
+          <p>Responsibilities</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
+            perspiciatis, quae sapiente molestiae cupiditate autem amet
+            voluptatibus unde a voluptas dignissimos, dolor repellendus ipsum
+            quo dolorem odit vitae. Veniam, pariatur?
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

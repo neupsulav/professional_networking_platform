@@ -53,7 +53,7 @@ const Post = () => {
                 setSeeComments(!seeComments);
               }}
             >
-              20 Comments
+              {seeComments ? "Hide Comments" : "20 Comments"}
             </p>
           </div>
 
