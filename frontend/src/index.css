@@ -114,6 +114,52 @@ html {
   visibility: hidden;
 }
 
+.createPostContainer {
+  padding: 10px 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 90%;
+  gap: 10px;
+  background-color: white;
+  height: 400px;
+}
+
+.createPostContainer img {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.createPostContainer input {
+  width: 75%;
+  height: 100%;
+  padding-left: 15px;
+  outline: none;
+  border: none;
+}
+
+.createPostContainer button {
+  height: 30px;
+  width: 60px;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.5s;
+}
+
+.createPostContainer button:hover {
+  color: var(--primary-color);
+  background-color: white;
+  border: 1px solid var(--primary-color);
+}
+
 /* for suggestionbar */
 .suggestionbar_container {
   width: 25%;
