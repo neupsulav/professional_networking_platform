@@ -863,3 +863,114 @@ html {
   font-size: 25px;
   font-weight: bold;
 }
+
+.signup-form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background-color: #f9f9f9;
+}
+
+.signup-form-container h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+.signup-button {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.signup-button:hover {
+  background-color: #0056b3;
+}
+.signup-options-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.options {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.option {
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  width: 200px;
+  text-align: center;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.option:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.option img {
+  width: 50px;
+  height: 50px;
+}
+
+.option h3 {
+  margin: 1rem 0 0.5rem;
+}
+
+.option p {
+  margin: 0 0 1rem;
+}
+
+.option button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.option button:hover {
+  background-color: #0056b3;
+}
+
+.back-button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #6c757d;
+  color: white;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background-color: #5a6268;
+}
