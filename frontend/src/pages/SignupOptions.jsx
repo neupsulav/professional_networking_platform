@@ -25,7 +25,7 @@ const SignupOptions = () => {
           </div>
           <div className="option" onClick={() => handleOptionClick("company")}>
             <img src={companyImage} alt="Company Icon" />
-            <h3>Employer</h3>
+            <h3>Company</h3>
             <p>Create free account to post vacancy!</p>
             <button>Register</button>
           </div>
