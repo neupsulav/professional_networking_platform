@@ -653,6 +653,16 @@ body::-webkit-scrollbar {
   font-size: 25px;
 }
 
+.job_details_items_icon_deadline {
+  color: red;
+  font-size: 25px;
+}
+
+.job_details_items_icon_people {
+  color: black;
+  font-size: 25px;
+}
+
 .see_job_details_btn {
   margin-top: 15px;
   padding: 3px;
@@ -1286,4 +1296,76 @@ body::-webkit-scrollbar {
 
 .companies_profile_container .company-profile-container {
   width: 80%;
+}
+
+/* for job application submission form */
+.job-application-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 500px;
+  height: 500px;
+  background-color: #f0f2f5;
+}
+
+.job-application-form {
+  width: 100%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.job-application-form-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.job-application-form-group {
+  margin-bottom: 15px;
+}
+
+.job-application-form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+.job-application-form-input {
+  width: 95%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.job-application-form-submit {
+  width: 99%;
+  padding: 10px;
+  font-size: 16px;
+  color: white;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid var(--primary-color);
+  transition: 0.5s;
+}
+
+.job-application-form-submit:hover {
+  background-color: white;
+  border: 1px solid var(--primary-color);
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.job-application-form-note {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #777;
+  text-align: center;
 }
