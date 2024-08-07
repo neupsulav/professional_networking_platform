@@ -6,7 +6,8 @@ import SignupOptions from "./pages/SignupOptions";
 import SignupUser from "./pages/SignupUser";
 import SignupCompany from "./pages/SignupCompany";
 import NotFound from "./pages/ErrorPage";
-// import NotificationPage from "./components/Notifications";
+import UsersProfile from "./pages/UsersProfile";
+import CompaniesProfile from "./pages/CompaniesProfile";
 
 const App = () => {
   return (
@@ -17,6 +18,8 @@ const App = () => {
         <Route path="/signup-options" element={<SignupOptions />} />
         <Route path="/signup-user" element={<SignupUser />} />
         <Route path="/signup-company" element={<SignupCompany />} />
+        <Route path="/user/:id" element={<UsersProfile />} />
+        <Route path="/company/:id" element={<CompaniesProfile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

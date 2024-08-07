@@ -11,6 +11,10 @@ html {
   font-size: 16px;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 :root {
   --primary-color: #5bb7a8;
   --secondary-color: white;
@@ -111,7 +115,7 @@ html {
 }
 
 .newsfeed_container::-webkit-scrollbar {
-  visibility: hidden;
+  display: none;
 }
 
 .createPostContainer {
@@ -607,7 +611,7 @@ html {
 }
 
 .jobs_container::-webkit-scrollbar {
-  visibility: hidden;
+  display: none;
 }
 
 /* for job container */
@@ -750,7 +754,7 @@ html {
 }
 
 .userProfileContainer::-webkit-scrollbar {
-  visibility: hidden;
+  display: none;
 }
 
 .profileDetails {
@@ -1141,4 +1145,145 @@ html {
   .home-link {
     font-size: 14px;
   }
+}
+
+/* Company Profile Container */
+.company-profile-container {
+  /* max-width: 900px; */
+  width: 50%;
+  /* margin: 40px auto; */
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.company-profile-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Profile Header */
+.company-profile-header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background: var(--primary-color);
+  color: white;
+}
+
+.company-profile-picture {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-right: 20px;
+  border: 4px solid white;
+}
+
+.company-profile-info {
+  flex: 1;
+}
+
+.company-profile-name {
+  margin: 0;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.company-profile-bio {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.company-profile-additional-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 10px;
+}
+
+.company-profile-info-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 16px;
+}
+
+/* Profile Content */
+.company-profile-content {
+  padding: 20px;
+}
+
+.company-profile-section {
+  margin-bottom: 20px;
+}
+
+.company-profile-section-title {
+  margin-top: 0;
+  font-size: 22px;
+  color: #283e4a;
+  border-bottom: 2px solid #f0f2f5;
+  padding-bottom: 5px;
+}
+
+.company-profile-section-text,
+.company-profile-section-list {
+  margin: 10px 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.company-profile-section-list {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.company-profile-section-list li {
+  margin-bottom: 5px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .company-profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .company-profile-picture {
+    margin-bottom: 10px;
+  }
+
+  .company-profile-info {
+    text-align: center;
+  }
+}
+
+/* for other users profile */
+.users_profile_container {
+  height: auto;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f3f3f3;
+}
+
+.users_profile_container .userProfileContainer {
+  width: 80%;
+}
+
+/* for other companies profile */
+.companies_profile_container {
+  height: auto;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.companies_profile_container .company-profile-container {
+  width: 80%;
 }
