@@ -16,13 +16,13 @@ const SignupOptions = () => {
           <h2>Let's get started!</h2>
           <p>or</p>
           <div className="option" onClick={() => handleOptionClick('user')}>
-            <img src="/https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToK_-LT9HmxfBNTsC0A8wfvjtfxKh3GjexbQ&s" alt="User Icon" />
+            <img src="frontend/src/pages/images/co.png" alt="User Icon" />
             <h3>Jobseeker</h3>
             <p>Create free account to apply!</p>
             <button>Register</button>
           </div>
           <div className="option" onClick={() => handleOptionClick('company')}>
-            <img src="/https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpHhmRyyFUqDgbP7F0qTVkiPXb5GxENtaHVQ&s" alt="Company Icon" />
+            <img src="/C:\Users\Sandi\Desktop\professional_networking_platform\frontend\src\pages\images\co.png" alt="Company Icon" />
             <h3>Employer</h3>
             <p>Create free account to post vacancy!</p>
             <button>Register</button>
