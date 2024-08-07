@@ -110,7 +110,7 @@ const Login = () => {
               <div className="register_message">
                 <p>
                   Haven't registered yet?
-                  <Link to="/register" className="register_btn_link">
+                  <Link to="/signup-options" className="register_btn_link">
                     Register
                   </Link>
                 </p>

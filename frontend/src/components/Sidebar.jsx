@@ -13,7 +13,10 @@ const Sidebar = ({ selectedPath, setSelectedPath }) => {
   return (
     <div className="sidebarContainer">
       <div className="sidebarTitle">
-        <img src="https://storage2.timheuer.com/boratcircle.png" alt="logo" />
+        <img
+          src="https://static.vecteezy.com/system/resources/thumbnails/008/214/517/small_2x/abstract-geometric-logo-or-infinity-line-logo-for-your-company-free-vector.jpg"
+          alt="logo"
+        />
         <p>HamroSanjal</p>
       </div>
       <ul className="sidebar-menu">

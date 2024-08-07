@@ -4,10 +4,12 @@ import { GiTakeMyMoney } from "react-icons/gi";
 import { MdOutlinePeopleAlt } from "react-icons/md";
 import { RxLapTimer } from "react-icons/rx";
 import { RxCross2 } from "react-icons/rx";
+import ApplicantsList from "./ApplicantLists";
 
 const Job = () => {
   const [seeJobDetails, setSeeJobDetails] = useState(false);
   const [applyJobModal, setApplyJobModal] = useState(false);
+  const [seeApplicants, setSeeApplicants] = useState(false);
 
   // for job application form
   const [formData, setFormData] = useState({
@@ -88,6 +90,16 @@ const Job = () => {
           }}
         >
           Apply Job
+        </button>
+
+        {/* see applicants btn */}
+        <button
+          className="apply_jobs_btn"
+          onClick={() => {
+            setSeeApplicants(true);
+          }}
+        >
+          See applicants
         </button>
 
         {/* for job details */}
@@ -190,6 +202,19 @@ const Job = () => {
             </form>
           </div>
           {/* </div> */}
+        </div>
+      )}
+
+      {/* see applicants modal */}
+      {seeApplicants && (
+        <div className="overlay">
+          <RxCross2
+            className="closeModalBtn"
+            onClick={() => {
+              setSeeApplicants(false);
+            }}
+          />
+          <ApplicantsList />
         </div>
       )}
     </>
