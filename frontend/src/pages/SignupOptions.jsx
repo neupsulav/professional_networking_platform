@@ -21,8 +21,8 @@ const SignupOptions = () => {
           <div className="signup_options">
             <div className="option" onClick={() => handleOptionClick("user")}>
               <img src={userImage} alt="User Icon" />
-              <h3>Jobseeker</h3>
-              <p>Create free account to apply!</p>
+              <h3>User</h3>
+              <p>Create free account as user</p>
               <button>Register</button>
             </div>
             <h2>or</h2>
@@ -32,7 +32,7 @@ const SignupOptions = () => {
             >
               <img src={companyImage} alt="Company Icon" />
               <h3>Company</h3>
-              <p>Create free account to post vacancy!</p>
+              <p>Create free account as a company</p>
               <button>Register</button>
             </div>
           </div>
