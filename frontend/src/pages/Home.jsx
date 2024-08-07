@@ -4,6 +4,7 @@ import Newsfeed from "../components/Newsfeed";
 import SuggestionBar from "../components/SuggestionBar";
 import Jobs from "../components/Jobs";
 import UserProfile from "../components/userProfile";
+import Notifications from "../components/Notifications";
 
 const Home = () => {
   const [selectedPath, setSelectedPath] = useState(0);
@@ -17,6 +18,8 @@ const Home = () => {
         return <UserProfile />;
       case 2:
         return <Jobs />;
+      case 4:
+        return <Notifications />;
 
       default:
         break;

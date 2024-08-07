@@ -999,3 +999,64 @@ html {
 .back-button:hover {
   background-color: #5a6268;
 }
+
+/* for notification component */
+/* NotificationPage.css */
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* NotificationItem.css */
+
+.notification-item {
+  background-color: #f9f9f9;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.notification-item p {
+  margin: 0;
+}
+
+.notification-item:hover {
+  background-color: #f1f1f1;
+}
+
+/* NotificationPage.css */
+.notification-page {
+  padding: 20px;
+  background-color: white;
+  width: 50%;
+  border: 1px solid var(--primary-color);
+}
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+  .notification-page {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+}
