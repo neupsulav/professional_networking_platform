@@ -70,7 +70,7 @@ const Sidebar = ({ selectedPath, setSelectedPath }) => {
             }}
           >
             <FaUsers className="sidebar-icon" />
-            Network
+            Recommendations
           </div>
         </li>
         <li

@@ -14,6 +14,7 @@ const UserProfile = () => {
       <div className="users_profile_container">
         <div className="userProfileContainer">
           <div className="profileDetails">
+            <button className="follow_btn_profile">Follow</button>
             <img
               src="https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg"
               alt="user_img"

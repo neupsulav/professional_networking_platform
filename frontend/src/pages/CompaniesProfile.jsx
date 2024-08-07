@@ -7,6 +7,7 @@ const CompanyProfile = () => {
     <div className="companies_profile_container">
       <div className="company-profile-container">
         <div className="company-profile-header">
+          <button className="follow_btn_company_profile">Follow</button>
           <img
             src="https://static.vecteezy.com/system/resources/thumbnails/008/214/517/small_2x/abstract-geometric-logo-or-infinity-line-logo-for-your-company-free-vector.jpg"
             alt="Company Logo"

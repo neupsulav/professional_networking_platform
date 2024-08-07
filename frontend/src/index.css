@@ -629,6 +629,7 @@ body::-webkit-scrollbar {
   gap: 30px;
   flex-direction: row;
   margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .job_details_items {
@@ -778,6 +779,26 @@ body::-webkit-scrollbar {
   background-color: rgb(228, 248, 216);
   border-radius: 20px;
   width: 90%;
+  position: relative;
+}
+
+.follow_btn_profile {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  width: 120px;
+  height: 30px;
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.follow_btn_profile:hover {
+  background-color: white;
+  color: var(--primary-color);
 }
 
 .profileDetails img {
@@ -1180,6 +1201,27 @@ body::-webkit-scrollbar {
   padding: 20px;
   background: var(--primary-color);
   color: white;
+  position: relative;
+}
+
+.follow_btn_company_profile {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  width: 120px;
+  height: 30px;
+  border: 1px solid white;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.follow_btn_company_profile:hover {
+  border: 1px solid var(--primary-color);
+  background-color: white;
+  color: var(--primary-color);
 }
 
 .company-profile-picture {
