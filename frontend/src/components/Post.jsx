@@ -63,6 +63,7 @@ const Post = () => {
               name="comment"
               id="comment"
               placeholder="Add a comment..."
+              className="commentInputContainer_input"
             />
             <IoSend className="postCommentIcon" />
           </div>

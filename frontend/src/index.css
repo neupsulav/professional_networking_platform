@@ -39,6 +39,16 @@ body::-webkit-scrollbar {
   height: 100%;
   background-color: white;
   border-radius: 15px;
+  transition: 0.5s;
+}
+
+.hamburger_icon {
+  font-size: 30px;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  display: none;
+  cursor: pointer;
 }
 
 .sidebarTitle {
@@ -98,6 +108,16 @@ body::-webkit-scrollbar {
 
 .sidebar-icon {
   margin-right: 10px;
+}
+
+.cross_icon {
+  font-size: 30px;
+  color: red;
+  position: absolute;
+  top: 25px;
+  right: 20px;
+  cursor: pointer;
+  display: none;
 }
 
 /* for newsfeed container */
@@ -170,6 +190,72 @@ body::-webkit-scrollbar {
   height: 100%;
   background-color: white;
   border-radius: 15px;
+}
+
+/* for home page responsiveness */
+@media only screen and (max-width: 1200px) {
+  .suggestionbar_container {
+    display: none;
+  }
+
+  .newsfeed_container {
+    width: 70%;
+  }
+
+  .sidebarContainer {
+    width: 30%;
+  }
+
+  .pageContainer {
+    justify-content: flex-start;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .cross_icon {
+    display: block;
+  }
+
+  .createPostContainer {
+    margin-top: 30px;
+  }
+
+  .sidebarContainer {
+    width: 40%;
+    position: absolute;
+    left: -600px;
+    box-shadow: 5px 5px 15px var(--shadow-color);
+    z-index: 2;
+  }
+
+  .sidebar_active {
+    left: 10px;
+  }
+
+  .hamburger_icon {
+    display: block;
+  }
+
+  .pageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .newsfeed_container {
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 660px) {
+  .sidebarContainer {
+    width: 80%;
+    margin-top: 0px;
+  }
+
+  .commentInputContainer_input {
+    width: 50%;
+  }
 }
 
 /* for login page */
@@ -282,6 +368,7 @@ body::-webkit-scrollbar {
     width: 50vw;
   }
 }
+
 @media only screen and (max-width: 1300px) {
   .login_Container {
     width: 70vw;
@@ -430,6 +517,12 @@ body::-webkit-scrollbar {
   font-size: 14px;
   padding-left: 10px;
   font-weight: bold;
+}
+
+@media only screen and (max-width: 660px) {
+  .commentInputContainer {
+    gap: 30px;
+  }
 }
 
 .postCommentIcon {
@@ -750,6 +843,18 @@ body::-webkit-scrollbar {
   font-size: 14px;
 }
 
+@media only screen and (max-width: 1200px) {
+  .jobs_container {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .jobs_container {
+    width: 100%;
+  }
+}
+
 /* for profile container */
 .userProfileContainer {
   width: 55%;
@@ -923,6 +1028,25 @@ body::-webkit-scrollbar {
   font-weight: bold;
 }
 
+@media only screen and (max-width: 1200px) {
+  .userProfileContainer {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .userProfileContainer {
+    width: 100vw;
+  }
+
+  .profileDetails {
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+  }
+}
+
+/* signup form */
 .signup-form-container {
   max-width: 400px;
   margin: 40px auto;
@@ -1056,7 +1180,6 @@ body::-webkit-scrollbar {
 .option img {
   width: 100px;
   height: 100px;
-  /* border-radius: 50%; */
   object-fit: cover;
 }
 
@@ -1104,6 +1227,32 @@ body::-webkit-scrollbar {
 
 .back-button:hover {
   background-color: #5a6268;
+}
+
+@media only screen and (max-width: 1200px) {
+  .signup-options-container {
+    padding-top: 0px;
+  }
+
+  .signup_options {
+    flex-direction: column;
+    gap: 0px;
+  }
+
+  .signup-form-container {
+    margin-top: 100px;
+    padding-left: 14px;
+  }
+}
+
+@media only screen and (max-width: 570px) {
+  .signup_options {
+    width: 80vw;
+  }
+
+  .option {
+    width: 100%;
+  }
 }
 
 /* for notification component */
@@ -1169,6 +1318,20 @@ body::-webkit-scrollbar {
 
   .notification-page h1 {
     font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .notification-page {
+    width: 60%;
+    margin-left: 35px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .notification-page {
+    width: 100%;
+    margin-left: 0px;
   }
 }
 

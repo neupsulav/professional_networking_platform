@@ -7,11 +7,27 @@ import {
   FaBell,
   FaCog,
 } from "react-icons/fa";
+import { RxCross1 } from "react-icons/rx";
 
 // create a leftsidebar
-const Sidebar = ({ selectedPath, setSelectedPath }) => {
+const Sidebar = ({
+  selectedPath,
+  setSelectedPath,
+  isSidebarActive,
+  setIsSidebarActive,
+}) => {
   return (
-    <div className="sidebarContainer">
+    <div
+      className={
+        isSidebarActive ? "sidebarContainer sidebar_active" : "sidebarContainer"
+      }
+    >
+      <RxCross1
+        className="cross_icon"
+        onClick={() => {
+          setIsSidebarActive(false);
+        }}
+      />
       <div className="sidebarTitle">
         <img
           src="https://static.vecteezy.com/system/resources/thumbnails/008/214/517/small_2x/abstract-geometric-logo-or-infinity-line-logo-for-your-company-free-vector.jpg"
