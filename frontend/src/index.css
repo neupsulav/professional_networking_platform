@@ -1716,8 +1716,8 @@ body::-webkit-scrollbar {
 /* settings */
 
 .settings-container {
-  max-width: 1500px;
-  margin: 50px auto;
+  width: 800px; 
+  margin: 20px ;
   padding: 20px;
   background-color: #ffffff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
