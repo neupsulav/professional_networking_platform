@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
-import { FaUser, FaBell, FaLock, FaCog, FaMoon, FaSignOutAlt } from 'react-icons/fa';
+import React, { useState } from "react";
+import {
+  FaUser,
+  FaBell,
+  FaLock,
+  FaCog,
+  FaMoon,
+  FaSignOutAlt,
+} from "react-icons/fa";
 
 const Settings = () => {
   const [darkMode, setDarkMode] = useState(false);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
-    document.body.classList.toggle('dark-mode', !darkMode);
+    document.body.classList.toggle("dark-mode", !darkMode);
   };
 
   return (
-    <div className={`settings-container ${darkMode ? 'dark-mode' : ''}`}>
+    <div className={`settings-container ${darkMode ? "dark-mode" : ""}`}>
       <h2>Settings</h2>
       <div className="settings-content">
         <section className="settings-section">
@@ -61,7 +68,7 @@ const Settings = () => {
             <h3>Appearance</h3>
             <div className="appearance-options">
               <button onClick={toggleDarkMode}>
-                {darkMode ? 'Disable Dark Mode' : 'Enable Dark Mode'}
+                {darkMode ? "Disable Dark Mode" : "Enable Dark Mode"}
               </button>
               <button className="logout-button">
                 <FaSignOutAlt /> Logout
