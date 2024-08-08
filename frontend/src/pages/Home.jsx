@@ -7,6 +7,9 @@ import Notifications from "../components/Notifications";
 // import CompanyProfile from "../components/CompanyProfile";
 import UserProfile from "../components/userProfile";
 import { RxHamburgerMenu } from "react-icons/rx";
+import CompanyProfile from "../components/CompanyProfile";
+// import UserProfile from "../components/userProfile";
+import Settings from "../components/settings";
 
 const Home = () => {
   const [selectedPath, setSelectedPath] = useState(0);
@@ -20,10 +23,14 @@ const Home = () => {
       case 1:
         // return <CompanyProfile />;
         return <UserProfile />;
+      // return <CompanyProfile />;
+      // return <UserProfile />;
       case 2:
         return <Jobs />;
       case 4:
         return <Notifications />;
+      case 5:
+        return <Settings />;
 
       default:
         break;
