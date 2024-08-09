@@ -3,6 +3,7 @@ const User = require("../models/user");
 const Post = require("../models/post");
 const ErrorHandler = require("../middlewares/errorHandler");
 const catchAsync = require("../middlewares/catchAsync");
+const Comment = require("../models/comment");
 
 // creating a post
 const createPost = catchAsync(async (req, res, next) => {
@@ -66,4 +67,32 @@ const likePost = catchAsync(async (req, res, next) => {
   }
 });
 
-module.exports = { createPost, likePost };
+//comment on a post
+const createComment = catchAsync(async (req, res, next) => {
+  if (!mongoose.isValidObjectId(req.params.id)) {
+    return next(new ErrorHandler("Invalid Post Id", 400));
+  }
+
+  const postId = req.params.id;
+
+  const saveComment = await Comment.create({
+    user: req.user.userId,
+    content: req.body.content,
+  });
+
+  saveComment.save();
+
+  const updatePost = await Post.findByIdAndUpdate(
+    { _id: postId },
+    { $push: { comments: saveComment._id } },
+    { new: true }
+  );
+
+  if (!updatePost) {
+    return next(new ErrorHandler("Something went wrong", 400));
+  }
+
+  res.status(201).json({ success: true });
+});
+
+module.exports = { createPost, likePost, createComment };
