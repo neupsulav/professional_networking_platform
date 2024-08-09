@@ -1735,8 +1735,8 @@ body::-webkit-scrollbar {
 /* settings */
 
 .settings-container {
-  width: 800px; 
-  margin: 20px ;
+  width: 800px;
+  margin: 20px;
   padding: 20px;
   background-color: var(--secondary-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -1763,12 +1763,25 @@ body::-webkit-scrollbar {
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   transition: background-color 0.3s ease;
-  color: var(--text-color);
+  color: var(--primary-color);
+  cursor: pointer;
 }
 
 .settings-section:hover {
   background-color: var(--primary-color);
-  color: var(--text-color);
+  color: white;
+}
+
+.settings-section:hover .settings-icon {
+  color: white;
+}
+
+.settings-section:hover .settings-details h3 {
+  color: white;
+}
+
+.settings-section:hover .settings-details p {
+  color: white;
 }
 
 .settings-icon {
@@ -1780,7 +1793,7 @@ body::-webkit-scrollbar {
 .settings-details h3 {
   font-size: 20px;
   margin: 0;
-  color: var(--text-color);
+  color: var(--primary-color);
 }
 
 .settings-details p {
