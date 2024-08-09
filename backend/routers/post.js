@@ -1,7 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-const { createPost, likePost, createComment } = require("../controllers/post");
+const {
+  createPost,
+  likePost,
+  createComment,
+  getPost,
+} = require("../controllers/post");
 
 const userAuthentication = require("../middlewares/userAuthentication");
 
@@ -11,5 +16,7 @@ router.post("/createpost", userAuthentication, createPost);
 router.patch("/likepost/:id", userAuthentication, likePost);
 
 router.patch("/createcomment/:id", userAuthentication, createComment);
+
+router.get("/posts", userAuthentication, getPost);
 
 module.exports = router;

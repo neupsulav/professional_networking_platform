@@ -95,4 +95,33 @@ const createComment = catchAsync(async (req, res, next) => {
   res.status(201).json({ success: true });
 });
 
-module.exports = { createPost, likePost, createComment };
+// get posts
+const getPost = catchAsync(async (req, res, next) => {
+  const thisUser = await User.findById({ _id: req.user.userId });
+
+  const posts = await Post.find({ user: thisUser.following })
+    .populate({
+      path: "user",
+      select: "_id name username email image",
+    })
+    .populate({
+      path: "comments",
+      select: "_id name username email image content createdAt",
+    })
+    .populate({
+      path: "likes",
+      select: "_id name username email image ",
+    })
+    .sort({ createdAt: -1 });
+
+  if (!posts) {
+    return next(new ErrorHandler("Something went wrong!", 400));
+  }
+  if (posts.length === 0) {
+    res.status(200).json([]);
+  } else {
+    res.status(200).json(posts);
+  }
+});
+
+module.exports = { createPost, likePost, createComment, getPost };
