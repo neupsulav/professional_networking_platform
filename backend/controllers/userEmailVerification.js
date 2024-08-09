@@ -4,7 +4,7 @@ const ErrorHandler = require("../middlewares/errorHandler");
 const User = require("../models/user");
 
 // email generation
-const sendVerificationMail = catchAsync(async (name, email, userid) => {
+const sendVerificationMailUser = catchAsync(async (name, email, userid) => {
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
@@ -78,7 +78,7 @@ const sendVerificationMail = catchAsync(async (name, email, userid) => {
         <div class="content">
             <p>Dear User,</p>
             <p>Thank you for signing up. Please click the button below to verify your email address.</p>
-            <a href="{{verification_link}}" class="button">Click here to verify</a>
+            <a href='http://localhost:3000/api/user/verify/${userid}' class="button">Click here to verify</a>
         </div>
         
     </div>
@@ -97,7 +97,7 @@ const sendVerificationMail = catchAsync(async (name, email, userid) => {
 });
 
 //   email verification
-const emailVerification = catchAsync(async (req, res, next) => {
+const userEmailVerification = catchAsync(async (req, res, next) => {
   const updateInfo = await User.findByIdAndUpdate(
     { _id: req.params.id },
     { $set: { isVerified: true } }
@@ -105,6 +105,7 @@ const emailVerification = catchAsync(async (req, res, next) => {
   res
     .status(200)
     .send("Your email has been verified. You can now login to your account.");
+  //   res.redirect("http://localhost:3000/login");
 });
 
-module.exports = { sendVerificationMail, emailVerification };
+module.exports = { sendVerificationMailUser, userEmailVerification };

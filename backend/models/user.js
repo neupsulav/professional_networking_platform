@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -35,8 +36,17 @@ const userSchema = new mongoose.Schema({
   accountType: {
     type: String,
     enum: ["user", "company"],
-    default: "company",
+    default: "user",
   },
+});
+
+//hashing the password
+userSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
+  this.cpassword = " ";
+  next();
 });
 
 //   exporting the user schema

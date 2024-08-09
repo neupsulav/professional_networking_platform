@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const companySchema = new mongoose.Schema({
   name: {
@@ -6,11 +7,6 @@ const companySchema = new mongoose.Schema({
     required: true,
   },
   email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  username: {
     type: String,
     required: true,
     unique: true,
@@ -37,6 +33,15 @@ const companySchema = new mongoose.Schema({
     enum: ["user", "company"],
     default: "company",
   },
+});
+
+//hashing the password
+companySchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
+  this.cpassword = " ";
+  next();
 });
 
 //   exporting the user schema

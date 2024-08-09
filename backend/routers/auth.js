@@ -9,7 +9,10 @@ const FILE_TYPE_MAP = {
   "image/jpg": "jpg",
 };
 
-const { userRegistration, userLogin } = require("../controllers/auth");
+const {
+  userRegistration,
+  companyRegistration,
+} = require("../controllers/auth");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -32,5 +35,11 @@ const uploadOptions = multer({ storage: storage });
 
 // routes
 router.post("/usersignup", uploadOptions.single("image"), userRegistration);
+
+router.post(
+  "/companysignup",
+  uploadOptions.single("image"),
+  companyRegistration
+);
 
 module.exports = router;
