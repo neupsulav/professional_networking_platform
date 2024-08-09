@@ -3,12 +3,21 @@ const dotenv = require("dotenv");
 const errorHandlerMiddleware = require("./middlewares/ErrorHandlerMiddleware");
 const noRoute = require("./middlewares/noRoute");
 const connectDatabase = require("./db/connect");
+const authRouters = require("./routers/auth");
 
 const app = express();
 dotenv.config();
 
 const PORT = process.env.port || 3000;
 app.use(express.json());
+
+// routes
+app.use(
+  "/public/uploads/userImages",
+  express.static("public/uploads/userImages")
+);
+
+app.use("/api/auth", authRouters);
 
 // no route
 app.use(noRoute);
