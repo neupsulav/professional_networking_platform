@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const companySchema = new mongoose.Schema({
   name: {
@@ -43,6 +44,28 @@ companySchema.pre("save", async function (next) {
   this.cpassword = " ";
   next();
 });
+
+// comparing password
+companySchema.methods.comparePassword = async function (password) {
+  const isMatch = await bcrypt.compare(password, this.password);
+  return isMatch;
+};
+
+companySchema.methods.getJwt = async function () {
+  const token = jwt.sign(
+    {
+      userImage: this.image,
+      userId: this._id,
+      name: this.name,
+    },
+    process.env.secretKey,
+    {
+      expiresIn: process.env.expiresIn,
+    }
+  );
+
+  return token;
+};
 
 //   exporting the user schema
 module.exports = mongoose.model("Company", companySchema);

@@ -12,6 +12,7 @@ const FILE_TYPE_MAP = {
 const {
   userRegistration,
   companyRegistration,
+  login,
 } = require("../controllers/auth");
 
 const storage = multer.diskStorage({
@@ -41,5 +42,7 @@ router.post(
   uploadOptions.single("image"),
   companyRegistration
 );
+
+router.post("/login", login);
 
 module.exports = router;

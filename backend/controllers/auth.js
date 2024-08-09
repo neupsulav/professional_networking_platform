@@ -133,4 +133,61 @@ const companyRegistration = catchAsync(async (req, res, next) => {
   });
 });
 
-module.exports = { userRegistration, companyRegistration };
+// login
+const login = catchAsync(async (req, res, next) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return next(new ErrorHandler("Please fill all the credentials", 400));
+  }
+
+  //   to determine if the credentials are of a user or a company
+  const isUser = await User.findOne({ email: email });
+  const isCompany = await Company.findOne({ email: email });
+
+  if (isUser) {
+    if (!isUser.isVerified) {
+      return next(
+        new ErrorHandler("Email is not verified. Please verify your email", 406)
+      );
+    }
+
+    // comparing hashed password
+    const comparePassword = await isUser.comparePassword(password);
+
+    if (!comparePassword) {
+      return next(new ErrorHandler("Invalid user credentials", 401));
+    }
+
+    const token = await isUser.getJwt();
+
+    return res
+      .status(200)
+      .json({ msg: "Logged in successfully", token: token });
+  }
+
+  if (isCompany) {
+    if (!isCompany.isVerified) {
+      return next(
+        new ErrorHandler("Email is not verified. Please verify your email", 406)
+      );
+    }
+
+    // comparing hashed password
+    const comparePassword = await isCompany.comparePassword(password);
+
+    if (!comparePassword) {
+      return next(new ErrorHandler("Invalid user credentials", 401));
+    }
+
+    const token = await isCompany.getJwt();
+
+    return res
+      .status(200)
+      .json({ msg: "Logged in successfully", token: token });
+  }
+
+  return next(new ErrorHandler("Invalid Credentials", 401));
+});
+
+module.exports = { userRegistration, companyRegistration, login };
