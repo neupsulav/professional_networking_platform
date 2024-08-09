@@ -7,6 +7,7 @@ const authRouters = require("./routers/auth");
 const emailVerificationRouter = require("./routers/emailVerification");
 const postRouter = require("./routers/post");
 const followRouter = require("./routers/follow");
+const followCompanyRouter = require("./routers/followCompany");
 
 const app = express();
 dotenv.config();
@@ -24,6 +25,7 @@ app.use("/api/auth", authRouters);
 app.use("/api", emailVerificationRouter);
 app.use("/api", postRouter);
 app.use("/api", followRouter);
+app.use("/api", followCompanyRouter);
 
 // error handler middlewares
 app.use(errorHandlerMiddleware);
