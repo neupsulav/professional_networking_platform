@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const User = require("../models/user");
 const Post = require("../models/post");
 const ErrorHandler = require("../middlewares/errorHandler");
@@ -6,7 +7,6 @@ const catchAsync = require("../middlewares/catchAsync");
 // creating a post
 const createPost = catchAsync(async (req, res, next) => {
   const userId = req.user.userId;
-  const { caption } = req.body;
 
   const createPost = await Post.create({
     user: userId,
@@ -18,4 +18,52 @@ const createPost = catchAsync(async (req, res, next) => {
   res.status(201).json({ msg: "Post created" });
 });
 
-module.exports = { createPost };
+// like and dislike a post
+const likePost = catchAsync(async (req, res, next) => {
+  if (!mongoose.isValidObjectId(req.params.id)) {
+    return next(new ErrorHandler("Invalid Post ID", 404));
+  }
+
+  const postId = req.params.id;
+
+  // check if user already liked the post
+  const checkIfLiked = await Post.findOne({
+    _id: postId,
+    likes: req.user.userId,
+  });
+
+  if (!checkIfLiked) {
+    // like a post
+    const like = await Post.findByIdAndUpdate(
+      { _id: postId },
+      { $push: { likes: req.user.userId } },
+      { new: true }
+    );
+
+    if (!like) {
+      return next(new ErrorHandler("Something went wrong", 400));
+    }
+
+    res
+      .status(200)
+      .json({ msg: "Liked the post", likesCount: like.likes.length });
+  } else {
+    // preventing a user to like a post multiple times
+    const preventMultipleLikes = await Post.findByIdAndUpdate(
+      { _id: postId },
+      { $pull: { likes: req.user.userId } },
+      { new: true }
+    );
+
+    if (!preventMultipleLikes) {
+      return next(new ErrorHandler("Something went wrong", 400));
+    }
+
+    res.status(200).json({
+      msg: "Disliked the post",
+      likesCount: preventMultipleLikes.likes.length,
+    });
+  }
+});
+
+module.exports = { createPost, likePost };
