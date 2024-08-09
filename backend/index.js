@@ -5,6 +5,7 @@ const noRoute = require("./middlewares/noRoute");
 const connectDatabase = require("./db/connect");
 const authRouters = require("./routers/auth");
 const emailVerificationRouter = require("./routers/emailVerification");
+const postRouter = require("./routers/post");
 
 const app = express();
 dotenv.config();
@@ -20,6 +21,7 @@ app.use(
 
 app.use("/api/auth", authRouters);
 app.use("/api", emailVerificationRouter);
+app.use("/api", postRouter);
 
 // error handler middlewares
 app.use(errorHandlerMiddleware);
