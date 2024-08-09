@@ -9,6 +9,8 @@ const FILE_TYPE_MAP = {
   "image/jpg": "jpg",
 };
 
+const { userRegistration, userLogin } = require("../controllers/auth");
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const isValid = FILE_TYPE_MAP[file.mimetype];
@@ -27,5 +29,8 @@ const storage = multer.diskStorage({
 });
 
 const uploadOptions = multer({ storage: storage });
+
+// routes
+router.post("/usersignup", uploadOptions.single("image"), userRegistration);
 
 module.exports = router;
