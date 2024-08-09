@@ -39,6 +39,18 @@ const userSchema = new mongoose.Schema({
     enum: ["user", "company"],
     default: "user",
   },
+  followers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  following: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 //hashing the password
