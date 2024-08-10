@@ -115,4 +115,39 @@ const updateUserProfile = catchAsync(async (req, res, next) => {
   res.status(201).send(updateUser);
 });
 
-module.exports = { userProfileData, selfProfileData, updateUserProfile };
+// to get people you may know recommendations
+const peopleYouMayKnow = catchAsync(async (req, res, next) => {
+  const userId = req.user.userId;
+
+  const user = await User.findById(userId).select("following");
+
+  const followedByMyFollowing = await User.find({
+    _id: { $in: user.following },
+  }).select("following");
+
+  const followedUsers = new Set();
+
+  followedByMyFollowing.forEach((followingUser) => {
+    followingUser.following.forEach((followedUserId) => {
+      if (followedUserId.toString() !== userId.toString()) {
+        // Exclude our own ID
+        followedUsers.add(followedUserId.toString());
+      }
+    });
+  });
+
+  const usersList = Array.from(followedUsers);
+
+  const peopleRecommendations = await User.find({ _id: usersList }).select(
+    "_id name email username image position"
+  );
+
+  res.status(200).send(peopleRecommendations);
+});
+
+module.exports = {
+  userProfileData,
+  selfProfileData,
+  updateUserProfile,
+  peopleYouMayKnow,
+};

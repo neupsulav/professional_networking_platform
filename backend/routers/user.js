@@ -6,6 +6,7 @@ const {
   userProfileData,
   selfProfileData,
   updateUserProfile,
+  peopleYouMayKnow,
 } = require("../controllers/user");
 
 // routes
@@ -14,5 +15,7 @@ router.get("/user/:id", userAuthentication, userProfileData);
 router.get("/selfuser", userAuthentication, selfProfileData);
 
 router.patch("/updateuser", userAuthentication, updateUserProfile);
+
+router.get("/peoplerecommendations", userAuthentication, peopleYouMayKnow);
 
 module.exports = router;
