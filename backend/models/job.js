@@ -32,7 +32,7 @@ const jobSchema = new mongoose.Schema({
   requirements: {
     type: String,
   },
-  Responsibilities: {
+  responsibilities: {
     type: String,
   },
 });

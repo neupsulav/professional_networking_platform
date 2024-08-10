@@ -10,6 +10,7 @@ const followRouter = require("./routers/follow");
 const followCompanyRouter = require("./routers/followCompany");
 const userProfileRouter = require("./routers/user");
 const notificationRouter = require("./routers/notifications");
+const jobsRouter = require("./routers/jobs");
 
 const app = express();
 dotenv.config();
@@ -30,6 +31,7 @@ app.use("/api", followRouter);
 app.use("/api", followCompanyRouter);
 app.use("/api", userProfileRouter);
 app.use("/api", notificationRouter);
+app.use("/api", jobsRouter);
 
 // error handler middlewares
 app.use(errorHandlerMiddleware);

@@ -3,7 +3,7 @@ const ErrorHandler = require("./errorHandler");
 const jwt = require("jsonwebtoken");
 
 // token authentication
-const authentication = catchAsync(async (req, res, next) => {
+const companyAuthentication = catchAsync(async (req, res, next) => {
   const authorization = req.headers.authorization;
 
   if (!authorization || !authorization.startsWith("Bearer ")) {
@@ -23,4 +23,4 @@ const authentication = catchAsync(async (req, res, next) => {
   next();
 });
 
-module.exports = authentication;
+module.exports = companyAuthentication;
