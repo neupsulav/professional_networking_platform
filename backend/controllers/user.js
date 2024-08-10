@@ -92,4 +92,21 @@ const selfProfileData = catchAsync(async (req, res, next) => {
   // }
 });
 
-module.exports = { userProfileData, selfProfileData };
+// update user profile
+const updateUserProfile = catchAsync(async (req, res, next) => {
+  const updateUser = await User.findByIdAndUpdate(
+    { _id: req.user.userId },
+    req.body,
+    {
+      new: true,
+    }
+  );
+
+  if (!updateUser) {
+    return next(new ErrorHandler("Something went wrong", 500));
+  }
+
+  res.status(201).send(updateUser);
+});
+
+module.exports = { userProfileData, selfProfileData, updateUserProfile };

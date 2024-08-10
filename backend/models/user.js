@@ -51,6 +51,20 @@ const userSchema = new mongoose.Schema({
       ref: "User",
     },
   ],
+  position: {
+    type: String,
+  },
+  location: {
+    type: String,
+  },
+  bio: {
+    type: String,
+  },
+  skills: [
+    {
+      type: String,
+    },
+  ],
 });
 
 //hashing the password
