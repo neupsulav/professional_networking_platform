@@ -22,4 +22,4 @@ const applicantsSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Application", applicantsSchema);
+module.exports = mongoose.model("Applicant", applicantsSchema);
