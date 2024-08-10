@@ -4,6 +4,7 @@ const Company = require("../models/company");
 const Job = require("../models/job");
 const ErrorHandler = require("../middlewares/errorHandler");
 const catchAsync = require("../middlewares/catchAsync");
+const job = require("../models/job");
 
 // create a job vacancy
 const createJob = catchAsync(async (req, res, next) => {
@@ -30,4 +31,22 @@ const createJob = catchAsync(async (req, res, next) => {
   res.status(201).send(newJob);
 });
 
-module.exports = { createJob };
+// get jobs
+const getJobs = catchAsync(async (req, res, next) => {
+  const userId = req.user.userId;
+
+  const thisUser = await User.findById({ _id: userId });
+
+  const currentDate = new Date();
+
+  const jobs = await Job.find({
+    company: thisUser.following_company,
+    deadline: { $gte: currentDate },
+  })
+    .populate("company")
+    .sort({ createdAt: -1 });
+
+  res.status(200).send(jobs);
+});
+
+module.exports = { createJob, getJobs };
