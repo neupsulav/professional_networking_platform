@@ -33,7 +33,7 @@ app.use("/api", userProfileRouter);
 app.use(errorHandlerMiddleware);
 
 // no route
-app.use(noRoute);
+// app.use(noRoute);
 
 // listen
 const listen = async () => {

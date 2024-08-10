@@ -53,6 +53,9 @@ const sendVerificationMailUser = catchAsync(async (name, email, userid) => {
             padding: 20px;
             text-align: center;
         }
+        .content a{
+        color : white;
+        }
         .button {
             display: inline-block;
             padding: 10px 20px;
@@ -102,10 +105,10 @@ const userEmailVerification = catchAsync(async (req, res, next) => {
     { _id: req.params.id },
     { $set: { isVerified: true } }
   );
-  res
-    .status(200)
-    .send("Your email has been verified. You can now login to your account.");
-  //   res.redirect("http://localhost:3000/login");
+  // res
+  //   .status(200)
+  //   .send("Your email has been verified. You can now login to your account.");
+  res.redirect("http://localhost:3000/login");
 });
 
 module.exports = { sendVerificationMailUser, userEmailVerification };
