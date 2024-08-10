@@ -4,6 +4,7 @@ const Post = require("../models/post");
 const ErrorHandler = require("../middlewares/errorHandler");
 const catchAsync = require("../middlewares/catchAsync");
 const Comment = require("../models/comment");
+const Notification = require("../models/notification");
 
 // creating a post
 const createPost = catchAsync(async (req, res, next) => {
@@ -44,6 +45,16 @@ const likePost = catchAsync(async (req, res, next) => {
     if (!like) {
       return next(new ErrorHandler("Something went wrong", 400));
     }
+
+    // to push the notification
+    const getPost = await Post.findOne({ _id: postId });
+    const currentUser = await User.findById({ _id: req.user.userId });
+
+    const createNotification = await Notification.create({
+      user: getPost.user,
+      content: `${currentUser.name} liked your post`,
+      post: getPost._id,
+    });
 
     res
       .status(200)
