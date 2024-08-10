@@ -14,9 +14,12 @@ const userProfileData = catchAsync(async (req, res, next) => {
 
   //   user's profile data
   const userProfileData = await User.findOne({ _id: userId })
-    .select("_id name username email image followers following")
+    .select(
+      "_id name username email image followers following following_company"
+    )
     .populate({ path: "followers", select: "name username image _id" })
-    .populate({ path: "following", select: "name username image _id" });
+    .populate({ path: "following", select: "name username image _id" })
+    .populate({ path: "following_company", select: "name image _id" });
 
   //   user's following and follow count
   const followersCount = userProfileData.followers.length;
@@ -56,9 +59,12 @@ const selfProfileData = catchAsync(async (req, res, next) => {
 
   //   user's profile data
   const userProfileData = await User.findOne({ _id: userId })
-    .select("_id name username email image followers following")
+    .select(
+      "_id name username email image followers following following_company"
+    )
     .populate({ path: "followers", select: "name username image _id" })
-    .populate({ path: "following", select: "name username image _id" });
+    .populate({ path: "following", select: "name username image _id" })
+    .populate({ path: "following_company", select: "name image _id" });
 
   //   user's following and follow count
   const followersCount = userProfileData.followers.length;

@@ -25,7 +25,7 @@ const followCompany = catchAsync(async (req, res, next) => {
       {
         _id: req.user.userId,
       },
-      { $push: { following: companyId } },
+      { $push: { following_company: companyId } },
       { new: true }
     );
 
@@ -42,7 +42,7 @@ const followCompany = catchAsync(async (req, res, next) => {
       {
         _id: req.user.userId,
       },
-      { $pull: { following: companyId } },
+      { $pull: { following_company: companyId } },
       { new: true }
     );
 

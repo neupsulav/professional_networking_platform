@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const Company = require("./company");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -49,6 +50,12 @@ const userSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+    },
+  ],
+  following_company: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: Company,
     },
   ],
   position: {
