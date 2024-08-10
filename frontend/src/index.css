@@ -202,6 +202,62 @@ body::-webkit-scrollbar {
   background-color: var(--secondary-color);
   border-radius: 15px;
   color: var(--text-color);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  overflow-y: scroll;
+}
+
+.suggestionbar_container::-webkit-scrollbar {
+  display: none;
+}
+
+.suggestionbar_heading {
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.suggestionbar_items {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.suggestionbar_item {
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  width: 90%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 15px;
+  padding: 10px 5px 10px 10px;
+}
+
+.suggestionbar_item img {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.suggestionbar_item_name {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.suggestionbar_item_position {
+  font-size: 14px;
+  color: var(--primary-color);
+  font-weight: bold;
 }
 
 /* for home page responsiveness */
