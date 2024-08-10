@@ -56,6 +56,8 @@ const likePost = catchAsync(async (req, res, next) => {
       post: getPost._id,
     });
 
+    createNotification.save();
+
     res
       .status(200)
       .json({ msg: "Liked the post", likesCount: like.likes.length });
