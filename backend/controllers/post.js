@@ -105,6 +105,18 @@ const createComment = catchAsync(async (req, res, next) => {
     return next(new ErrorHandler("Something went wrong", 400));
   }
 
+  // to push the notification
+  const getPost = await Post.findOne({ _id: postId });
+  const currentUser = await User.findById({ _id: req.user.userId });
+
+  const createNotification = await Notification.create({
+    user: getPost.user,
+    content: `${currentUser.name} commented your post`,
+    post: getPost._id,
+  });
+
+  createNotification.save();
+
   res.status(201).json({ success: true });
 });
 
