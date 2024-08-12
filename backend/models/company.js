@@ -40,6 +40,27 @@ const companySchema = new mongoose.Schema({
       ref: "User",
     },
   ],
+  bio: {
+    type: String,
+  },
+  location: {
+    type: String,
+  },
+  employees: {
+    type: String,
+  },
+  industry: {
+    type: String,
+  },
+  overview: {
+    type: String,
+  },
+  services: {
+    type: String,
+  },
+  phone: {
+    type: String,
+  },
 });
 
 //hashing the password
