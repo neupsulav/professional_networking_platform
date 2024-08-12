@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import {
   FaUser,
-  FaBell,
-  FaLock,
-  FaCog,
+  // FaBell,
+  // FaLock,
+  // FaCog,
   FaMoon,
   FaSignOutAlt,
 } from "react-icons/fa";
@@ -30,7 +30,7 @@ const Settings = () => {
           </div>
         </section>
 
-        <section className="settings-section">
+        {/* <section className="settings-section">
           <div className="settings-icon">
             <FaCog />
           </div>
@@ -58,7 +58,7 @@ const Settings = () => {
             <h3>Privacy Settings</h3>
             <p>Control your privacy settings here.</p>
           </div>
-        </section>
+        </section> */}
 
         <section className="settings-section">
           <div className="settings-icon">

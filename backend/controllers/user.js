@@ -117,32 +117,56 @@ const updateUserProfile = catchAsync(async (req, res, next) => {
 
 // to get people you may know recommendations
 const peopleYouMayKnow = catchAsync(async (req, res, next) => {
-  const userId = req.user.userId;
+  const user = await User.findById({ _id: req.user.userId }).select(
+    "following"
+  );
 
-  const user = await User.findById(userId).select("following");
+  if (!user) {
+    throw new Error("User not found");
+  }
 
   const followedByMyFollowing = await User.find({
     _id: { $in: user.following },
   }).select("following");
 
-  const followedUsers = new Set();
+  const recommendations = [];
 
   followedByMyFollowing.forEach((followingUser) => {
     followingUser.following.forEach((followedUserId) => {
-      if (followedUserId.toString() !== userId.toString()) {
+      if (followedUserId.toString() !== req.user.userId.toString()) {
         // Exclude our own ID
-        followedUsers.add(followedUserId.toString());
+        recommendations.push({
+          recommendedUserId: followedUserId,
+          recommendedBy: followingUser._id,
+        });
       }
     });
   });
 
-  const usersList = Array.from(followedUsers);
-
-  const peopleRecommendations = await User.find({ _id: usersList }).select(
-    "_id name email username image position"
+  const uniqueRecommendations = Array.from(
+    new Map(
+      recommendations.map((item) => [item.recommendedUserId.toString(), item])
+    ).values()
   );
 
-  res.status(200).send(peopleRecommendations);
+  const detailedRecommendations = await Promise.all(
+    uniqueRecommendations.map(async (recommendation) => {
+      const recommendedUser = await User.findById(
+        recommendation.recommendedUserId
+      ).select("image name username position _id");
+
+      const recommendingUser = await User.findById(
+        recommendation.recommendedBy
+      ).select("image name username position _id");
+
+      return {
+        recommendedUser,
+        recommendedBy: recommendingUser,
+      };
+    })
+  );
+
+  res.status(200).send(detailedRecommendations);
 });
 
 module.exports = {
