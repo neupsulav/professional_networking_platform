@@ -12,6 +12,7 @@ const userProfileRouter = require("./routers/user");
 const notificationRouter = require("./routers/notifications");
 const jobsRouter = require("./routers/jobs");
 const applicantsRouter = require("./routers/applicants");
+const companyRouter = require("./routers/company");
 
 const app = express();
 dotenv.config();
@@ -36,6 +37,7 @@ app.use("/api", userProfileRouter);
 app.use("/api", notificationRouter);
 app.use("/api", jobsRouter);
 app.use("/api", applicantsRouter);
+app.use("/api", companyRouter);
 
 // error handler middlewares
 app.use(errorHandlerMiddleware);
