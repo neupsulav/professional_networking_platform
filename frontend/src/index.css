@@ -1176,6 +1176,12 @@ body::-webkit-scrollbar {
   color: var(--primary-color);
 }
 
+.error-message {
+  color: #d9534f;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
 .back_btn_signup {
   width: 80px;
   height: 35px;

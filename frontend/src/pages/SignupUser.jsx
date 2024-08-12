@@ -9,14 +9,63 @@ const SignupUser = () => {
     confirmPassword: "",
   });
 
+  const [errors, setErrors] = useState({});
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const validate = () => {
+    const newErrors = {};
+
+    // Name validation
+    if (formData.name.trim().length < 3) {
+      newErrors.name = "Name must be at least 3 characters long";
+    }
+
+    // Email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+
+    // Mobile number validation
+    const mobilePattern = /^\d{10}$/;
+    if (!mobilePattern.test(formData.mobile)) {
+      newErrors.mobile = "Mobile number must be 10 digits";
+    }
+
+    // Password validation
+    if (formData.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters long";
+    }
+
+    // Confirm password validation
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
+    }
+
+    return newErrors;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log(formData);
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+    } else {
+      setErrors({});
+      // Handle form submission
+      console.log(formData);
+      // Optionally, reset the form after submission
+      setFormData({
+        name: "",
+        email: "",
+        mobile: "",
+        password: "",
+        confirmPassword: "",
+      });
+    }
   };
 
   return (
@@ -32,16 +81,18 @@ const SignupUser = () => {
             onChange={handleChange}
             required
           />
+          {errors.name && <p className="error-message">{errors.name}</p>}
         </div>
         <div className="form-group">
           <label>Email</label>
           <input
-            type="email"
+            type="text"
             name="email"
             value={formData.email}
             onChange={handleChange}
             required
           />
+          {errors.email && <p className="error-message">{errors.email}</p>}
         </div>
         <div className="form-group">
           <label>Mobile Number</label>
@@ -52,6 +103,7 @@ const SignupUser = () => {
             onChange={handleChange}
             required
           />
+          {errors.mobile && <p className="error-message">{errors.mobile}</p>}
         </div>
         <div className="form-group">
           <label>Password</label>
@@ -62,6 +114,9 @@ const SignupUser = () => {
             onChange={handleChange}
             required
           />
+          {errors.password && (
+            <p className="error-message">{errors.password}</p>
+          )}
         </div>
         <div className="form-group">
           <label>Confirm Password</label>
@@ -72,6 +127,9 @@ const SignupUser = () => {
             onChange={handleChange}
             required
           />
+          {errors.confirmPassword && (
+            <p className="error-message">{errors.confirmPassword}</p>
+          )}
         </div>
         <button type="submit" className="signup-button">
           Sign Up
