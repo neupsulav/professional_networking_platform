@@ -35,4 +35,20 @@ const applyJob = catchAsync(async (req, res, next) => {
   res.status(201).send(newApplication);
 });
 
-module.exports = { applyJob };
+// to get all the applicants
+const getApplicants = catchAsync(async (req, res, next) => {
+  if (!mongoose.isValidObjectId(req.params.id)) {
+    return next(new ErrorHandler("Invalid Job Id", 400));
+  }
+
+  const jobId = req.params.id;
+
+  const applicants = await Applicant.find({ job: jobId }).populate({
+    path: "user",
+    select: "cv",
+  });
+
+  res.status(200).send(applicants);
+});
+
+module.exports = { applyJob, getApplicants };
