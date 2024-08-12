@@ -44,7 +44,50 @@ const getOtherCompanyProfileDetails = catchAsync(async (req, res, next) => {
     .send({ companyDetails, followersCount, companyJobs, isFollowing });
 });
 
+// update company details
+const updateCompanyProfile = catchAsync(async (req, res, next) => {
+  const companyId = req.user.companyId;
+
+  const file = req.file;
+
+  if (!file) {
+    const updateCompany = await Company.findByIdAndUpdate(
+      { _id: companyId },
+      req.body,
+      {
+        new: true,
+      }
+    );
+
+    if (!updateCompany) {
+      return next(new ErrorHandler("Something went wrong", 500));
+    }
+
+    res.status(201).send(updateCompany);
+  } else {
+    const filename = file.filename;
+    const basepath = `${req.protocol}://${req.get(
+      "host"
+    )}/public/uploads/companyImages/`;
+
+    const updateCompany = await Company.findByIdAndUpdate(
+      { _id: companyId },
+      { ...req.body, image: `${basepath}${filename}` },
+      {
+        new: true,
+      }
+    );
+
+    if (!updateCompany) {
+      return next(new ErrorHandler("Something went wrong", 500));
+    }
+
+    res.status(201).send(updateCompany);
+  }
+});
+
 module.exports = {
   getCompanySelfProfileDetails,
   getOtherCompanyProfileDetails,
+  updateCompanyProfile,
 };
