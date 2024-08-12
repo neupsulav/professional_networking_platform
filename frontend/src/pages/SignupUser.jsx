@@ -57,7 +57,6 @@ const SignupUser = () => {
       setErrors({});
       // Handle form submission
       console.log(formData);
-      // Optionally, reset the form after submission
       setFormData({
         name: "",
         email: "",
@@ -79,7 +78,6 @@ const SignupUser = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            required
           />
           {errors.name && <p className="error-message">{errors.name}</p>}
         </div>
@@ -90,7 +88,6 @@ const SignupUser = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            required
           />
           {errors.email && <p className="error-message">{errors.email}</p>}
         </div>
@@ -101,7 +98,6 @@ const SignupUser = () => {
             name="mobile"
             value={formData.mobile}
             onChange={handleChange}
-            required
           />
           {errors.mobile && <p className="error-message">{errors.mobile}</p>}
         </div>
@@ -112,7 +108,6 @@ const SignupUser = () => {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            required
           />
           {errors.password && (
             <p className="error-message">{errors.password}</p>
@@ -125,7 +120,6 @@ const SignupUser = () => {
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
-            required
           />
           {errors.confirmPassword && (
             <p className="error-message">{errors.confirmPassword}</p>
