@@ -24,6 +24,8 @@ app.use(
   express.static("public/uploads/userImages")
 );
 
+app.use("/public/uploads", express.static("public/uploads"));
+
 app.use("/api/auth", authRouters);
 app.use("/api", emailVerificationRouter);
 app.use("/api", postRouter);

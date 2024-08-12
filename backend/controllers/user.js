@@ -100,19 +100,42 @@ const selfProfileData = catchAsync(async (req, res, next) => {
 
 // update user profile
 const updateUserProfile = catchAsync(async (req, res, next) => {
-  const updateUser = await User.findByIdAndUpdate(
-    { _id: req.user.userId },
-    req.body,
-    {
-      new: true,
+  // if cv is provided
+  const file = req.file;
+
+  if (!file) {
+    const updateUser = await User.findByIdAndUpdate(
+      { _id: req.user.userId },
+      req.body,
+      {
+        new: true,
+      }
+    );
+
+    if (!updateUser) {
+      return next(new ErrorHandler("Something went wrong", 500));
     }
-  );
 
-  if (!updateUser) {
-    return next(new ErrorHandler("Something went wrong", 500));
+    res.status(201).send(updateUser);
+  } else {
+    const fileUrl = `${req.protocol}://${req.get("host")}/public/uploads/cv${
+      file.filename
+    }`;
+
+    const updateUser = await User.findByIdAndUpdate(
+      { _id: req.user.userId },
+      { ...req.body, cv: fileUrl },
+      {
+        new: true,
+      }
+    );
+
+    if (!updateUser) {
+      return next(new ErrorHandler("Something went wrong", 500));
+    }
+
+    res.status(201).send(updateUser);
   }
-
-  res.status(201).send(updateUser);
 });
 
 // to get people you may know recommendations
