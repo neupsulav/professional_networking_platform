@@ -35,7 +35,7 @@ const storage = multer.diskStorage({
 const uploadOptions = multer({ storage: storage });
 
 // routes
-router.post("/usersignup", uploadOptions.single("image"), userRegistration);
+router.post("/usersignup", userRegistration);
 
 router.post(
   "/companysignup",

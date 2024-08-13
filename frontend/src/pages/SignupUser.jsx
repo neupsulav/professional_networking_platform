@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignupUser = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    mobile: "",
+    phone: "",
     password: "",
-    confirmPassword: "",
+    cpassword: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -31,8 +33,8 @@ const SignupUser = () => {
 
     // Mobile number validation
     const mobilePattern = /^\d{10}$/;
-    if (!mobilePattern.test(formData.mobile)) {
-      newErrors.mobile = "Mobile number must be 10 digits";
+    if (!mobilePattern.test(formData.phone)) {
+      newErrors.phone = "Mobile number must be 10 digits";
     }
 
     // Password validation
@@ -41,34 +43,60 @@ const SignupUser = () => {
     }
 
     // Confirm password validation
-    if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match";
+    if (formData.password !== formData.cpassword) {
+      newErrors.cpassword = "Passwords do not match";
     }
 
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
       setErrors({});
-      // Handle form submission
-      console.log(formData);
-      setFormData({
-        name: "",
-        email: "",
-        mobile: "",
-        password: "",
-        confirmPassword: "",
+      // to get all the data
+      const { name, email, phone, password, cpassword } = formData;
+
+      // to send data to backend
+      const res = await fetch("/api/auth/usersignup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          phone: phone,
+          password: password,
+          cpassword: cpassword,
+        }),
       });
+
+      // to check for status of API post request
+      if (res.status === 201) {
+        toast.success("An email has been sent, please verify your email.");
+        // Reset form only after successful submission
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          password: "",
+          cpassword: "",
+        });
+      } else if (res.status === 409) {
+        toast.warn("User already exists");
+      } else {
+        toast.error("Something went wrong");
+      }
     }
   };
 
   return (
     <div className="signup-form-container">
+      <ToastContainer />
       <h2>Sign Up as User</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -95,11 +123,11 @@ const SignupUser = () => {
           <label>Mobile Number</label>
           <input
             type="text"
-            name="mobile"
-            value={formData.mobile}
+            name="phone"
+            value={formData.phone}
             onChange={handleChange}
           />
-          {errors.mobile && <p className="error-message">{errors.mobile}</p>}
+          {errors.phone && <p className="error-message">{errors.phone}</p>}
         </div>
         <div className="form-group">
           <label>Password</label>
@@ -117,12 +145,12 @@ const SignupUser = () => {
           <label>Confirm Password</label>
           <input
             type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
+            name="cpassword"
+            value={formData.cpassword}
             onChange={handleChange}
           />
-          {errors.confirmPassword && (
-            <p className="error-message">{errors.confirmPassword}</p>
+          {errors.cpassword && (
+            <p className="error-message">{errors.cpassword}</p>
           )}
         </div>
         <button type="submit" className="signup-button">

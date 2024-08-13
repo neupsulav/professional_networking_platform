@@ -7,9 +7,9 @@ const { sendVerificationMailCompany } = require("./companyEmailVerification");
 
 // user registration
 const userRegistration = catchAsync(async (req, res, next) => {
-  const { name, username, email, password, cpassword } = req.body;
+  const { name, email, phone, password, cpassword } = req.body;
 
-  if (!name || !username || !email || !password || !cpassword) {
+  if (!name || !phone || !email || !password || !cpassword) {
     return next(new ErrorHandler("Please fill all the fields properly", 400));
   }
 
@@ -17,57 +17,30 @@ const userRegistration = catchAsync(async (req, res, next) => {
     return next(new ErrorHandler("Passowrd's doesn't match", 406));
   }
 
-  //for saving user's image in database
-  const file = req.file;
-  if (!file) {
-    const newUser = await User.create({
-      name: req.body.name,
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-      cpassword: req.body.cpassword,
-    });
-    newUser.save();
+  const userExists = await User.findOne({ email: email });
 
-    if (!newUser) {
-      return next(
-        new ErrorHandler("Something went wrong, User not created!", 500)
-      );
-    }
-
-    // send verification mail
-    sendVerificationMailUser(req.body.name, req.body.email, newUser._id);
-  } else {
-    const filename = file.filename;
-    const basepath = `${req.protocol}://${req.get(
-      "host"
-    )}/public/uploads/userImages/`;
-
-    const newUser = await User.create({
-      name: req.body.name,
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-      cpassword: req.body.cpassword,
-      image: `${basepath}${filename}`,
-    });
-
-    newUser.save();
-
-    if (!newUser) {
-      return next(
-        new ErrorHandler("Something went wrong, User not created!", 500)
-      );
-    }
-
-    // send verification mail
-    sendVerificationMailUser(req.body.name, req.body.email, newUser._id);
+  if (userExists) {
+    return next(new ErrorHandler("User already exists", 409));
   }
 
-  res.status(201).json({
-    success: true,
-    msg: "An email has been sent. Please verify your account.",
+  const newUser = await User.create({
+    name,
+    email,
+    phone,
+    password,
+    cpassword,
   });
+
+  newUser.save();
+
+  // send verification mail
+  sendVerificationMailUser(req.body.name, req.body.email, newUser._id);
+
+  if (!newUser) {
+    return next(new ErrorHandler("Something went wrong", 500));
+  }
+
+  res.status(201).send(newUser);
 });
 
 // company registration
