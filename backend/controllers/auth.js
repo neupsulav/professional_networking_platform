@@ -113,9 +113,11 @@ const login = catchAsync(async (req, res, next) => {
 
     const token = await isUser.getJwt();
 
-    return res
-      .status(200)
-      .json({ msg: "Logged in successfully", token: token });
+    return res.status(200).json({
+      msg: "Logged in successfully",
+      token: token,
+      accountType: isUser.accountType,
+    });
   }
 
   if (isCompany) {
@@ -134,9 +136,11 @@ const login = catchAsync(async (req, res, next) => {
 
     const token = await isCompany.getJwt();
 
-    return res
-      .status(200)
-      .json({ msg: "Logged in successfully", token: token });
+    return res.status(200).json({
+      msg: "Logged in successfully",
+      token: token,
+      accountType: isCompany.accountType,
+    });
   }
 
   return next(new ErrorHandler("Invalid Credentials", 401));
