@@ -1142,6 +1142,7 @@ body::-webkit-scrollbar {
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
+  width: 95%;
 }
 
 .form-group label {

@@ -101,41 +101,65 @@ const selfProfileData = catchAsync(async (req, res, next) => {
 // update user profile
 const updateUserProfile = catchAsync(async (req, res, next) => {
   // if cv is provided
-  const file = req.file;
+  // const file = req.file;
 
-  if (!file) {
-    const updateUser = await User.findByIdAndUpdate(
-      { _id: req.user.userId },
-      req.body,
-      {
-        new: true,
-      }
-    );
+  // if (!file) {
+  //   const updateUser = await User.findByIdAndUpdate(
+  //     { _id: req.user.userId },
+  //     req.body,
+  //     {
+  //       new: true,
+  //     }
+  //   );
 
-    if (!updateUser) {
-      return next(new ErrorHandler("Something went wrong", 500));
-    }
+  //   if (!updateUser) {
+  //     return next(new ErrorHandler("Something went wrong", 500));
+  //   }
 
-    res.status(201).send(updateUser);
-  } else {
-    const fileUrl = `${req.protocol}://${req.get("host")}/public/uploads/cv${
-      file.filename
-    }`;
+  //   res.status(201).send(updateUser);
+  // } else {
+  //   const fileUrl = `${req.protocol}://${req.get("host")}/public/uploads/cv${
+  //     file.filename
+  //   }`;
 
-    const updateUser = await User.findByIdAndUpdate(
-      { _id: req.user.userId },
-      { ...req.body, cv: fileUrl },
-      {
-        new: true,
-      }
-    );
+  //   const updateUser = await User.findByIdAndUpdate(
+  //     { _id: req.user.userId },
+  //     { ...req.body, cv: fileUrl },
+  //     {
+  //       new: true,
+  //     }
+  //   );
 
-    if (!updateUser) {
-      return next(new ErrorHandler("Something went wrong", 500));
-    }
+  //   if (!updateUser) {
+  //     return next(new ErrorHandler("Something went wrong", 500));
+  //   }
 
-    res.status(201).send(updateUser);
+  //   res.status(201).send(updateUser);
+  // }
+
+  const fileUrls = {};
+
+  if (req.files["image"]) {
+    fileUrls.image = `${req.protocol}://${req.get(
+      "host"
+    )}/public/uploads/userImages/${req.files["image"][0].filename}`;
   }
+
+  if (req.files["cv"]) {
+    fileUrls.cv = `${req.protocol}://${req.get("host")}/public/uploads/${
+      req.files["cv"][0].filename
+    }`;
+  }
+
+  const updateUser = await User.findByIdAndUpdate(
+    { _id: req.user.userId },
+    { ...req.body, ...fileUrls },
+    {
+      new: true,
+    }
+  );
+
+  res.status(200).send(updateUser);
 });
 
 // to get people you may know recommendations
