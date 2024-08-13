@@ -45,9 +45,9 @@ const userRegistration = catchAsync(async (req, res, next) => {
 
 // company registration
 const companyRegistration = catchAsync(async (req, res, next) => {
-  const { name, email, password, cpassword } = req.body;
+  const { name, email, password, cpassword, phone } = req.body;
 
-  if (!name || !email || !password || !cpassword) {
+  if (!name || !email || !password || !cpassword || !phone) {
     return next(new ErrorHandler("Please fill all the fields properly", 400));
   }
 
@@ -55,50 +55,29 @@ const companyRegistration = catchAsync(async (req, res, next) => {
     return next(new ErrorHandler("Passowrd's doesn't match", 406));
   }
 
-  //for saving company's image in database
-  const file = req.file;
-  if (!file) {
-    const newUser = await Company.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-      cpassword: req.body.cpassword,
-    });
-    newUser.save();
+  const userExists = await Company.findOne({ email: email });
 
-    if (!newUser) {
-      return next(
-        new ErrorHandler("Something went wrong, User not created!", 500)
-      );
-    }
-
-    // send verification mail
-    sendVerificationMailCompany(req.body.name, req.body.email, newUser._id);
-  } else {
-    const filename = file.filename;
-    const basepath = `${req.protocol}://${req.get(
-      "host"
-    )}/public/uploads/userImages/`;
-
-    const newUser = await Company.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-      cpassword: req.body.cpassword,
-      image: `${basepath}${filename}`,
-    });
-
-    newUser.save();
-
-    if (!newUser) {
-      return next(
-        new ErrorHandler("Something went wrong, User not created!", 500)
-      );
-    }
-
-    // send verification mail
-    sendVerificationMailCompany(req.body.name, req.body.email, newUser._id);
+  if (userExists) {
+    return next(new ErrorHandler("User already exists", 409));
   }
+
+  const newUser = await Company.create({
+    name: req.body.name,
+    phone: req.body.phone,
+    email: req.body.email,
+    password: req.body.password,
+    cpassword: req.body.cpassword,
+  });
+  newUser.save();
+
+  if (!newUser) {
+    return next(
+      new ErrorHandler("Something went wrong, company not created!", 500)
+    );
+  }
+
+  // send verification mail
+  sendVerificationMailCompany(req.body.name, req.body.email, newUser._id);
 
   res.status(201).json({
     success: true,
@@ -134,9 +113,11 @@ const login = catchAsync(async (req, res, next) => {
 
     const token = await isUser.getJwt();
 
-    return res
-      .status(200)
-      .json({ msg: "Logged in successfully", token: token });
+    return res.status(200).json({
+      msg: "Logged in successfully",
+      token: token,
+      accountType: isUser.accountType,
+    });
   }
 
   if (isCompany) {
@@ -155,9 +136,11 @@ const login = catchAsync(async (req, res, next) => {
 
     const token = await isCompany.getJwt();
 
-    return res
-      .status(200)
-      .json({ msg: "Logged in successfully", token: token });
+    return res.status(200).json({
+      msg: "Logged in successfully",
+      token: token,
+      accountType: isCompany.accountType,
+    });
   }
 
   return next(new ErrorHandler("Invalid Credentials", 401));
