@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import {
   FaUser,
-  // FaBell,
-  // FaLock,
-  // FaCog,
+  FaBriefcase,
+   FaLock,
+  //  FaCog,
   FaMoon,
   FaSignOutAlt,
 } from "react-icons/fa";
+import UserSettingsForm from './UserSettingsForm';
+import CompanySettingsForm from './CompanySettingsForm';
 
-const Settings = () => {
+const Settings = ({ userType }) => {
   const [darkMode, setDarkMode] = useState(false);
 
   const toggleDarkMode = () => {
@@ -19,6 +21,7 @@ const Settings = () => {
   return (
     <div className={`settings-container ${darkMode ? "dark-mode" : ""}`}>
       <h2>Settings</h2>
+{userType === 'user' ? <UserSettingsForm /> : <CompanySettingsForm />}
       <div className="settings-content">
         <section className="settings-section">
           <div className="settings-icon">
@@ -30,7 +33,7 @@ const Settings = () => {
           </div>
         </section>
 
-        {/* <section className="settings-section">
+          {/* <section className="settings-section">  
           <div className="settings-icon">
             <FaCog />
           </div>
@@ -38,15 +41,15 @@ const Settings = () => {
             <h3>Account Settings</h3>
             <p>Manage your account settings here.</p>
           </div>
-        </section>
+        </section> */}
 
         <section className="settings-section">
           <div className="settings-icon">
-            <FaBell />
+            <FaBriefcase />
           </div>
           <div className="settings-details">
-            <h3>Notification Settings</h3>
-            <p>Set your notification preferences here.</p>
+            <h3>Post Jobs</h3>
+            <p>post jobs here.</p>
           </div>
         </section>
 
@@ -58,7 +61,7 @@ const Settings = () => {
             <h3>Privacy Settings</h3>
             <p>Control your privacy settings here.</p>
           </div>
-        </section> */}
+        </section> 
 
         <section className="settings-section">
           <div className="settings-icon">
@@ -70,9 +73,10 @@ const Settings = () => {
               <button onClick={toggleDarkMode}>
                 {darkMode ? "Disable Dark Mode" : "Enable Dark Mode"}
               </button>
+              <div>
               <button className="logout-button">
                 <FaSignOutAlt /> Logout
-              </button>
+              </button></div>
             </div>
           </div>
         </section>

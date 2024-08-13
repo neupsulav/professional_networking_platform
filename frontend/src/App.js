@@ -8,8 +8,6 @@ import SignupCompany from "./pages/SignupCompany";
 import NotFound from "./pages/ErrorPage";
 import UsersProfile from "./pages/UsersProfile";
 import CompaniesProfile from "./pages/CompaniesProfile";
-import settings from './components/settings';
-
 
 const App = () => {
   return (
@@ -23,7 +21,6 @@ const App = () => {
         <Route path="/user/:id" element={<UsersProfile />} />
         <Route path="/company/:id" element={<CompaniesProfile />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="/settings" element={<settings/>} />
       </Routes>
     </>
   );
