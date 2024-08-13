@@ -8,8 +8,10 @@ import SignupCompany from "./pages/SignupCompany";
 import NotFound from "./pages/ErrorPage";
 import UsersProfile from "./pages/UsersProfile";
 import CompaniesProfile from "./pages/CompaniesProfile";
+import Settings from "./components/settings";
 
 const App = () => {
+  const userType = 'user';
   return (
     <>
       <Routes>
@@ -20,6 +22,7 @@ const App = () => {
         <Route path="/signup-company" element={<SignupCompany />} />
         <Route path="/user/:id" element={<UsersProfile />} />
         <Route path="/company/:id" element={<CompaniesProfile />} />
+        <Route path="/settings" element={<Settings userType={userType} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
