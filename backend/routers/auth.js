@@ -37,11 +37,7 @@ const uploadOptions = multer({ storage: storage });
 // routes
 router.post("/usersignup", userRegistration);
 
-router.post(
-  "/companysignup",
-  uploadOptions.single("image"),
-  companyRegistration
-);
+router.post("/companysignup", companyRegistration);
 
 router.post("/login", login);
 

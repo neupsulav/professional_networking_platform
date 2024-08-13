@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignupCompany = () => {
   const [formData, setFormData] = useState({
@@ -48,28 +50,54 @@ const SignupCompany = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
       setErrors({});
-      // Handle form submission
-      console.log(formData);
-      // Optionally, reset the form after submission
-      setFormData({
-        companyName: "",
-        contactNumber: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
+      // to get all the data
+      const { companyName, email, contactNumber, password, confirmPassword } =
+        formData;
+
+      // to send data to backend
+      const res = await fetch("/api/auth/companysignup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: companyName,
+          email: email,
+          phone: contactNumber,
+          password: password,
+          cpassword: confirmPassword,
+        }),
       });
+
+      // to check for status of API post request
+      if (res.status === 201) {
+        toast.success("An email has been sent, please verify your email.");
+        // Reset form only after successful submission
+        setFormData({
+          companyName: "",
+          contactNumber: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+        });
+      } else if (res.status === 409) {
+        toast.warn("Email already exists");
+      } else {
+        toast.error("Something went wrong");
+      }
     }
   };
 
   return (
     <div className="signup-form-container">
+      <ToastContainer />
       <h2>Sign Up as Company</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
