@@ -21,7 +21,6 @@ const Settings = ({ userType }) => {
   return (
     <div className={`settings-container ${darkMode ? "dark-mode" : ""}`}>
       <h2>Settings</h2>
-{userType === 'user' ? <UserSettingsForm /> : <CompanySettingsForm />}
       <div className="settings-content">
         <section className="settings-section">
           <div className="settings-icon">
@@ -30,6 +29,12 @@ const Settings = ({ userType }) => {
           <div className="settings-details">
             <h3>Profile Settings</h3>
             <p>Update your profile information here.</p>
+             {/* Render the form based on user type */}
+             {userType === "user" ? (
+              <UserSettingsForm />
+            ) : userType === "company" ? (
+              <CompanySettingsForm />
+            ) : null}
           </div>
         </section>
 
@@ -42,7 +47,7 @@ const Settings = ({ userType }) => {
             <p>Manage your account settings here.</p>
           </div>
         </section> */}
-
+ {userType === "company" && (
         <section className="settings-section">
           <div className="settings-icon">
             <FaBriefcase />
@@ -52,6 +57,7 @@ const Settings = ({ userType }) => {
             <p>post jobs here.</p>
           </div>
         </section>
+ )}
 
         <section className="settings-section">
           <div className="settings-icon">
