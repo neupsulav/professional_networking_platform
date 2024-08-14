@@ -3,15 +3,11 @@ import {
   FaUser,
   FaBriefcase,
   FaLock,
-<<<<<<< HEAD
-=======
-  //  FaCog,
->>>>>>> 200ead02af569aefb2e758c5134abd1bb2eca901
   FaMoon,
   FaSignOutAlt,
 } from "react-icons/fa";
-import UserSettingsForm from "./UserSettingsForm";
-import CompanySettingsForm from "./CompanySettingsForm";
+import UserSettingsForm from './UserSettingsForm';
+import CompanySettingsForm from './CompanySettingsForm';
 
 const Settings = ({ userType }) => {
   const [darkMode, setDarkMode] = useState(false);
@@ -37,7 +33,6 @@ const Settings = ({ userType }) => {
           <div className="settings-details">
             <h3>Profile Settings</h3>
             <p>Update your profile information here.</p>
-<<<<<<< HEAD
           </div>
         </section>
 
@@ -50,26 +45,6 @@ const Settings = ({ userType }) => {
           ) : null
         )}
 
-=======
-            {/* Render the form based on user type */}
-            {userType === "user" ? (
-              <UserSettingsForm />
-            ) : userType === "company" ? (
-              <CompanySettingsForm />
-            ) : null}
-          </div>
-        </section>
-
-        {/* <section className="settings-section">  
-          <div className="settings-icon">
-            <FaCog />
-          </div>
-          <div className="settings-details">
-            <h3>Account Settings</h3>
-            <p>Manage your account settings here.</p>
-          </div>
-        </section> */}
->>>>>>> 200ead02af569aefb2e758c5134abd1bb2eca901
         {userType === "company" && (
           <section className="settings-section">
             <div className="settings-icon">
@@ -77,11 +52,7 @@ const Settings = ({ userType }) => {
             </div>
             <div className="settings-details">
               <h3>Post Jobs</h3>
-<<<<<<< HEAD
               <p>Post jobs here.</p>
-=======
-              <p>post jobs here.</p>
->>>>>>> 200ead02af569aefb2e758c5134abd1bb2eca901
             </div>
           </section>
         )}
