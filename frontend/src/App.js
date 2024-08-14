@@ -11,7 +11,6 @@ import CompaniesProfile from "./pages/CompaniesProfile";
 import Settings from "./components/settings";
 
 const App = () => {
-  const userType = 'user';
   return (
     <>
       <Routes>

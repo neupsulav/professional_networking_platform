@@ -47,7 +47,7 @@ const Home = () => {
       case 4:
         return <Notifications />;
       case 5:
-        return <Settings />;
+        return <Settings userType={userType} />;
 
       default:
         break;
