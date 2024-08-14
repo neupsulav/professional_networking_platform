@@ -40,10 +40,8 @@ const Home = () => {
       case 0:
         return <Newsfeed />;
       case 1:
-        // return <CompanyProfile />;
-        return <UserProfile />;
-      // return <CompanyProfile />;
-      // return <UserProfile />;
+        return userType === "user" ? <UserProfile /> : <CompanyProfile />;
+
       case 2:
         return <Jobs />;
       case 4:
