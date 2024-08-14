@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Newsfeed from "../components/Newsfeed";
 import SuggestionBar from "../components/SuggestionBar";
@@ -10,10 +11,34 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import CompanyProfile from "../components/CompanyProfile";
 // import UserProfile from "../components/userProfile";
 import Settings from "../components/settings";
+import Cookies from "universal-cookie";
+// import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  // const navigate = useNavigate();
+
   const [selectedPath, setSelectedPath] = useState(0);
   const [isSidebarActive, setIsSidebarActive] = useState(false);
+
+  // for accountType cookie value
+  const [cookieValueAccType, setCookieValueAccType] = useState("");
+
+  // for cookies
+  const cookies = new Cookies();
+  useEffect(() => {
+    const value = cookies.get("accounttype");
+    setCookieValueAccType(value || "No cookie found");
+  }, []);
+
+  console.log(cookieValueAccType);
+
+  // const cookieToken = cookies.get("jwttoken");
+
+  // const protectPath = () => {
+  //   if (!cookieToken) {
+  //     navigate("/login");
+  //   }
+  // };
 
   //   to navigate using sidebar options
   const navigateComponents = () => {

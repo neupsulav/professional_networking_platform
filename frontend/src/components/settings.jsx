@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import {
   FaUser,
   FaBriefcase,
-   FaLock,
+  FaLock,
   //  FaCog,
   FaMoon,
   FaSignOutAlt,
 } from "react-icons/fa";
-import UserSettingsForm from './UserSettingsForm';
-import CompanySettingsForm from './CompanySettingsForm';
+import UserSettingsForm from "./UserSettingsForm";
+import CompanySettingsForm from "./CompanySettingsForm";
 
 const Settings = ({ userType }) => {
   const [darkMode, setDarkMode] = useState(false);
@@ -29,8 +29,8 @@ const Settings = ({ userType }) => {
           <div className="settings-details">
             <h3>Profile Settings</h3>
             <p>Update your profile information here.</p>
-             {/* Render the form based on user type */}
-             {userType === "user" ? (
+            {/* Render the form based on user type */}
+            {userType === "user" ? (
               <UserSettingsForm />
             ) : userType === "company" ? (
               <CompanySettingsForm />
@@ -38,7 +38,7 @@ const Settings = ({ userType }) => {
           </div>
         </section>
 
-          {/* <section className="settings-section">  
+        {/* <section className="settings-section">  
           <div className="settings-icon">
             <FaCog />
           </div>
@@ -47,17 +47,17 @@ const Settings = ({ userType }) => {
             <p>Manage your account settings here.</p>
           </div>
         </section> */}
- {userType === "company" && (
-        <section className="settings-section">
-          <div className="settings-icon">
-            <FaBriefcase />
-          </div>
-          <div className="settings-details">
-            <h3>Post Jobs</h3>
-            <p>post jobs here.</p>
-          </div>
-        </section>
- )}
+        {userType === "company" && (
+          <section className="settings-section">
+            <div className="settings-icon">
+              <FaBriefcase />
+            </div>
+            <div className="settings-details">
+              <h3>Post Jobs</h3>
+              <p>post jobs here.</p>
+            </div>
+          </section>
+        )}
 
         <section className="settings-section">
           <div className="settings-icon">
@@ -67,7 +67,7 @@ const Settings = ({ userType }) => {
             <h3>Privacy Settings</h3>
             <p>Control your privacy settings here.</p>
           </div>
-        </section> 
+        </section>
 
         <section className="settings-section">
           <div className="settings-icon">
@@ -80,9 +80,10 @@ const Settings = ({ userType }) => {
                 {darkMode ? "Disable Dark Mode" : "Enable Dark Mode"}
               </button>
               <div>
-              <button className="logout-button">
-                <FaSignOutAlt /> Logout
-              </button></div>
+                <button className="logout-button">
+                  <FaSignOutAlt /> Logout
+                </button>
+              </div>
             </div>
           </div>
         </section>
