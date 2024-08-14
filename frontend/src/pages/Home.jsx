@@ -11,6 +11,7 @@ import CompanyProfile from "../components/CompanyProfile";
 // import UserProfile from "../components/userProfile";
 import Settings from "../components/settings";
 import Cookies from "universal-cookie";
+import CompanyFollowers from "../components/CompanyFollowers";
 // import { useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -73,7 +74,7 @@ const Home = () => {
         userType={userType}
       />
       {navigateComponents(selectedPath)}
-      <SuggestionBar />
+      {userType === "user" ? <SuggestionBar /> : <CompanyFollowers />}
     </div>
   );
 };
