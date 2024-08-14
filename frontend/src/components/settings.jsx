@@ -79,6 +79,23 @@ const Settings = ({ userType }) => {
                   <button onClick={toggleDarkMode}>
                     {darkMode ? "Disable Dark Mode" : "Enable Dark Mode"}
                   </button>
+                  {/* <div>
+                    <button className="logout-button">
+                      <FaSignOutAlt /> Logout
+                    </button>
+                  </div> */}
+                </div>
+              </div>
+            </section>
+
+            <section className="settings-section">
+              <div className="settings-icon">
+                <FaMoon />
+              </div>
+              <div className="settings-details">
+                <h3>Logout</h3>
+                <div className="appearance-options">
+                  {/* <button>Logout</button> */}
                   <div>
                     <button className="logout-button">
                       <FaSignOutAlt /> Logout

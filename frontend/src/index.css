@@ -1839,6 +1839,12 @@ body::-webkit-scrollbar {
   color: white;
 }
 
+.settings-section:hover button {
+  border: 1px solid white;
+  /* background-color: white; */
+  color: white;
+}
+
 .settings-section:hover .settings-icon {
   color: white;
 }
@@ -1879,7 +1885,7 @@ body::-webkit-scrollbar {
   padding: 10px 15px;
   font-size: 16px;
   cursor: pointer;
-  border: none;
+  border: 1px solid var(--primary-color);
   border-radius: 5px;
 }
 
