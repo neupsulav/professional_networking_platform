@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import {
   FaHome,
@@ -15,6 +16,7 @@ const Sidebar = ({
   setSelectedPath,
   isSidebarActive,
   setIsSidebarActive,
+  userType,
 }) => {
   return (
     <div
@@ -36,20 +38,22 @@ const Sidebar = ({
         <p>HamroSanjal</p>
       </div>
       <ul className="sidebar-menu">
-        <li
-          className={
-            selectedPath === 0 ? "active-link sidebar-item" : "sidebar-item"
-          }
-        >
-          <div
-            onClick={() => {
-              setSelectedPath(0);
-            }}
+        {userType === "user" && (
+          <li
+            className={
+              selectedPath === 0 ? "active-link sidebar-item" : "sidebar-item"
+            }
           >
-            <FaHome className="sidebar-icon" />
-            Home
-          </div>
-        </li>
+            <div
+              onClick={() => {
+                setSelectedPath(0);
+              }}
+            >
+              <FaHome className="sidebar-icon" />
+              Home
+            </div>
+          </li>
+        )}
         <li
           className={
             selectedPath === 1 ? "active-link sidebar-item" : "sidebar-item"
@@ -64,34 +68,38 @@ const Sidebar = ({
             Profile
           </div>
         </li>
-        <li
-          className={
-            selectedPath === 2 ? "active-link sidebar-item" : "sidebar-item"
-          }
-        >
-          <div
-            onClick={() => {
-              setSelectedPath(2);
-            }}
+        {userType === "user" && (
+          <li
+            className={
+              selectedPath === 2 ? "active-link sidebar-item" : "sidebar-item"
+            }
           >
-            <FaBriefcase className="sidebar-icon" />
-            Jobs
-          </div>
-        </li>
-        <li
-          className={
-            selectedPath === 3 ? "active-link sidebar-item" : "sidebar-item"
-          }
-        >
-          <div
-            onClick={() => {
-              setSelectedPath(3);
-            }}
+            <div
+              onClick={() => {
+                setSelectedPath(2);
+              }}
+            >
+              <FaBriefcase className="sidebar-icon" />
+              Jobs
+            </div>
+          </li>
+        )}
+        {userType === "user" && (
+          <li
+            className={
+              selectedPath === 3 ? "active-link sidebar-item" : "sidebar-item"
+            }
           >
-            <FaUsers className="sidebar-icon" />
-            Recommendations
-          </div>
-        </li>
+            <div
+              onClick={() => {
+                setSelectedPath(3);
+              }}
+            >
+              <FaUsers className="sidebar-icon" />
+              Recommendations
+            </div>
+          </li>
+        )}
         <li
           className={
             selectedPath === 4 ? "active-link sidebar-item" : "sidebar-item"
