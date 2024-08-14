@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Newsfeed from "../components/Newsfeed";
@@ -19,26 +18,20 @@ const Home = () => {
 
   const [selectedPath, setSelectedPath] = useState(0);
   const [isSidebarActive, setIsSidebarActive] = useState(false);
+  const [userType, setUserType] = useState("");
 
-  // for accountType cookie value
-  const [cookieValueAccType, setCookieValueAccType] = useState("");
-
-  // for cookies
-  const cookies = new Cookies();
   useEffect(() => {
-    const value = cookies.get("accounttype");
-    setCookieValueAccType(value || "No cookie found");
+    const cookies = new Cookies();
+    const cookie = cookies.get("accounttype");
+    setUserType(cookie);
+
+    // for initial path setup for company
+    if (cookie === "user") {
+      setSelectedPath(0);
+    } else {
+      setSelectedPath(1);
+    }
   }, []);
-
-  console.log(cookieValueAccType);
-
-  // const cookieToken = cookies.get("jwttoken");
-
-  // const protectPath = () => {
-  //   if (!cookieToken) {
-  //     navigate("/login");
-  //   }
-  // };
 
   //   to navigate using sidebar options
   const navigateComponents = () => {
@@ -77,6 +70,7 @@ const Home = () => {
         setSelectedPath={setSelectedPath}
         isSidebarActive={isSidebarActive}
         setIsSidebarActive={setIsSidebarActive}
+        userType={userType}
       />
       {navigateComponents(selectedPath)}
       <SuggestionBar />

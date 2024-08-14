@@ -55,7 +55,7 @@ const Login = () => {
         expires: new Date(Date.now() + 2629800000),
       });
 
-      cookies.set("accountype", response.accountType, {
+      cookies.set("accounttype", response.accountType, {
         path: "/",
         expires: new Date(Date.now() + 2629800000),
       });
