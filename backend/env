@@ -1,0 +1,11 @@
+PORT = 3000
+
+connectionUrl = mongodb+srv://noreplyhamrosanjal:hamrosanjal123@cluster0.eex987g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+USER = noreply.hamrosanjal
+
+PASS = xkzi jvbj wqpg cdcf
+
+secretKey = "@1ncej3i93nc30u84rnfnc47392nf4bucceujie3"
+
+expiresIn = 30d

@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import UserSettingsForm from './UserSettingsForm';
 import CompanySettingsForm from './CompanySettingsForm';
+import changepassword from "./changepassword";
 
 const Settings = ({ userType }) => {
   const [darkMode, setDarkMode] = useState(false);
@@ -57,7 +58,8 @@ const Settings = ({ userType }) => {
           </section>
         )}
 
-        <section className="settings-section">
+        <section className="settings-section"
+        onClick={() => setActiveSection("privacy")}>
           <div className="settings-icon">
             <FaLock />
           </div>
@@ -66,6 +68,7 @@ const Settings = ({ userType }) => {
             <p>Control your privacy settings here.</p>
           </div>
         </section>
+        {activeSection === "privacy" && <changePassword/>}
 
         <section className="settings-section">
           <div className="settings-icon">
@@ -87,6 +90,7 @@ const Settings = ({ userType }) => {
         </section>
       </div>
     </div>
+    
   );
 };
 
