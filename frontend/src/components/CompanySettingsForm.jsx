@@ -1,18 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+// import { useRef } from "react";
+// import JoditEditor from "jodit-react";
 
 const CompanySettingsForm = () => {
-  const [companyOverview, setCompanyOverview] = useState('');
-  const [industry, setIndustry] = useState('');
-  const [companySize, setCompanySize] = useState('');
-  const [contactInformation, setContactInformation] = useState('');
-  const [socialMediaLinks, setSocialMediaLinks] = useState('');
+  const [companyOverview, setCompanyOverview] = useState("");
+  const [industry, setIndustry] = useState("");
+  const [companySize, setCompanySize] = useState("");
+  const [contactInformation, setContactInformation] = useState("");
+  const [socialMediaLinks, setSocialMediaLinks] = useState("");
   const [logo, setLogo] = useState(null);
-  const [jobOpenings, setJobOpenings] = useState('');
-  const [companyPolicies, setCompanyPolicies] = useState('');
+  const [jobOpenings, setJobOpenings] = useState("");
+  const [companyPolicies, setCompanyPolicies] = useState("");
+
+  // for jodit text editor
+  // const editor = useRef(null);
+  // const [content, setContent] = useState("");
+
+  // const config = {
+  //   placeholder: "Write blogs content here....",
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Company Form submitted:', {
+    console.log("Company Form submitted:", {
       companyOverview,
       industry,
       companySize,
@@ -25,7 +35,7 @@ const CompanySettingsForm = () => {
   };
 
   return (
-    <div className="form-container">
+    <div className="profile-setting-form-container">
       <h2>Edit Company Profile</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -59,6 +69,14 @@ const CompanySettingsForm = () => {
             onChange={(e) => setContactInformation(e.target.value)}
           />
         </div>
+        {/* <div className="newstextEditor">
+          <JoditEditor
+            ref={editor}
+            value={content}
+            config={config}
+            onBlur={(newContent) => setContent(newContent)}
+          />
+        </div> */}
         <div className="form-group">
           <label>Social Media Links</label>
           <input
@@ -86,7 +104,9 @@ const CompanySettingsForm = () => {
             onChange={(e) => setCompanyPolicies(e.target.value)}
           />
         </div>
-        <button type="submit" className="submit-button">Save Changes</button>
+        <button type="submit" className="submit-button">
+          Save Changes
+        </button>
       </form>
     </div>
   );

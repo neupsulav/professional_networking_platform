@@ -85,7 +85,7 @@ const Settings = ({ userType }) => {
                   <FaSignOutAlt /> Logout
                 </button>
               </div>
-            </div>
+            </div>g
           </div>
         </section>
       </div>
