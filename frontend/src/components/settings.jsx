@@ -1,99 +1,120 @@
-// import React, { useState } from "react";
-// import {
-//   FaUser,
-//   FaBriefcase,
-//   FaLock,
-//   FaMoon,
-//   FaSignOutAlt,
-// } from "react-icons/fa";
-// import UserSettingsForm from './UserSettingsForm';
-// import CompanySettingsForm from './CompanySettingsForm';
-// import changepassword from "./changepassword";
-// import PostJobs from "./PostJobs";
+import React, { useState } from "react";
+import {
+  FaUser,
+  FaBriefcase,
+  FaLock,
+  FaMoon,
+  FaSignOutAlt,
+} from "react-icons/fa";
+import UserSettingsForm from "./UserSettingsForm";
+import CompanySettingsForm from "./CompanySettingsForm";
+import ChangePasswordForm from "./changepassword";
+import PostJobsForm from "./PostJobs";
 
-// const Settings = ({ userType }) => {
-//   const [darkMode, setDarkMode] = useState(false);
-//   const [activeSection, setActiveSection] = useState(null); // State to track which section is active
+const Settings = ({ userType }) => {
+  const [darkMode, setDarkMode] = useState(false);
+  const [activeSection, setActiveSection] = useState(null); // State to track which section is active
 
-//   const toggleDarkMode = () => {
-//     setDarkMode(!darkMode);
-//     document.body.classList.toggle("dark-mode", !darkMode);
-//   };
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.body.classList.toggle("dark-mode", !darkMode);
+  };
 
-//   const handleSectionClick = (section) => {
-//     setActiveSection(section); // Set the active section on click
-//   };
+  const handleSectionClick = (section) => {
+    setActiveSection(section); // Set the active section on click
+  };
 
-//   return (
-//     <div className={`settings-container ${darkMode ? "dark-mode" : ""}`}>
-//       <h2>Settings</h2>
-//       <div className="settings-content">
-//         <section className="settings-section" onClick={() => handleSectionClick('profile')}>
-//           <div className="settings-icon">
-//             <FaUser />
-//           </div>
-//           <div className="settings-details">
-//             <h3>Profile Settings</h3>
-//             <p>Update your profile information here.</p>
-//           </div>
-//         </section>
+  //   to return components
+  const returnComponent = () => {
+    switch (activeSection) {
+      case "profile":
+        return userType === "user" ? (
+          <UserSettingsForm />
+        ) : (
+          <CompanySettingsForm />
+        );
 
-//         {activeSection === 'profile' && (
-//           // Render the form based on user type if 'Profile Settings' is clicked
-//           userType === "user" ? (
-//             <UserSettingsForm />
-//           ) : userType === "company" ? (
-//             <CompanySettingsForm />
-//           ) : null
-//         )}
+      case "privacy":
+        return <ChangePasswordForm />;
 
-//         {userType === "company" && (
-//           <section className="settings-section" onClick={() => setActiveSection("post-jobs")}>
-//             <div className="settings-icon">
-//               <FaBriefcase />
-//             </div>
-//             <div className="settings-details">
-//               <h3>Post Jobs</h3>
-//               <p>Post jobs here.</p>
-//             </div>
-//           </section>
-//           {activeSection === "post-jobs" && <PostJobs/>}
-//         )}
+      case "post-jobs":
+        return <PostJobsForm />;
 
-//         <section className="settings-section"
-//         onClick={() => setActiveSection("privacy")}>
-//           <div className="settings-icon">
-//             <FaLock />
-//           </div>
-//           <div className="settings-details">
-//             <h3>Privacy Settings</h3>
-//             <p>Control your privacy settings here.</p>
-//           </div>
-//         </section>
-//         {activeSection === "privacy" && <changePassword/>}
+      default:
+        return (
+          <div className={`settings-container ${darkMode ? "dark-mode" : ""}`}>
+            <h2>Settings</h2>
+            <div className="settings-content">
+              <section
+                className="settings-section"
+                onClick={() => handleSectionClick("profile")}
+              >
+                <div className="settings-icon">
+                  <FaUser />
+                </div>
+                <div className="settings-details">
+                  <h3>Profile Settings</h3>
+                  <p>Update your profile information here.</p>
+                </div>
+              </section>
 
-//         <section className="settings-section">
-//           <div className="settings-icon">
-//             <FaMoon />
-//           </div>
-//           <div className="settings-details">
-//             <h3>Appearance</h3>
-//             <div className="appearance-options">
-//               <button onClick={toggleDarkMode}>
-//                 {darkMode ? "Disable Dark Mode" : "Enable Dark Mode"}
-//               </button>
-//               <div>
-//                 <button className="logout-button">
-//                   <FaSignOutAlt /> Logout
-//                 </button>
-//               </div>
-//             </div>
-//           </div>
-//         </section>
-//       </div>
-//     </div>
-    
-//   );
-// };
+              {userType === "company" && (
+                <section
+                  className="settings-section"
+                  onClick={() => {
+                    setActiveSection("post-jobs");
+                  }}
+                >
+                  <div className="settings-icon">
+                    <FaBriefcase />
+                  </div>
+                  <div className="settings-details">
+                    <h3>Post Jobs</h3>
+                    <p>Post jobs here.</p>
+                  </div>
+                </section>
+              )}
 
-// export default Settings;
+              <section
+                className="settings-section"
+                onClick={() => {
+                  setActiveSection("privacy");
+                }}
+              >
+                <div className="settings-icon">
+                  <FaLock />
+                </div>
+                <div className="settings-details">
+                  <h3>Privacy Settings</h3>
+                  <p>Control your privacy settings here.</p>
+                </div>
+              </section>
+
+              <section className="settings-section">
+                <div className="settings-icon">
+                  <FaMoon />
+                </div>
+                <div className="settings-details">
+                  <h3>Appearance</h3>
+                  <div className="appearance-options">
+                    <button onClick={toggleDarkMode}>
+                      {darkMode ? "Disable Dark Mode" : "Enable Dark Mode"}
+                    </button>
+                    <div>
+                      <button className="logout-button">
+                        <FaSignOutAlt /> Logout
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        );
+    }
+  };
+
+  return <>{returnComponent()}</>;
+};
+
+export default Settings;
