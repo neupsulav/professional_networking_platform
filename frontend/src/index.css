@@ -1809,6 +1809,12 @@ body::-webkit-scrollbar {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   color: var(--text-color);
+  height: 90vh;
+  overflow-y: scroll;
+}
+
+.settings-container::-webkit-scrollbar {
+  display: none;
 }
 
 .settings-container h2 {
@@ -1879,7 +1885,7 @@ body::-webkit-scrollbar {
   padding: 10px 15px;
   font-size: 16px;
   cursor: pointer;
-  border: none;
+  border: 1px solid white;
   border-radius: 5px;
 }
 
@@ -2065,67 +2071,254 @@ input {
   cursor: pointer;
 }
 
-/* POST JOBS */
+/* post job container Styles */
+.jobform-container {
+  width: 50%;
+  height: 90vh;
+  overflow-y: scroll;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
 
-.post-jobs-form {
-  margin-top: 20px;
+.jobform-container::-webkit-scrollbar {
+  display: none;
+}
+
+.jobform-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.jobform-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.jobform-group {
   display: flex;
   flex-direction: column;
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
+.jobform-label {
   margin-bottom: 5px;
   font-weight: bold;
+  color: #555;
 }
 
-input,
-textarea,
-select {
-  padding: 8px;
+/* Input Fields and Textarea Styles */
+.jobform-input,
+.jobform-textarea,
+.jobform-datepicker,
+.jobform-multiselect {
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.jobform-input:focus,
+.jobform-textarea:focus,
+.jobform-datepicker:focus,
+.jobform-multiselect:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Jodit Editor Custom Styles */
+.jobform-editor .jodit_container {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.jobform-editor .jodit_toolbar {
+  background-color: #007bff;
+  border-bottom: 1px solid #ccc;
+  border-radius: 5px 5px 0 0;
+}
+
+.jobform-editor .jodit_toolbar .jodit_toolbar_button {
+  color: #fff;
+}
+
+.jobform-editor .jodit_workplace {
+  border-radius: 0 0 5px 5px;
+  background-color: #fff;
+}
+
+.jobform-editor .jodit_wysiwyg {
+  padding: 10px;
+  min-height: 200px;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  border-radius: 0 0 5px 5px;
+}
+
+/* Submit Button Styles */
+.jobform-submit {
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.jobform-submit:hover {
+  background-color: #0056b3;
+}
+
+/* Multiselect Container */
+.jobform-multiselect .multiselect-container {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+/* Multiselect Input */
+.jobform-multiselect .multiselect-container input[type="text"] {
+  padding: 8px;
+  border: none;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+/* Multiselect Dropdown */
+.jobform-multiselect .multiselect-container .optionListContainer {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+/* Multiselect Options */
+.jobform-multiselect .multiselect-container .optionListContainer .option {
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #333;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.jobform-multiselect .multiselect-container .optionListContainer .option:hover {
+  background-color: #f1f1f1;
+}
+
+/* Selected Items */
+.jobform-multiselect .multiselect-container .selected {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+
+.jobform-multiselect .multiselect-container .selected:hover {
+  background-color: #0056b3;
+}
+
+/* Clear All Button */
+.jobform-multiselect .multiselect-container .clearAll {
+  padding: 5px 10px;
+  background-color: #dc3545;
+  color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.jobform-multiselect .multiselect-container .clearAll:hover {
+  background-color: #c82333;
+}
+
+/* for custom multiselect */
+.custom-multiselect {
+  position: relative;
   width: 100%;
 }
 
-textarea {
-  resize: vertical;
-}
-
-.jodit-wysiwyg {
-  min-height: 200px;
-}
-
-.jodit-toolbar-button {
-  color: #333;
-}
-
-.basic-multi-select {
-  margin-top: 10px;
-}
-
-.basic-multi-select .select__control {
-  border-radius: 4px;
+.multiselect-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
   border: 1px solid #ccc;
-}
-
-.basic-multi-select .select__menu {
-  border-radius: 4px;
-}
-
-.basic-multi-select .select__multi-value {
-  background-color: #e4e4e4;
-}
-
-.save-button {
-  padding: 10px 20px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 10px;
+  background-color: #fff;
+}
+
+.multiselect-arrow {
+  margin-left: 10px;
+}
+
+.multiselect-dropdown {
+  position: absolute;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.multiselect-option {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.multiselect-option:hover {
+  background-color: #f0f0f0;
+}
+
+.multiselect-option.selected {
+  background-color: #e0e0e0;
+}
+
+/* user profile settings form */
+.profile-setting-form-container {
+  width: 50%;
+  height: 90vh;
+  overflow-y: scroll;
+}
+
+.profile-setting-form-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* change password form */
+.change-password-form {
+  background-color: white;
+  width: 50%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-right: 15px;
+  border-radius: 10px;
 }

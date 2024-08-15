@@ -9,7 +9,7 @@ import {
 import UserSettingsForm from "./UserSettingsForm";
 import CompanySettingsForm from "./CompanySettingsForm";
 import ChangePasswordForm from "./changepassword";
-import PostJobsForm from "./PostJobs";
+import JobForm from "./PostJobs";
 
 const Settings = ({ userType }) => {
   const [darkMode, setDarkMode] = useState(false);
@@ -38,7 +38,7 @@ const Settings = ({ userType }) => {
         return <ChangePasswordForm />;
 
       case "post-jobs":
-        return <PostJobsForm />;
+        return <JobForm />;
 
       default:
         return (
@@ -100,6 +100,16 @@ const Settings = ({ userType }) => {
                     <button onClick={toggleDarkMode}>
                       {darkMode ? "Disable Dark Mode" : "Enable Dark Mode"}
                     </button>
+                  </div>
+                </div>
+              </section>
+              <section className="settings-section">
+                <div className="settings-icon">
+                  <FaMoon />
+                </div>
+                <div className="settings-details">
+                  <h3>Log Out</h3>
+                  <div className="appearance-options">
                     <div>
                       <button className="logout-button">
                         <FaSignOutAlt /> Logout
