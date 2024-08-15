@@ -2064,3 +2064,68 @@ input {
   border-radius: 4px;
   cursor: pointer;
 }
+
+/* POST JOBS */
+
+.post-jobs-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input,
+textarea,
+select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.jodit-wysiwyg {
+  min-height: 200px;
+}
+
+.jodit-toolbar-button {
+  color: #333;
+}
+
+.basic-multi-select {
+  margin-top: 10px;
+}
+
+.basic-multi-select .select__control {
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.basic-multi-select .select__menu {
+  border-radius: 4px;
+}
+
+.basic-multi-select .select__multi-value {
+  background-color: #e4e4e4;
+}
+
+.save-button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
