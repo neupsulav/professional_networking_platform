@@ -1,8 +1,10 @@
 import React from "react";
+import BackButton from "./BackButton";
 
 const ChangePasswordForm = () => {
   return (
     <form className="change-password-form">
+      <BackButton />
       <h3>Change Password</h3>
       <div className="form-group">
         <label htmlFor="current-password">Current Password</label>

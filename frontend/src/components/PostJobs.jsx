@@ -4,6 +4,7 @@ import { Multiselect } from "multiselect-react-dropdown";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import CustomMultiselect from "./CustomMultiSelect";
+import BackButton from "./BackButton";
 
 const JobForm = () => {
   const [formData, setFormData] = useState({
@@ -34,6 +35,7 @@ const JobForm = () => {
 
   return (
     <div className="jobform-container">
+      <BackButton />
       <h2 className="jobform-title">Post a New Job</h2>
       <form onSubmit={handleSubmit} className="jobform-form">
         <div className="jobform-group jobform-jobtitle">
