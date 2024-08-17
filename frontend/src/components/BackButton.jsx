@@ -10,9 +10,10 @@ const BackButton = () => {
   };
 
   return (
+    <span>
     <button onClick={handleBack} className="back-button">
       <FaArrowLeft /> Back
-    </button>
+    </button></span>
   );
 };
 

@@ -21,7 +21,7 @@ const UserSettingsForm = ({ setSelectedOption }) => {
   return (
     <div>
       <div className="profile-setting-form-container">
-      <span><BackButton /></span>
+      <BackButton />
         <h2>Edit Profile</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">

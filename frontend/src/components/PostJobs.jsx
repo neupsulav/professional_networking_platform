@@ -35,7 +35,7 @@ const JobForm = () => {
 
   return (
     <div className="jobform-container">
-     <span><BackButton /></span>
+     <BackButton />
       <h2 className="jobform-title">Post a New Job</h2>
       <form onSubmit={handleSubmit} className="jobform-form">
         <div className="jobform-group jobform-jobtitle">

@@ -37,7 +37,7 @@ const CompanySettingsForm = () => {
 
   return (
     <div className="profile-setting-form-container">
-     <span> <BackButton /></span>
+     <BackButton />
       <h2>Edit Company Profile</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
