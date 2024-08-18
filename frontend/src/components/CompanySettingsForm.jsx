@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import BackButton from "./BackButton";
 // import { useRef } from "react";
 // import JoditEditor from "jodit-react";
 
@@ -36,6 +37,7 @@ const CompanySettingsForm = () => {
 
   return (
     <div className="profile-setting-form-container">
+     <BackButton />
       <h2>Edit Company Profile</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
