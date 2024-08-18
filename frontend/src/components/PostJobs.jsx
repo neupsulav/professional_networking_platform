@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import JoditEditor from "jodit-react";
-import { Multiselect } from "multiselect-react-dropdown";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import CustomMultiselect from "./CustomMultiSelect";
