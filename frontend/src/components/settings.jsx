@@ -11,7 +11,7 @@ import CompanySettingsForm from "./CompanySettingsForm";
 import ChangePasswordForm from "./changepassword";
 import JobForm from "./PostJobs";
 
-const Settings = ({ userType }) => {
+const Settings = ({ userType, selectedPath, setSelectedPath }) => {
   const [darkMode, setDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState(null); // State to track which section is active
 
@@ -29,16 +29,32 @@ const Settings = ({ userType }) => {
     switch (activeSection) {
       case "profile":
         return userType === "user" ? (
-          <UserSettingsForm />
+          <UserSettingsForm
+            selectedPath={selectedPath}
+            setSelectedPath={setSelectedPath}
+          />
         ) : (
-          <CompanySettingsForm />
+          <CompanySettingsForm
+            selectedPath={selectedPath}
+            setSelectedPath={setSelectedPath}
+          />
         );
 
       case "privacy":
-        return <ChangePasswordForm />;
+        return (
+          <ChangePasswordForm
+            selectedPath={selectedPath}
+            setSelectedPath={setSelectedPath}
+          />
+        );
 
       case "post-jobs":
-        return <JobForm />;
+        return (
+          <JobForm
+            selectedPath={selectedPath}
+            setSelectedPath={setSelectedPath}
+          />
+        );
 
       default:
         return (

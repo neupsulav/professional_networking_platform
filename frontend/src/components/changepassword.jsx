@@ -1,10 +1,13 @@
 import React from "react";
 import BackButton from "./BackButton";
 
-const ChangePasswordForm = () => {
+const ChangePasswordForm = ({ selectedPath, setSelectedPath }) => {
   return (
     <form className="change-password-form">
-     <BackButton/>
+      <BackButton
+        selectedPath={selectedPath}
+        setSelectedPath={setSelectedPath}
+      />
       <h3>Change Password</h3>
       <div className="form-group">
         <label htmlFor="current-password">Current Password</label>

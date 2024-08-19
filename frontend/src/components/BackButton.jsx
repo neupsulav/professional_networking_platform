@@ -1,19 +1,26 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
+import React from "react";
+// import { useNavigate } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
-const BackButton = () => {
-  const navigate = useNavigate();
+const BackButton = ({ selectedPath, setSelectedPath }) => {
+  // const navigate = useNavigate();
 
-  const handleBack = () => {
-    navigate(0); 
-  };
+  // const handleBack = () => {
+  //   // navigate(5);
+
+  // };
 
   return (
     <span>
-    <button onClick={handleBack} className="back-button">
-      <FaArrowLeft /> Back
-    </button></span>
+      <button
+        onClick={() => {
+          // setSelectedPath(5);
+        }}
+        className="back-button"
+      >
+        <FaArrowLeft /> Back
+      </button>
+    </span>
   );
 };
 

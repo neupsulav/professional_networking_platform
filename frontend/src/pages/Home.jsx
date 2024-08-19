@@ -47,7 +47,13 @@ const Home = () => {
       case 4:
         return <Notifications />;
       case 5:
-        return <Settings userType={userType} />;
+        return (
+          <Settings
+            userType={userType}
+            selectedPath={selectedPath}
+            setSelectedPath={setSelectedPath}
+          />
+        );
 
       default:
         break;
