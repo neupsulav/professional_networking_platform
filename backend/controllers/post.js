@@ -155,7 +155,9 @@ const getLikesCount = catchAsync(async (req, res, next) => {
 
   const likesCount = post.likes.length;
 
-  res.status(200).json({ likesCount: likesCount });
+  const isLiked = post.likes.includes(req.user.userId);
+
+  res.status(200).json({ likesCount: likesCount, isLiked: isLiked });
 });
 
 module.exports = {

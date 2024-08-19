@@ -20,6 +20,6 @@ router.patch("/createcomment/:id", userAuthentication, createComment);
 
 router.get("/posts", userAuthentication, getPost);
 
-router.get("/getlikescount/:id", getLikesCount);
+router.get("/getlikescount/:id", userAuthentication, getLikesCount);
 
 module.exports = router;
