@@ -5,6 +5,7 @@ const ErrorHandler = require("../middlewares/errorHandler");
 const catchAsync = require("../middlewares/catchAsync");
 const Comment = require("../models/comment");
 const Notification = require("../models/notification");
+const post = require("../models/post");
 
 // creating a post
 const createPost = catchAsync(async (req, res, next) => {
@@ -142,6 +143,7 @@ const getPost = catchAsync(async (req, res, next) => {
   if (!posts) {
     return next(new ErrorHandler("Something went wrong!", 400));
   }
+
   if (posts.length === 0) {
     res.status(200).json([]);
   } else {
