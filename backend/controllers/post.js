@@ -149,4 +149,19 @@ const getPost = catchAsync(async (req, res, next) => {
   }
 });
 
-module.exports = { createPost, likePost, createComment, getPost };
+// get likes count for a post
+const getLikesCount = catchAsync(async (req, res, next) => {
+  const post = await Post.findById({ _id: req.params.id });
+
+  const likesCount = post.likes.length;
+
+  res.status(200).json({ likesCount: likesCount });
+});
+
+module.exports = {
+  createPost,
+  likePost,
+  createComment,
+  getPost,
+  getLikesCount,
+};
