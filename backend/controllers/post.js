@@ -155,7 +155,7 @@ const getPost = catchAsync(async (req, res, next) => {
 const getLikesCount = catchAsync(async (req, res, next) => {
   const post = await Post.findById({ _id: req.params.id }).populate({
     path: "likes",
-    select: "_id name username email image ",
+    select: "_id name username email position image ",
   });
 
   const likesCount = post.likes.length;
