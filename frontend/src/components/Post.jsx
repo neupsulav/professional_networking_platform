@@ -6,12 +6,14 @@ import { CiShare2 } from "react-icons/ci";
 import { IoSend } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import Cookies from "universal-cookie";
+import { toast } from "react-toastify";
 
 const Post = ({ details }) => {
   const [seeComments, setSeeComments] = useState(false);
   const [showLikedByModal, setShowLikedByModal] = useState(false);
   const [likesCount, setLikesCount] = useState(details.likes.length);
   const [isLiked, setIsLiked] = useState();
+  const [comment, setComment] = useState("");
 
   // for cookies
   const cookies = new Cookies();
@@ -36,6 +38,12 @@ const Post = ({ details }) => {
     return daysSince;
   };
 
+  // to handle comment value
+  const handleInputs = async (e) => {
+    const value = e.target.value;
+    setComment(value);
+  };
+
   // for liking post
   const likePost = async (id) => {
     await fetch(`/api/likepost/${id}`, {
@@ -58,6 +66,27 @@ const Post = ({ details }) => {
     const response = await res.json();
     setLikesCount(response.likesCount);
     setIsLiked(response.isLiked);
+  };
+
+  // for posting a comment
+  const postComment = async (id) => {
+    const res = await fetch(`/api/createcomment/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${cookie}`,
+      },
+      body: JSON.stringify({
+        content: comment,
+      }),
+    });
+
+    if (res.status === 201) {
+      toast.success("Commented created");
+      setComment("");
+    } else {
+      toast.error("Something went wrong");
+    }
   };
 
   useEffect(() => {
@@ -128,8 +157,15 @@ const Post = ({ details }) => {
               id="comment"
               placeholder="Add a comment..."
               className="commentInputContainer_input"
+              value={comment}
+              onChange={handleInputs}
             />
-            <IoSend className="postCommentIcon" />
+            <IoSend
+              className="postCommentIcon"
+              onClick={() => {
+                postComment(details._id);
+              }}
+            />
           </div>
         </div>
 
