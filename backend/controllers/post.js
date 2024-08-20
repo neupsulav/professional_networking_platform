@@ -153,13 +153,18 @@ const getPost = catchAsync(async (req, res, next) => {
 
 // get likes count for a post
 const getLikesCount = catchAsync(async (req, res, next) => {
-  const post = await Post.findById({ _id: req.params.id });
+  const post = await Post.findById({ _id: req.params.id }).populate({
+    path: "likes",
+    select: "_id name username email image ",
+  });
 
   const likesCount = post.likes.length;
 
   const isLiked = post.likes.includes(req.user.userId);
 
-  res.status(200).json({ likesCount: likesCount, isLiked: isLiked });
+  res
+    .status(200)
+    .json({ likesCount: likesCount, isLiked: isLiked, likedBy: post.likes });
 });
 
 // to get comments and comments count
