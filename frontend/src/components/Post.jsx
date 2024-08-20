@@ -16,6 +16,7 @@ const Post = ({ details }) => {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
   const [commentsCount, setCommentsCount] = useState(details.comments.length);
+  const [likedBy, setLikedBy] = useState(details.likes);
 
   // for cookies
   const cookies = new Cookies();
@@ -83,6 +84,7 @@ const Post = ({ details }) => {
     const response = await res.json();
     setLikesCount(response.likesCount);
     setIsLiked(response.isLiked);
+    setLikedBy(response.likedBy.likes);
   };
 
   // for posting a comment
@@ -246,6 +248,7 @@ const Post = ({ details }) => {
           </div>
         </div>
       </div>
+
       {/* liked by list modal */}
       {showLikedByModal && (
         <div className="overlay">
@@ -257,106 +260,21 @@ const Post = ({ details }) => {
                 setShowLikedByModal(false);
               }}
             />
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
+            {likedBy.length > 0
+              ? likedBy.map((person, index) => {
+                  return (
+                    <div className="likedBYModalItems" key={index}>
+                      <img src={person.image} alt="profile" />
+                      <div>
+                        <p className="likedByModalItem_name">{person.name}</p>
+                        <p className="likedByModal_position">
+                          {person.position ? person.position : person.email}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })
+              : "No likes yet"}
           </div>
         </div>
       )}
