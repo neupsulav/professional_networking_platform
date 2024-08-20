@@ -158,7 +158,12 @@ const Post = ({ details }) => {
               });
             }}
           />
-          <FaRegComment className="post_icons_icon" />
+          <FaRegComment
+            className="post_icons_icon"
+            onClick={() => {
+              setSeeComments(!seeComments);
+            }}
+          />
           <CiShare2
             className="post_icons_icon"
             onClick={() => {
