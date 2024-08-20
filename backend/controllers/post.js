@@ -164,7 +164,7 @@ const getLikesCount = catchAsync(async (req, res, next) => {
 
 // to get comments and comments count
 const getComments = catchAsync(async (req, res, next) => {
-  const comments = await Post.findById({
+  const Comments = await Post.findById({
     _id: req.params.id,
   })
     .select("comments")
@@ -179,9 +179,9 @@ const getComments = catchAsync(async (req, res, next) => {
       ],
     });
 
-  const commentsCount = comments.comments.length;
+  const commentsCount = Comments.comments.length;
 
-  res.status(200).json({ comments, commentsCount });
+  res.status(200).json({ Comments, commentsCount });
 });
 
 module.exports = {
