@@ -14,6 +14,8 @@ const Post = ({ details }) => {
   const [likesCount, setLikesCount] = useState(details.likes.length);
   const [isLiked, setIsLiked] = useState();
   const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
+  const [commentsCount, setCommentsCount] = useState(details.comments.length);
 
   // for cookies
   const cookies = new Cookies();
@@ -36,6 +38,21 @@ const Post = ({ details }) => {
     // Update the state
     setDaysSince(differenceInDays);
     return daysSince;
+  };
+
+  // to calculate days for comments
+  const calculateDaysSinceComment = (createdAtDate) => {
+    // Calculate the difference in milliseconds
+    const currentDate = new Date();
+    const createdDate = new Date(createdAtDate);
+    const differenceInMilliseconds = currentDate - createdDate;
+
+    // Convert milliseconds to days
+    const differenceInDays = Math.floor(
+      differenceInMilliseconds / (1000 * 60 * 60 * 24)
+    );
+
+    return differenceInDays;
   };
 
   // to handle comment value
@@ -84,14 +101,27 @@ const Post = ({ details }) => {
     if (res.status === 201) {
       toast.success("Commented created");
       setComment("");
+      getComments(details._id);
     } else {
       toast.error("Something went wrong");
     }
   };
 
+  // for getting comments and comments count
+  const getComments = async (id) => {
+    const res = await fetch(`/api/getcomments/${id}`, {
+      method: "GET",
+    });
+
+    const response = await res.json();
+    setComments(response.Comments.comments);
+    setCommentsCount(response.commentsCount);
+  };
+
   useEffect(() => {
     calculateDaysSince();
     getLikesCount(details._id);
+    getComments(details._id);
   }, []);
 
   return (
@@ -127,7 +157,15 @@ const Post = ({ details }) => {
             }}
           />
           <FaRegComment className="post_icons_icon" />
-          <CiShare2 className="post_icons_icon" />
+          <CiShare2
+            className="post_icons_icon"
+            onClick={() => {
+              navigator.clipboard.writeText(
+                `http://localhost:3001/post/${details._id}`
+              );
+              toast.success("Link copied to clipboard");
+            }}
+          />
         </div>
 
         <div className="commentContainer">
@@ -144,9 +182,7 @@ const Post = ({ details }) => {
                 setSeeComments(!seeComments);
               }}
             >
-              {seeComments
-                ? "Hide Comments"
-                : `${details.comments.length} Comments`}
+              {seeComments ? "Hide Comments" : `${commentsCount} Comments`}
             </p>
           </div>
 
@@ -179,101 +215,34 @@ const Post = ({ details }) => {
         >
           <p className="commentsContainerTitle">Comments</p>
           <div className="commentItems">
-            <div className="commentItem">
-              <div>
-                <img
-                  src="https://plus.unsplash.com/premium_photo-1664536392896-cd1743f9c02c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fHww"
-                  alt="profile"
-                />
-                <div>
-                  <p className="commentItem_name">
-                    Sandip Neupane <span>2h ago</span>
-                  </p>
-                  <p className="commentItem_position">Full Stack Developer</p>
-                </div>
-              </div>
-              <div className="commentItem_content">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-                quaerat ea rerum voluptatum at sit laborum eligendi sequi labore
-                ipsum.
-              </div>
-            </div>
-            <div className="commentItem">
-              <div>
-                <img
-                  src="https://plus.unsplash.com/premium_photo-1664536392896-cd1743f9c02c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fHww"
-                  alt="profile"
-                />
-                <div>
-                  <p className="commentItem_name">
-                    Sandip Neupane <span>2h ago</span>
-                  </p>
-                  <p className="commentItem_position">Full Stack Developer</p>
-                </div>
-              </div>
-              <div className="commentItem_content">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-                quaerat ea rerum voluptatum at sit laborum eligendi sequi labore
-                ipsum.
-              </div>
-            </div>
-            <div className="commentItem">
-              <div>
-                <img
-                  src="https://plus.unsplash.com/premium_photo-1664536392896-cd1743f9c02c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fHww"
-                  alt="profile"
-                />
-                <div>
-                  <p className="commentItem_name">
-                    Sandip Neupane <span>2h ago</span>
-                  </p>
-                  <p className="commentItem_position">Full Stack Developer</p>
-                </div>
-              </div>
-              <div className="commentItem_content">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-                quaerat ea rerum voluptatum at sit laborum eligendi sequi labore
-                ipsum.
-              </div>
-            </div>
-            <div className="commentItem">
-              <div>
-                <img
-                  src="https://plus.unsplash.com/premium_photo-1664536392896-cd1743f9c02c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fHww"
-                  alt="profile"
-                />
-                <div>
-                  <p className="commentItem_name">
-                    Sandip Neupane <span>2h ago</span>
-                  </p>
-                  <p className="commentItem_position">Full Stack Developer</p>
-                </div>
-              </div>
-              <div className="commentItem_content">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-                quaerat ea rerum voluptatum at sit laborum eligendi sequi labore
-                ipsum.
-              </div>
-            </div>
-            <div className="commentItem">
-              <div>
-                <img
-                  src="https://plus.unsplash.com/premium_photo-1664536392896-cd1743f9c02c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fHww"
-                  alt="profile"
-                />
-                <div>
-                  <p className="commentItem_name">
-                    Sandip Neupane <span>2h ago</span>
-                  </p>
-                  <p className="commentItem_position">Full Stack Developer</p>
-                </div>
-              </div>
-              <div className="commentItem_content">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-                quaerat ea rerum voluptatum at sit laborum eligendi sequi labore
-                ipsum.
-              </div>
-            </div>
+            {comments.length > 0
+              ? comments.map((comment, index) => {
+                  return (
+                    <div className="commentItem" key={index}>
+                      <div>
+                        <img src={comment.user.image} alt="profile" />
+                        <div>
+                          <p className="commentItem_name">
+                            {comment.user.name}{" "}
+                            <span>
+                              {calculateDaysSinceComment(comment.createdAt)}d
+                              ago
+                            </span>
+                          </p>
+                          <p className="commentItem_position">
+                            {comment.user.position
+                              ? comment.user.position
+                              : comment.user.email}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="commentItem_content">
+                        {comment.content}
+                      </div>
+                    </div>
+                  );
+                })
+              : "No comments yet"}
           </div>
         </div>
       </div>
