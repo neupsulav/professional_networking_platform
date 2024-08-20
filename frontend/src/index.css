@@ -159,7 +159,6 @@ body::-webkit-scrollbar {
   width: 90%;
   gap: 10px;
   background-color: var(--secondary-color);
-  height: 400px;
 }
 
 .createPostContainer img {
@@ -491,9 +490,10 @@ body::-webkit-scrollbar {
 }
 
 .postIdentity_name span {
-  font-weight: 100;
-  font-size: 14px;
-  color: var(--text-color);
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 12px;
+  color: var(--primary-color);
 }
 
 .postIdentity_field {
@@ -524,9 +524,13 @@ body::-webkit-scrollbar {
   font-size: 25px;
   cursor: pointer;
   transition: 0.5s;
+  color: black;
 }
 
-.post_icons_icon:hover {
+.post_icons_icon_liked {
+  font-size: 25px;
+  cursor: pointer;
+  transition: 0.5s;
   color: var(--primary-color);
 }
 

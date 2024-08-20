@@ -1,40 +1,102 @@
-import React, { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import { AiOutlineLike } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
 import { CiShare2 } from "react-icons/ci";
 import { IoSend } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
+import Cookies from "universal-cookie";
 
-const Post = () => {
+const Post = ({ details }) => {
   const [seeComments, setSeeComments] = useState(false);
   const [showLikedByModal, setShowLikedByModal] = useState(false);
+  const [likesCount, setLikesCount] = useState(details.likes.length);
+  const [isLiked, setIsLiked] = useState();
+
+  // for cookies
+  const cookies = new Cookies();
+  const cookie = cookies.get("jwtToken");
+
+  // for number of days
+  const [daysSince, setDaysSince] = useState(3);
+
+  const calculateDaysSince = () => {
+    // Calculate the difference in milliseconds
+    const currentDate = new Date();
+    const createdDate = new Date(details.createdAt);
+    const differenceInMilliseconds = currentDate - createdDate;
+
+    // Convert milliseconds to days
+    const differenceInDays = Math.floor(
+      differenceInMilliseconds / (1000 * 60 * 60 * 24)
+    );
+
+    // Update the state
+    setDaysSince(differenceInDays);
+    return daysSince;
+  };
+
+  // for liking post
+  const likePost = async (id) => {
+    await fetch(`/api/likepost/${id}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${cookie}`,
+      },
+    });
+  };
+
+  // for getting likes count
+  const getLikesCount = async (id) => {
+    const res = await fetch(`/api/getlikescount/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${cookie}`,
+      },
+    });
+
+    const response = await res.json();
+    setLikesCount(response.likesCount);
+    setIsLiked(response.isLiked);
+  };
+
+  useEffect(() => {
+    calculateDaysSince();
+    getLikesCount(details._id);
+  }, []);
 
   return (
     <>
       <div className="postContainer">
         <div className="postIdentity">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-            alt="profile_picture"
-          />
+          <img src={details.user.image} alt="profile_picture" />
           <div className="postIdentity_text">
             <p className="postIdentity_name">
-              Sulav Neupane <span className="post_time">. 2d</span>
+              {details.user.name}
+              <span className="post_time">
+                {daysSince === 0 ? "Today" : `.${daysSince}d`}
+              </span>
             </p>
-            <p className="postIdentity_field">Full Stack Developer</p>
+            <p className="postIdentity_field">
+              {details.user.position
+                ? details.user.position
+                : details.user.email}
+            </p>
           </div>
         </div>
 
         <div className="postContent">
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error
-            voluptates eligendi iusto corrupti dolor, nam, quaerat optio nemo
-            quis voluptatum aliquid nihil, repellendus quia perferendis alias
-            officia iure quos maiores!
-          </p>
+          <p>{details.caption}</p>
         </div>
         <div className="post_icons">
-          <AiOutlineLike className="post_icons_icon" />
+          <AiOutlineLike
+            className={isLiked ? "post_icons_icon_liked" : "post_icons_icon"}
+            onClick={() => {
+              likePost(details._id).then(() => {
+                getLikesCount(details._id);
+              });
+            }}
+          />
           <FaRegComment className="post_icons_icon" />
           <CiShare2 className="post_icons_icon" />
         </div>
@@ -46,14 +108,16 @@ const Post = () => {
                 setShowLikedByModal(true);
               }}
             >
-              100 Likes
+              {likesCount} Likes
             </p>
             <p
               onClick={() => {
                 setSeeComments(!seeComments);
               }}
             >
-              {seeComments ? "Hide Comments" : "20 Comments"}
+              {seeComments
+                ? "Hide Comments"
+                : `${details.comments.length} Comments`}
             </p>
           </div>
 

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import Post from "./Post";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,6 +12,9 @@ const Newsfeed = () => {
 
   // to store post caption
   const [caption, setCaption] = useState("");
+
+  // to store posts for newsfeed
+  const [posts, setPosts] = useState([]);
 
   // to update caption value
   const handleInputs = async (e) => {
@@ -46,6 +50,22 @@ const Newsfeed = () => {
     }
   };
 
+  const getPosts = async () => {
+    const res = await fetch("/api/posts", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${cookie}`,
+      },
+    });
+
+    const response = await res.json();
+    setPosts(response);
+  };
+
+  useEffect(() => {
+    getPosts();
+  }, []);
+
   return (
     <div className="newsfeed_container">
       <ToastContainer />
@@ -64,14 +84,19 @@ const Newsfeed = () => {
         />
         <button onClick={postData}>Post</button>
       </div>
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
+
+      {/* to display all the posts */}
+      {posts.length > 0 ? (
+        posts.map((post, index) => {
+          return <Post key={index} details={post} />;
+        })
+      ) : (
+        <p
+          style={{ fontWeight: "bold", fontSize: "20px", textAlign: "center" }}
+        >
+          No posts yet. Please follow people to create network and view posts.
+        </p>
+      )}
     </div>
   );
 };
