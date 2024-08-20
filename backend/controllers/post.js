@@ -162,10 +162,33 @@ const getLikesCount = catchAsync(async (req, res, next) => {
   res.status(200).json({ likesCount: likesCount, isLiked: isLiked });
 });
 
+// to get comments and comments count
+const getComments = catchAsync(async (req, res, next) => {
+  const comments = await Post.findById({
+    _id: req.params.id,
+  })
+    .select("comments")
+    .populate({
+      path: "comments",
+      select: "_id user content createdAt",
+    })
+    .populate({
+      path: "comments",
+      populate: [
+        { path: "user", select: "_id name username image email position" },
+      ],
+    });
+
+  const commentsCount = comments.comments.length;
+
+  res.status(200).json({ comments, commentsCount });
+});
+
 module.exports = {
   createPost,
   likePost,
   createComment,
   getPost,
   getLikesCount,
+  getComments,
 };
