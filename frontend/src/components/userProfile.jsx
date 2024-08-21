@@ -137,106 +137,21 @@ const UserProfile = () => {
                 setSeeFollowersModal(false);
               }}
             />
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
+            {profileData.userProfileData.followers.length > 0
+              ? profileData.userProfileData.followers.map((user, index) => {
+                  return (
+                    <div key={index} className="likedBYModalItems">
+                      <img src={user.image} alt="profile" />
+                      <div>
+                        <p className="likedByModalItem_name">{user.name}</p>
+                        <p className="likedByModal_position">
+                          {user.position ? user.position : user.email}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })
+              : "You have no followers yet"}
           </div>
         </div>
       )}
@@ -252,106 +167,21 @@ const UserProfile = () => {
                 setSeeFollowingModal(false);
               }}
             />
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
-            <div className="likedBYModalItems">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                alt="profile"
-              />
-              <div>
-                <p className="likedByModalItem_name">Sulav Neupane</p>
-                <p className="likedByModal_position">Full stack developer</p>
-              </div>
-            </div>
+            {profileData.userProfileData.following.length > 0
+              ? profileData.userProfileData.following.map((user, index) => {
+                  return (
+                    <div key={index} className="likedBYModalItems">
+                      <img src={user.image} alt="profile" />
+                      <div>
+                        <p className="likedByModalItem_name">{user.name}</p>
+                        <p className="likedByModal_position">
+                          {user.position ? user.position : user.email}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })
+              : "You are currently following no any users"}
           </div>
         </div>
       )}
