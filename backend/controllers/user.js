@@ -72,7 +72,11 @@ const selfProfileData = catchAsync(async (req, res, next) => {
 
   //   post posted by user if any
   const userPosts = await Post.find({ user: userProfileData._id })
-    .select("_id caption likes comments createdAt")
+    .select("_id user caption likes comments createdAt")
+    .populate({
+      path: "user",
+      select: "_id name email image",
+    })
     .populate({
       path: "comments",
       select: "user content createdAt _id",
