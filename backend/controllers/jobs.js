@@ -20,6 +20,7 @@ const createJob = catchAsync(async (req, res, next) => {
     noOfPost: req.body.noOfPost,
     requirements: req.body.requirements,
     responsibilities: req.body.responsibilities,
+    type: req.body.type,
   });
 
   if (!newJob) {

@@ -21,7 +21,7 @@ const jobSchema = new mongoose.Schema({
     type: String,
   },
   salary: {
-    type: Number,
+    type: String,
   },
   deadline: {
     type: Date,
@@ -33,6 +33,9 @@ const jobSchema = new mongoose.Schema({
     type: String,
   },
   responsibilities: {
+    type: String,
+  },
+  type: {
     type: String,
   },
 });
