@@ -60,7 +60,7 @@ const selfProfileData = catchAsync(async (req, res, next) => {
   //   user's profile data
   const userProfileData = await User.findOne({ _id: userId })
     .select(
-      "_id name username email image followers following following_company"
+      "_id name username email image followers following following_company createdAt"
     )
     .populate({ path: "followers", select: "name username image _id" })
     .populate({ path: "following", select: "name username image _id" })
