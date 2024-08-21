@@ -4,14 +4,22 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import CustomMultiselect from "./CustomMultiSelect";
 import BackButton from "./BackButton";
+import Cookies from "universal-cookie";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const JobForm = () => {
+  // for cookies
+  const cookies = new Cookies();
+  const cookie = cookies.get("jwtToken");
+
   const [formData, setFormData] = useState({
     jobTitle: "",
     jobIntro: "",
     location: "",
     deadline: new Date(),
     numberOfPosts: 1,
+    salary: "",
     jobRequirements: "",
     responsibilities: "",
     jobType: [],
@@ -27,14 +35,52 @@ const JobForm = () => {
     setFormData({ ...formData, jobType: selectedList });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+
+    // to post job data
+    const res = await fetch("/api/createjob", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${cookie}`,
+      },
+      body: JSON.stringify({
+        position: formData.jobTitle,
+        intro: formData.jobIntro,
+        location: formData.location,
+        salary: formData.salary,
+        deadline: formData.deadline,
+        noOfPost: formData.numberOfPosts,
+        requirements: formData.jobRequirements,
+        responsibilities: formData.responsibilities,
+        type: formData.jobType[0],
+      }),
+    });
+
+    if (res.status === 201) {
+      toast.success("Job Posted");
+      // reset form after submission
+      setFormData({
+        jobTitle: "",
+        jobIntro: "",
+        location: "",
+        deadline: new Date(),
+        numberOfPosts: 1,
+        salary: "",
+        jobRequirements: "",
+        responsibilities: "",
+        jobType: [],
+      });
+    } else {
+      toast.error("Something went wrong");
+    }
   };
 
   return (
     <div className="jobform-container">
-     <BackButton />
+      <ToastContainer />
+      <BackButton />
       <h2 className="jobform-title">Post a New Job</h2>
       <form onSubmit={handleSubmit} className="jobform-form">
         <div className="jobform-group jobform-jobtitle">
@@ -88,6 +134,19 @@ const JobForm = () => {
             type="number"
             name="numberOfPosts"
             value={formData.numberOfPosts}
+            onChange={handleInputChange}
+            className="jobform-input"
+            required
+          />
+        </div>
+
+        <div className="jobform-group jobform-numberofposts">
+          <label className="jobform-label">Salary</label>
+          <input
+            type="text"
+            name="salary"
+            placeholder="Eg: 100000 or Negotiable"
+            value={formData.salary}
             onChange={handleInputChange}
             className="jobform-input"
             required
