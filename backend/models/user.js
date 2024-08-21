@@ -72,6 +72,10 @@ const userSchema = new mongoose.Schema({
   cv: {
     type: String,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 //hashing the password
