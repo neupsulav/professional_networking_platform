@@ -2002,18 +2002,22 @@ body::-webkit-scrollbar {
 }
 
 .submit-button {
-  width: 100%;
+  width: 98%;
   padding: 10px;
-  background-color: #007bff;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
   color: white;
-  border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  transition: 0.5s;
+  font-weight: bold;
 }
 
 .submit-button:hover {
-  background-color: #0056b3;
+  background-color: white;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
 }
 
 /* change password */
@@ -2306,13 +2310,25 @@ input {
 
 /* user profile settings form */
 .profile-setting-form-container {
+  background-color: white;
+  border-radius: 10px;
   width: 50%;
   height: 90vh;
+  padding: 60px 0px 20px 0px;
   overflow-y: scroll;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
 }
 
 .profile-setting-form-container::-webkit-scrollbar {
   display: none;
+}
+
+.profile-setting-form-container form {
+  width: 90%;
 }
 
 /* change password form */
@@ -2337,6 +2353,11 @@ input {
   color: #333;
   cursor: pointer;
   margin-bottom: 20px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  transition: 0.5s;
+  border: 1px solid white;
 }
 
 .back-button svg {
@@ -2344,5 +2365,43 @@ input {
 }
 
 .back-button:hover {
-  color: #007bff;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  background-color: white;
+}
+
+/* for react select */
+.react-select-container {
+  width: 100%;
+}
+
+/* for image preview */
+.image-preview {
+  margin-top: 15px;
+  height: 200px;
+  width: 200px;
+}
+
+.image-preview img {
+  border-radius: 10px;
+  height: 100%;
+  object-fit: cover;
+}
+
+.view-cv-button-settings {
+  margin-top: 10px;
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid var(--primary-color);
+  color: white;
+  background-color: var(--primary-color);
+  font-weight: bold;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.view-cv-button-settings:hover {
+  background-color: white;
+  color: var(--primary-color);
 }
