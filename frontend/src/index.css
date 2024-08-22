@@ -698,7 +698,6 @@ body::-webkit-scrollbar {
 }
 
 .likedBYModalContainer {
-  /* display: none; */
   position: absolute;
   height: 400px;
   width: 350px;
@@ -1119,8 +1118,6 @@ body::-webkit-scrollbar {
 
   .profileDetails {
     flex-direction: column;
-    /* justify-content: center;
-    align-items: center; */
   }
 }
 
@@ -1353,7 +1350,6 @@ body::-webkit-scrollbar {
 }
 
 /* NotificationItem.css */
-
 .notification-item {
   background-color: var(--secondary-color);
   padding: 10px 15px;
@@ -1493,9 +1489,7 @@ body::-webkit-scrollbar {
 
 /* Company Profile Container */
 .company-profile-container {
-  /* max-width: 900px; */
   width: 50%;
-  /* margin: 40px auto; */
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1804,10 +1798,9 @@ body::-webkit-scrollbar {
   background-color: white;
   color: var(--primary-color);
 }
-/* settings */
 
+/* settings */
 .settings-container {
-  /* width: 800px; */
   margin: 20px;
   padding: 20px;
   background-color: var(--secondary-color);
@@ -1915,16 +1908,6 @@ body::-webkit-scrollbar {
   background-color: var(--primary-color);
 }
 
-/* Dark mode styles */
-/* .dark-mode .settings-container {
-  background-color: #333;
-  color: white;
-}
-
-.dark-mode .settings-section {
-  border-color: #555;
-}
-
 .dark-mode .settings-section:hover {
   background-color: #444;
 }
@@ -1956,7 +1939,8 @@ body::-webkit-scrollbar {
 
 .dark-mode .appearance-options button.logout-button:hover {
   background-color: var(--primary-color);
-} */
+}
+*/
 
 /* for update profile */
 .settings-container {
