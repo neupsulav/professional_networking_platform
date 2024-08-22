@@ -1,21 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { GiTakeMyMoney } from "react-icons/gi";
 import { MdOutlinePeopleAlt } from "react-icons/md";
 import { RxLapTimer } from "react-icons/rx";
 import { RxCross2 } from "react-icons/rx";
+import { MdOutlineWorkHistory } from "react-icons/md";
 import ApplicantsList from "./ApplicantLists";
+import moment from "moment";
+import Cookies from "universal-cookie";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Job = () => {
+const Job = ({ job, profileData }) => {
   const [seeJobDetails, setSeeJobDetails] = useState(false);
   const [applyJobModal, setApplyJobModal] = useState(false);
   const [seeApplicants, setSeeApplicants] = useState(false);
+  const [formattedDate, setFormattedDate] = useState("");
+
+  // for cookies
+  const cookies = new Cookies();
+  const cookie = cookies.get("jwtToken");
+
+  // to get the formatted date
+  const getFormattedDate = (deadline) => {
+    const newDate = moment(deadline).format("MMMM D, YYYY");
+
+    setFormattedDate(newDate);
+  };
 
   // for job application form
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
+    name: profileData.userProfileData.name,
+    email: profileData.userProfileData.email,
+    phone: profileData.userProfileData.phone
+      ? profileData.userProfileData.phone
+      : "",
   });
 
   const handleChange = (e) => {
@@ -26,51 +45,87 @@ const Job = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted: ", formData);
+
     // Handle form submission logic here
+
+    // to check if user has cv linked oh his/her profile
+    // if (!profileData.userProfileData.cv) {
+    //   return toast.error(
+    //     "Application submission failed. Please link cv to your profile"
+    //   );
+    // }
+
+    const res = await fetch(`/api/applyjob/${job._id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${cookie}`,
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+      }),
+    });
+
+    if (res.status === 201) {
+      toast.success("Job applied successfully");
+      // setFormData({
+      //   name: "",
+      //   email: "",
+      //   phone: "",
+      // });
+    } else if (res.status === 404) {
+      toast.error(
+        "Application submission failed. Please link cv to your profile"
+      );
+    } else {
+      toast.error("Something went wrong");
+    }
   };
+
+  useEffect(() => {
+    getFormattedDate(job.deadline);
+  }, []);
 
   return (
     <>
       <div className="job_container">
+        <ToastContainer />
         <div className="postIdentity">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-            alt="profile_picture"
-          />
+          <img src={job.company.image} alt="profile_picture" />
           <div className="postIdentity_text">
-            <p className="postIdentity_name">Senior Backend Developer</p>
-            <p className="postIdentity_field">XYZ company</p>
+            <p className="postIdentity_name">{job.position}</p>
+            <p className="postIdentity_field">{job.company.name}</p>
           </div>
         </div>
 
         <div className="postContent">
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error
-            voluptates eligendi iusto corrupti dolor, nam, quaerat optio nemo
-            quis voluptatum aliquid nihil, repellendus quia perferendis alias
-            officia iure quos maiores!
-          </p>
+          <p>{job.intro}</p>
         </div>
 
         <div className="job_basic_details">
           <div className="job_details_items">
             <CiLocationOn className="job_details_items_icon_location" />
-            <p>Butwal</p>
+            <p>{job.location}</p>
           </div>
           <div className="job_details_items">
             <GiTakeMyMoney className="job_details_items_icon_salary" />
-            <p>Rs 20000</p>
+            <p>{job.salary}</p>
           </div>
           <div className="job_details_items">
             <RxLapTimer className="job_details_items_icon_deadline" />
-            <p>Deadline: October 10</p>
+            <p>Deadline: {formattedDate}</p>
           </div>
           <div className="job_details_items">
             <MdOutlinePeopleAlt className="job_details_items_icon_people" />
-            <p>No of posts: 10</p>
+            <p>No of posts: {job.noOfPost}</p>
+          </div>
+          <div className="job_details_items">
+            <MdOutlineWorkHistory className="job_details_items_icon_people" />
+            <p>Type: {job.type}</p>
           </div>
         </div>
         <button
@@ -113,22 +168,12 @@ const Job = () => {
           <p className="jobDetailsContainerHeading">Job Description</p>
           <div className="jobDetails_req">
             <p>Requirements</p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam
-              repellendus deserunt autem exercitationem odio atque nulla, rerum
-              error, temporibus illo possimus et excepturi! Ut tenetur libero
-              quo cupiditate quas neque.
-            </p>
+            <p dangerouslySetInnerHTML={{ __html: job.requirements }} />
           </div>
 
           <div className="jobDetails_req">
             <p>Responsibilities</p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-              perspiciatis, quae sapiente molestiae cupiditate autem amet
-              voluptatibus unde a voluptas dignissimos, dolor repellendus ipsum
-              quo dolorem odit vitae. Veniam, pariatur?
-            </p>
+            <p dangerouslySetInnerHTML={{ __html: job.responsibilities }} />
           </div>
         </div>
       </div>
