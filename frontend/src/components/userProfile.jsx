@@ -51,10 +51,7 @@ const UserProfile = () => {
       {isDataFetched && (
         <div className="userProfileContainer">
           <div className="profileDetails">
-            <img
-              src="https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg"
-              alt="user_img"
-            />
+            <img src={profileData.userProfileData.image} alt="user_img" />
             <div className="profileDetailsContent">
               <p className="profile_name">{profileData.userProfileData.name}</p>
               <p className="profile_position">
