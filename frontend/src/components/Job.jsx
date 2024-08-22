@@ -77,6 +77,9 @@ const Job = ({ job, profileData }) => {
       //   email: "",
       //   phone: "",
       // });
+
+      // to close the apply job modal
+      setApplyJobModal(false);
     } else if (res.status === 404) {
       toast.error(
         "Application submission failed. Please link cv to your profile"
