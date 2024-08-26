@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignupOptions from "./pages/SignupOptions";
@@ -9,10 +9,17 @@ import NotFound from "./pages/ErrorPage";
 import UsersProfile from "./pages/UsersProfile";
 import CompaniesProfile from "./pages/CompaniesProfile";
 import Settings from "./components/settings";
+import Header from "./components/searchbar"; 
 
 const App = () => {
+  const location = useLocation();
+  const hideHeaderRoutes = ["/login", "/signup-options", "/signup-user", "/signup-company"];
+
   return (
     <>
+      {/* Conditionally render Header based on the current route */}
+      {!hideHeaderRoutes.includes(location.pathname) && <Header />}
+    <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

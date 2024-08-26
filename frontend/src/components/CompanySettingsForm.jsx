@@ -64,7 +64,7 @@ const CompanySettingsForm = () => {
           />
         </div>
         <div className="form-group">
-          <label>Contact Information</label>
+          <label>Contact Number</label>
           <input
             type="text"
             value={contactInformation}
