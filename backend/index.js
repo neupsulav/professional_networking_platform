@@ -17,6 +17,10 @@ const companyRouter = require("./routers/company");
 const app = express();
 dotenv.config();
 
+// to accept large payloads
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
+
 const PORT = process.env.port || 3000;
 app.use(express.json());
 
