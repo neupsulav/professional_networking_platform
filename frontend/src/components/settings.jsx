@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaUser,
   FaBriefcase,
@@ -10,6 +10,7 @@ import UserSettingsForm from "./UserSettingsForm";
 import CompanySettingsForm from "./CompanySettingsForm";
 import ChangePasswordForm from "./changepassword";
 import JobForm from "./PostJobs";
+import Cookies from "universal-cookie";
 
 const Settings = ({ userType, selectedPath, setSelectedPath }) => {
   const [darkMode, setDarkMode] = useState(false);
@@ -24,6 +25,31 @@ const Settings = ({ userType, selectedPath, setSelectedPath }) => {
     setActiveSection(section); // Set the active section on click
   };
 
+  // for cookies
+  const cookies = new Cookies();
+  const cookie = cookies.get("jwtToken");
+
+  // to store user profile data
+  const [profileData, setProfileData] = useState({});
+
+  // to get user's profile data
+  const getProfileData = async () => {
+    const res = await fetch("/api/selfuser", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${cookie}`,
+      },
+    });
+
+    const response = await res.json();
+
+    setProfileData(response);
+  };
+
+  useEffect(() => {
+    getProfileData();
+  }, []);
+
   //   to return components
   const returnComponent = () => {
     switch (activeSection) {
@@ -32,6 +58,7 @@ const Settings = ({ userType, selectedPath, setSelectedPath }) => {
           <UserSettingsForm
             selectedPath={selectedPath}
             setSelectedPath={setSelectedPath}
+            profileData={profileData}
           />
         ) : (
           <CompanySettingsForm

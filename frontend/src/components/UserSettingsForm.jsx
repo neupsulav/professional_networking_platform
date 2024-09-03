@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import Select from "react-select";
 import Cookies from "universal-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const UserSettingsForm = () => {
+const UserSettingsForm = ({ profileData }) => {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    position: "",
-    bio: "",
-    location: "",
-    phone: "",
-    skills: [],
+    name: profileData.userProfileData.name,
+    email: profileData.userProfileData.email,
+    position: profileData.userProfileData.position,
+    bio: profileData.userProfileData.bio,
+    location: profileData.userProfileData.location,
+    phone: profileData.userProfileData.phone,
+    skills: profileData.userProfileData.skills,
   });
 
   // for cookies
@@ -25,6 +25,7 @@ const UserSettingsForm = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    // console.log(formData);
   };
 
   // to handle image
@@ -64,10 +65,13 @@ const UserSettingsForm = () => {
     form.append("bio", formData.bio);
     form.append("location", formData.location);
     form.append("phone", formData.phone);
-    form.append(
-      "skills",
-      JSON.stringify(formData.skills.map((skill) => skill.value))
-    );
+
+    if (formData.skills) {
+      form.append(
+        "skills",
+        JSON.stringify(formData.skills.map((skill) => skill.value))
+      );
+    }
     if (image) {
       form.append("image", image);
     }
@@ -87,19 +91,18 @@ const UserSettingsForm = () => {
     });
 
     const response = await res.json();
-    console.log(response);
 
     if (res.status === 200) {
       toast.success("Profile data updated");
-      setFormData({
-        name: "",
-        email: "",
-        position: "",
-        bio: "",
-        location: "",
-        phone: "",
-        skills: [],
-      });
+      // setFormData({
+      //   name: "",
+      //   email: "",
+      //   position: "",
+      //   bio: "",
+      //   location: "",
+      //   phone: "",
+      //   skills: [],
+      // });
     } else {
       toast.error("Something went wrong");
     }
