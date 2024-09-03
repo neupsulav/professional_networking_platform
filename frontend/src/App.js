@@ -9,17 +9,22 @@ import NotFound from "./pages/ErrorPage";
 import UsersProfile from "./pages/UsersProfile";
 import CompaniesProfile from "./pages/CompaniesProfile";
 import Settings from "./components/settings";
-import Header from "./components/searchbar"; 
+import Header from "./components/searchbar";
 
 const App = () => {
   const location = useLocation();
-  const hideHeaderRoutes = ["/login", "/signup-options", "/signup-user", "/signup-company"];
+  const hideHeaderRoutes = [
+    "/login",
+    "/signup-options",
+    "/signup-user",
+    "/signup-company",
+  ];
 
   return (
     <>
       {/* Conditionally render Header based on the current route */}
-      {!hideHeaderRoutes.includes(location.pathname) && <Header />}
-    <Header />
+      {/* {!hideHeaderRoutes.includes(location.pathname) && <Header />} */}
+      {/* <Header /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -28,7 +33,7 @@ const App = () => {
         <Route path="/signup-company" element={<SignupCompany />} />
         <Route path="/user/:id" element={<UsersProfile />} />
         <Route path="/company/:id" element={<CompaniesProfile />} />
-        <Route path="/settings" element={<Settings/>} />
+        <Route path="/settings" element={<Settings />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

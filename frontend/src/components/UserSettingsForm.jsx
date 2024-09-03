@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import Select from "react-select";
+import Cookies from "universal-cookie";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UserSettingsForm = () => {
   const [formData, setFormData] = useState({
@@ -9,11 +12,13 @@ const UserSettingsForm = () => {
     position: "",
     bio: "",
     location: "",
-    image: null,
-    cv: null,
     phone: "",
     skills: [],
   });
+
+  // for cookies
+  const cookies = new Cookies();
+  const cookie = cookies.get("jwtToken");
 
   const [imagePreview, setImagePreview] = useState(null);
   const [cvPreview, setCvPreview] = useState(null);
@@ -22,26 +27,85 @@ const UserSettingsForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // to handle image
+  const [image, setImage] = useState("");
+
+  const handleImage = (e) => {
+    setImage(e.target.files[0]);
+    setImagePreview(URL.createObjectURL(e.target.files[0]));
+  };
+
+  // to handle cv
+  const [cv, setCv] = useState("");
+
+  const handleCv = (e) => {
+    setCv(e.target.files[0]);
+    setCvPreview(URL.createObjectURL(e.target.files[0]));
+  };
+
   const handleFileChange = (e) => {
     const { name } = e.target;
     const file = e.target.files[0];
 
     setFormData({ ...formData, [name]: file });
-
-    if (name === "image") {
-      setImagePreview(URL.createObjectURL(file));
-    } else if (name === "cv") {
-      setCvPreview(URL.createObjectURL(file));
-    }
   };
 
   const handleSkillsChange = (selectedOptions) => {
     setFormData({ ...formData, skills: selectedOptions });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("User Form submitted:", formData);
+
+    const form = new FormData();
+    form.append("name", formData.name);
+    form.append("email", formData.email);
+    form.append("position", formData.position);
+    form.append("bio", formData.bio);
+    form.append("location", formData.location);
+    form.append("phone", formData.phone);
+    form.append(
+      "skills",
+      JSON.stringify(formData.skills.map((skill) => skill.value))
+    );
+    if (image) {
+      form.append("image", image);
+    }
+
+    if (cv) {
+      form.append("cv", cv);
+    }
+
+    // try {
+    const res = await fetch(`/api/updateuser`, {
+      method: "PATCH",
+      headers: {
+        // "Content-Type": "application/json",
+        Authorization: `Bearer ${cookie}`,
+      },
+      body: form,
+    });
+
+    const response = await res.json();
+    console.log(response);
+
+    if (res.status === 200) {
+      toast.success("Profile data updated");
+      setFormData({
+        name: "",
+        email: "",
+        position: "",
+        bio: "",
+        location: "",
+        phone: "",
+        skills: [],
+      });
+    } else {
+      toast.error("Something went wrong");
+    }
+    // } catch (error) {
+    //   console.error("Error updating profile:", error);
+    // }
   };
 
   const skillOptions = [
@@ -119,6 +183,7 @@ const UserSettingsForm = () => {
 
   return (
     <div className="profile-setting-form-container">
+      <ToastContainer />
       <IoMdArrowBack />
       <h2>Edit Profile</h2>
       <form onSubmit={handleSubmit}>
@@ -183,7 +248,7 @@ const UserSettingsForm = () => {
             type="file"
             name="image"
             accept="image/*"
-            onChange={handleFileChange}
+            onChange={handleImage}
           />
           {imagePreview && (
             <div className="image-preview">
@@ -197,7 +262,7 @@ const UserSettingsForm = () => {
             type="file"
             name="cv"
             accept=".pdf,.doc,.docx"
-            onChange={handleFileChange}
+            onChange={handleCv}
           />
           {cvPreview && (
             <a href={cvPreview} target="_blank" rel="noopener noreferrer">
