@@ -90,7 +90,7 @@ const CompanyProfile = () => {
   useEffect(() => {
     getProfileData();
     getSelfProfileData();
-  }, []);
+  }, [id]);
 
   return (
     <>
