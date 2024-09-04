@@ -13,6 +13,7 @@ const userProfileData = catchAsync(async (req, res, next) => {
   const userId = req.params.id;
 
   //   user's profile data
+  const user = await User.findOne({ _id: userId });
   const userProfileData = await User.findOne({ _id: userId })
     .select(
       "_id name username email image cv followers following following_company createdAt"
@@ -49,7 +50,7 @@ const userProfileData = catchAsync(async (req, res, next) => {
     .sort({ createdAt: -1 });
 
   let isFollowing = false;
-  if (userProfileData.followers.includes(req.user.userId)) {
+  if (user.followers.includes(req.user.userId)) {
     isFollowing = true;
   }
 

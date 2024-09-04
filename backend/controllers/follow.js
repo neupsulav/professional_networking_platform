@@ -52,4 +52,15 @@ const followOther = catchAsync(async (req, res, next) => {
   }
 });
 
-module.exports = { followOther };
+// to check if we are following a certain user
+const checkFollowing = catchAsync(async (req, res, next) => {
+  const userId = req.params.id;
+
+  const thatUser = await User.findById({ _id: userId });
+
+  const checkFollowing = thatUser.followers.includes(req.user.userId);
+
+  res.status(200).json(checkFollowing);
+});
+
+module.exports = { followOther, checkFollowing };
