@@ -74,12 +74,12 @@ const UserProfile = () => {
 
           <div className="profile_posts_container">
             <p className="profile_posts_container_title">Posts</p>
+            {/* <Post />
             <Post />
             <Post />
             <Post />
             <Post />
-            <Post />
-            <Post />
+            <Post /> */}
           </div>
         </div>
 

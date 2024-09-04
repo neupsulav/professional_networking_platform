@@ -81,10 +81,19 @@ const UserProfile = () => {
               </div>
 
               <div className="profile_skills">
-                {profileData.userProfileData.skills &&
-                  profileData.userProfileData.skills.map((skill) => {
-                    return <div className="skill_item">{skill}</div>;
-                  })}
+                {
+                  profileData.userProfileData.skills &&
+                    JSON.parse(profileData.userProfileData.skills[0]).map(
+                      (skill, index) => {
+                        return (
+                          <div key={index} className="skill_item">
+                            {skill}
+                          </div>
+                        );
+                      }
+                    )
+                  // profileData.userProfileData.skills[0].split(", ")
+                }
               </div>
             </div>
           </div>

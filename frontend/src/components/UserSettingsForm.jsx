@@ -13,7 +13,7 @@ const UserSettingsForm = ({ profileData }) => {
     bio: profileData.userProfileData.bio,
     location: profileData.userProfileData.location,
     phone: profileData.userProfileData.phone,
-    skills: profileData.userProfileData.skills,
+    skills: JSON.parse(profileData.userProfileData.skills[0]),
   });
 
   // for cookies
