@@ -1,318 +1,203 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdRememberMe } from "react-icons/md";
-
 import { RxCross2 } from "react-icons/rx";
 import Post from "../components/Post";
+import Cookies from "universal-cookie";
+import { useParams } from "react-router-dom";
+import moment from "moment";
 
 const UserProfile = () => {
   const [seeFollowersModal, setSeeFollowersModal] = useState(false);
   const [seeFollowingModal, setSeeFollowingModal] = useState(false);
+  const [isDataFetched, setIsDataFetched] = useState(false);
+  const [profileData, setProfileData] = useState();
+  const [formattedDate, setFormattedDate] = useState("");
+  const [isFollowing, setIsFollowing] = useState();
+
+  // to get the formatted date
+  const getFormattedDate = (createdAt) => {
+    const newDate = moment(createdAt).format("MMMM D, YYYY");
+
+    setFormattedDate(newDate);
+  };
+
+  // setting up useParams()
+  const params = useParams();
+
+  // for cookies
+  const cookies = new Cookies();
+  const cookie = cookies.get("jwtToken");
+
+  // to get user profile data
+  const getProfileData = async () => {
+    const res = await fetch(`/api/user/${params.id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${cookie}`,
+      },
+    });
+
+    const response = await res.json();
+    if (res.status === 200) {
+      getFormattedDate(response.userProfileData.createdAt);
+      setIsDataFetched(true);
+      setProfileData(response);
+      setIsFollowing(response.isFollowing);
+    }
+  };
+
+  useEffect(() => {
+    getProfileData();
+  }, []);
 
   return (
     <>
-      <div className="users_profile_container">
-        <div className="userProfileContainer">
-          <div className="profileDetails">
-            <button className="follow_btn_profile">Follow</button>
-            <img
-              src="https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg"
-              alt="user_img"
-            />
-            <div className="profileDetailsContent">
-              <p className="profile_name">Sulav Neupane</p>
-              <p className="profile_position">Full Stack Developer</p>
-              <div className="profileDetails_icon_container">
-                <div>
-                  <FaLocationDot className="profileDetails_icons_location" />
-                  <p>Butwal</p>
+      {isDataFetched && (
+        <div className="users_profile_container">
+          <div className="userProfileContainer">
+            <div className="profileDetails">
+              <button className="follow_btn_profile">
+                {isFollowing ? "Unfollow" : "Follow"}
+              </button>
+              <img src={profileData.userProfileData.image} alt="user_img" />
+              <div className="profileDetailsContent">
+                <p className="profile_name">
+                  {profileData.userProfileData.name}
+                </p>
+                <p className="profile_position">
+                  {profileData.userProfileData.position
+                    ? profileData.userProfileData.position
+                    : profileData.userProfileData.email}
+                </p>
+                <div className="profileDetails_icon_container">
+                  <div>
+                    <FaLocationDot className="profileDetails_icons_location" />
+                    <p>
+                      {profileData.userProfileData.location
+                        ? profileData.userProfileData.location
+                        : "No location set yet"}
+                    </p>
+                  </div>
+
+                  <div>
+                    <MdRememberMe className="profileDetails_icons_member" />
+                    <p>{`Member since ${formattedDate}`}</p>
+                  </div>
+                </div>
+                <div className="profile_bio">
+                  {profileData.userProfileData.bio
+                    ? profileData.userProfileData.bio
+                    : "No bio yet"}
                 </div>
 
-                <div>
-                  <MdRememberMe className="profileDetails_icons_member" />
-                  <p>Member since June 7, 2020</p>
+                <div className="profile_skills">
+                  <div className="skill_item">HTML5</div>
+                  <div className="skill_item">CSS3</div>
+                  <div className="skill_item">Javascript</div>
+                  <div className="skill_item">Python</div>
+                  <div className="skill_item">PHP</div>
+                  <div className="skill_item">Github</div>
+                  <div className="skill_item">SQL</div>
+                  <div className="skill_item">React</div>
                 </div>
               </div>
-              <div className="profile_bio">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Delectus dignissimos porro fugiat accusantium praesentium maxime
-                laboriosam dolor illum, quod amet mollitia tempore inventore
-                nisi. Molestias perferendis quasi numquam accusantium alias.
+            </div>
+            <div className="follwing_followers_count">
+              <div
+                onClick={() => {
+                  setSeeFollowingModal(true);
+                }}
+              >
+                <p className="follwing_followers_count_number">
+                  {profileData.followingCount}
+                </p>
+                <p>Following</p>
               </div>
 
-              <div className="profile_skills">
-                <div className="skill_item">HTML5</div>
-                <div className="skill_item">CSS3</div>
-                <div className="skill_item">Javascript</div>
-                <div className="skill_item">Python</div>
-                <div className="skill_item">PHP</div>
-                <div className="skill_item">Github</div>
-                <div className="skill_item">SQL</div>
-                <div className="skill_item">React</div>
+              <div
+                onClick={() => {
+                  setSeeFollowersModal(true);
+                }}
+              >
+                <p className="follwing_followers_count_number">
+                  {profileData.followersCount}
+                </p>
+                <p>Followers</p>
               </div>
             </div>
-          </div>
-          <div className="follwing_followers_count">
-            <div
-              onClick={() => {
-                setSeeFollowingModal(true);
-              }}
-            >
-              <p className="follwing_followers_count_number">100</p>
-              <p>Following</p>
-            </div>
 
-            <div
-              onClick={() => {
-                setSeeFollowersModal(true);
-              }}
-            >
-              <p className="follwing_followers_count_number">100</p>
-              <p>Followers</p>
+            <div className="profile_posts_container">
+              <p className="profile_posts_container_title">Posts</p>
+              {profileData.userPosts.length > 0
+                ? profileData.userPosts.map((post, index) => {
+                    return <Post key={index} details={post} />;
+                  })
+                : "No posts yet"}
             </div>
           </div>
 
-          <div className="profile_posts_container">
-            <p className="profile_posts_container_title">Posts</p>
-            {/* <Post />
-            <Post />
-            <Post />
-            <Post />
-            <Post />
-            <Post /> */}
-          </div>
+          {/* for followers modal */}
+          {seeFollowersModal && (
+            <div className="overlay">
+              <div className="likedBYModalContainer">
+                <p className="likedBYModalContainer_title">Followers</p>
+                <RxCross2
+                  className="closeModalBtn"
+                  onClick={() => {
+                    setSeeFollowersModal(false);
+                  }}
+                />
+                {profileData.userProfileData.followers.length > 0
+                  ? profileData.userProfileData.followers.map((user, index) => {
+                      return (
+                        <div key={index} className="likedBYModalItems">
+                          <img src={user.image} alt="profile" />
+                          <div>
+                            <p className="likedByModalItem_name">{user.name}</p>
+                            <p className="likedByModal_position">
+                              {user.position ? user.position : user.email}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })
+                  : "You have no followers yet"}
+              </div>
+            </div>
+          )}
+
+          {/* for followers modal */}
+          {seeFollowingModal && (
+            <div className="overlay">
+              <div className="likedBYModalContainer">
+                <p className="likedBYModalContainer_title">Following</p>
+                <RxCross2
+                  className="closeModalBtn"
+                  onClick={() => {
+                    setSeeFollowingModal(false);
+                  }}
+                />
+                {profileData.userProfileData.following.length > 0
+                  ? profileData.userProfileData.following.map((user, index) => {
+                      return (
+                        <div key={index} className="likedBYModalItems">
+                          <img src={user.image} alt="profile" />
+                          <div>
+                            <p className="likedByModalItem_name">{user.name}</p>
+                            <p className="likedByModal_position">
+                              {user.position ? user.position : user.email}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })
+                  : "You are currently following no any users"}
+              </div>
+            </div>
+          )}
         </div>
-
-        {/* for followers modal */}
-        {seeFollowersModal && (
-          <div className="overlay">
-            <div className="likedBYModalContainer">
-              <p className="likedBYModalContainer_title">Followers</p>
-              <RxCross2
-                className="closeModalBtn"
-                onClick={() => {
-                  setSeeFollowersModal(false);
-                }}
-              />
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* for followers modal */}
-        {seeFollowingModal && (
-          <div className="overlay">
-            <div className="likedBYModalContainer">
-              <p className="likedBYModalContainer_title">Following</p>
-              <RxCross2
-                className="closeModalBtn"
-                onClick={() => {
-                  setSeeFollowingModal(false);
-                }}
-              />
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-              <div className="likedBYModalItems">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                  alt="profile"
-                />
-                <div>
-                  <p className="likedByModalItem_name">Sulav Neupane</p>
-                  <p className="likedByModal_position">Full stack developer</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
+      )}
     </>
   );
 };

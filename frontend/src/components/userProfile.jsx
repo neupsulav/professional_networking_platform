@@ -81,7 +81,7 @@ const UserProfile = () => {
               </div>
 
               <div className="profile_skills">
-                {
+                {/* {
                   profileData.userProfileData.skills &&
                     JSON.parse(profileData.userProfileData.skills[0]).map(
                       (skill, index) => {
@@ -93,7 +93,7 @@ const UserProfile = () => {
                       }
                     )
                   // profileData.userProfileData.skills[0].split(", ")
-                }
+                } */}
               </div>
             </div>
           </div>
