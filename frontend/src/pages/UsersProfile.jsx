@@ -6,6 +6,8 @@ import Post from "../components/Post";
 import Cookies from "universal-cookie";
 import { useParams } from "react-router-dom";
 import moment from "moment";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UserProfile = () => {
   const [seeFollowersModal, setSeeFollowersModal] = useState(false);
@@ -23,7 +25,7 @@ const UserProfile = () => {
   };
 
   // setting up useParams()
-  const params = useParams();
+  const { id } = useParams();
 
   // for cookies
   const cookies = new Cookies();
@@ -31,7 +33,7 @@ const UserProfile = () => {
 
   // to get user profile data
   const getProfileData = async () => {
-    const res = await fetch(`/api/user/${params.id}`, {
+    const res = await fetch(`/api/user/${id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${cookie}`,
@@ -47,17 +49,61 @@ const UserProfile = () => {
     }
   };
 
+  // to follow and unfollow user
+  const followUser = async () => {
+    const res = await fetch(`/api/follow/${id}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${cookie}`,
+      },
+    });
+
+    const response = await res.json();
+    if (response.msg === "User followed") {
+      toast.success(
+        `You are now following ${profileData.userProfileData.name}`
+      );
+      checkFollowing();
+    } else {
+      toast.success(`You have unfollowed ${profileData.userProfileData.name}`);
+      checkFollowing();
+    }
+  };
+
+  // to check if we are following the user
+  const checkFollowing = async () => {
+    const res = await fetch(`/api/checkfollowing/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${cookie}`,
+      },
+    });
+
+    const response = await res.json();
+    if (response === true) {
+      setIsFollowing(true);
+    } else {
+      setIsFollowing(false);
+    }
+  };
+
   useEffect(() => {
     getProfileData();
-  }, []);
+  }, [id]);
 
   return (
     <>
       {isDataFetched && (
         <div className="users_profile_container">
+          <ToastContainer />
           <div className="userProfileContainer">
             <div className="profileDetails">
-              <button className="follow_btn_profile">
+              <button
+                className="follow_btn_profile"
+                onClick={() => {
+                  followUser();
+                }}
+              >
                 {isFollowing ? "Unfollow" : "Follow"}
               </button>
               <img src={profileData.userProfileData.image} alt="user_img" />
