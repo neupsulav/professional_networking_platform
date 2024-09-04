@@ -150,9 +150,9 @@ const updateUserProfile = catchAsync(async (req, res, next) => {
   const fileUrls = {};
 
   if (req.files["image"]) {
-    fileUrls.image = `${req.protocol}://${req.get(
-      "host"
-    )}/public/uploads/userImages/${req.files["image"][0].filename}`;
+    fileUrls.image = `${req.protocol}://${req.get("host")}/public/uploads/${
+      req.files["image"][0].filename
+    }`;
   }
 
   if (req.files["cv"]) {
