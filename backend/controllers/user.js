@@ -15,10 +15,16 @@ const userProfileData = catchAsync(async (req, res, next) => {
   //   user's profile data
   const userProfileData = await User.findOne({ _id: userId })
     .select(
-      "_id name username email image cv followers following following_company"
+      "_id name username email image cv followers following following_company createdAt"
     )
-    .populate({ path: "followers", select: "name username image _id" })
-    .populate({ path: "following", select: "name username image _id" })
+    .populate({
+      path: "followers",
+      select: "name username image _id email position",
+    })
+    .populate({
+      path: "following",
+      select: "name username image _id email position",
+    })
     .populate({ path: "following_company", select: "name image _id" });
 
   //   user's following and follow count
@@ -27,7 +33,11 @@ const userProfileData = catchAsync(async (req, res, next) => {
 
   //   post posted by user if any
   const userPosts = await Post.find({ user: userProfileData._id })
-    .select("_id caption likes comments createdAt")
+    .select("_id user caption likes comments createdAt")
+    .populate({
+      path: "user",
+      select: "_id name email image",
+    })
     .populate({
       path: "comments",
       select: "user content createdAt _id",
