@@ -3,6 +3,8 @@ import { FaMapMarkerAlt, FaUsers, FaIndustry } from "react-icons/fa";
 import Job from "../components/Job";
 import Cookies from "universal-cookie";
 import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CompanyProfile = () => {
   // to store company profile data
@@ -10,6 +12,7 @@ const CompanyProfile = () => {
   const [isDataFetched, setIsDataFetched] = useState(false);
   const [selfProfileData, setSelfProfileData] = useState();
   const [isJobsFetched, setIsJobsFetched] = useState(false);
+  const [isFollowing, setIsFollowing] = useState();
 
   // for cookies
   const cookies = new Cookies();
@@ -30,6 +33,7 @@ const CompanyProfile = () => {
     const response = await res.json();
     setProfileData(response);
     setIsDataFetched(true);
+    setIsFollowing(response.isFollowing);
   };
 
   const getSelfProfileData = async () => {
@@ -47,6 +51,42 @@ const CompanyProfile = () => {
     }
   };
 
+  // to follow a company
+  const followCompany = async () => {
+    const res = await fetch(`/api/follow/company/${id}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${cookie}`,
+      },
+    });
+
+    const response = await res.json();
+    if (response.msg === "Company followed") {
+      // toast.success(`You are now following ${profileData.companyDetails.name}`);
+      checkFollowing();
+    } else {
+      // toast.success(`You have unfollowed ${profileData.companyDetails.name}`);
+      checkFollowing();
+    }
+  };
+
+  // to check if user is following the company
+  const checkFollowing = async () => {
+    const res = await fetch(`/api/isfollowingcompany/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${cookie}`,
+      },
+    });
+
+    const response = await res.json();
+    if (response === true) {
+      setIsFollowing(true);
+    } else {
+      setIsFollowing(false);
+    }
+  };
+
   useEffect(() => {
     getProfileData();
     getSelfProfileData();
@@ -56,9 +96,17 @@ const CompanyProfile = () => {
     <>
       {isDataFetched && (
         <div className="companies_profile_container">
+          <ToastContainer />
           <div className="company-profile-container">
             <div className="company-profile-header">
-              <button className="follow_btn_company_profile">Follow</button>
+              <button
+                className="follow_btn_company_profile"
+                onClick={() => {
+                  followCompany();
+                }}
+              >
+                {isFollowing ? "Unfollow" : "Follow"}
+              </button>
               <img
                 src={profileData.companyDetails.image}
                 alt="Company Logo"
