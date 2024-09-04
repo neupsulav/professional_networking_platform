@@ -51,7 +51,14 @@ const Jobs = () => {
     <div className="jobs_container">
       {isJobsFetched &&
         jobsArray.map((job, index) => {
-          return <Job key={index} job={job} profileData={profileData} />;
+          return (
+            <Job
+              key={index}
+              job={job}
+              profileData={profileData}
+              isOwner={false}
+            />
+          );
         })}
 
       {isJobsFetched &&

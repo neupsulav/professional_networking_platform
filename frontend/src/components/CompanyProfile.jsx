@@ -62,12 +62,12 @@ const CompanyProfile = () => {
 
       <div className="profile_posts_container">
         <p className="profile_posts_container_title">Jobs</p>
+        {/* <Job />
         <Job />
         <Job />
         <Job />
         <Job />
-        <Job />
-        <Job />
+        <Job /> */}
       </div>
     </div>
   );

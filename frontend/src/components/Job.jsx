@@ -11,7 +11,7 @@ import Cookies from "universal-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Job = ({ job, profileData }) => {
+const Job = ({ job, profileData, isOwner }) => {
   const [seeJobDetails, setSeeJobDetails] = useState(false);
   const [applyJobModal, setApplyJobModal] = useState(false);
   const [seeApplicants, setSeeApplicants] = useState(false);
@@ -112,11 +112,11 @@ const Job = ({ job, profileData }) => {
         <div className="job_basic_details">
           <div className="job_details_items">
             <CiLocationOn className="job_details_items_icon_location" />
-            <p>{job.location}</p>
+            <p>{job.location ? job.location : "Not specified"}</p>
           </div>
           <div className="job_details_items">
             <GiTakeMyMoney className="job_details_items_icon_salary" />
-            <p>{job.salary}</p>
+            <p>{job.salary ? job.salary : "Not specified"}</p>
           </div>
           <div className="job_details_items">
             <RxLapTimer className="job_details_items_icon_deadline" />
@@ -124,11 +124,11 @@ const Job = ({ job, profileData }) => {
           </div>
           <div className="job_details_items">
             <MdOutlinePeopleAlt className="job_details_items_icon_people" />
-            <p>No of posts: {job.noOfPost}</p>
+            <p>No of posts: {job.noOfPost ? job.noOfPost : "Not specified"}</p>
           </div>
           <div className="job_details_items">
             <MdOutlineWorkHistory className="job_details_items_icon_people" />
-            <p>Type: {job.type}</p>
+            <p>Type: {job.type ? job.type : "Not specified"}</p>
           </div>
         </div>
         <button
@@ -151,14 +151,16 @@ const Job = ({ job, profileData }) => {
         </button>
 
         {/* see applicants btn */}
-        <button
-          className="apply_jobs_btn"
-          onClick={() => {
-            setSeeApplicants(true);
-          }}
-        >
-          See applicants
-        </button>
+        {isOwner && (
+          <button
+            className="apply_jobs_btn"
+            onClick={() => {
+              setSeeApplicants(true);
+            }}
+          >
+            See applicants
+          </button>
+        )}
 
         {/* for job details */}
         <div
