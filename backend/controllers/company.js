@@ -37,7 +37,16 @@ const getOtherCompanyProfileDetails = catchAsync(async (req, res, next) => {
 
   const followersCount = company.followers.length;
 
-  const companyJobs = await Job.find({ company: companyId });
+  const currentDate = new Date();
+
+  const companyJobs = await Job.find({
+    company: companyId,
+    deadline: { $gte: currentDate },
+  })
+    .populate("company")
+    .sort({
+      createdAt: -1,
+    });
 
   res
     .status(200)
