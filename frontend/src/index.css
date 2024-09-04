@@ -487,6 +487,7 @@ body::-webkit-scrollbar {
 
 .postIdentity_name {
   font-weight: bold;
+  cursor: pointer;
 }
 
 .postIdentity_name span {
@@ -2389,7 +2390,6 @@ input {
   background-color: white;
   color: var(--primary-color);
 }
-
 
 /* Header container */
 .header {

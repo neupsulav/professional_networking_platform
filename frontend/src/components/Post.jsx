@@ -7,8 +7,12 @@ import { IoSend } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import Cookies from "universal-cookie";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Post = ({ details }) => {
+  // to navigate to user profile
+  const navigate = useNavigate();
+
   const [seeComments, setSeeComments] = useState(false);
   const [showLikedByModal, setShowLikedByModal] = useState(false);
   const [likesCount, setLikesCount] = useState(details.likes.length);
@@ -132,7 +136,12 @@ const Post = ({ details }) => {
         <div className="postIdentity">
           <img src={details.user.image} alt="profile_picture" />
           <div className="postIdentity_text">
-            <p className="postIdentity_name">
+            <p
+              className="postIdentity_name"
+              onClick={() => {
+                navigate(`/user/${details.user._id}`);
+              }}
+            >
               {details.user.name}
               <span className="post_time">
                 {daysSince === 0 ? "Today" : `.${daysSince}d`}
