@@ -10,12 +10,16 @@ import moment from "moment";
 import Cookies from "universal-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const Job = ({ job, profileData, isOwner }) => {
   const [seeJobDetails, setSeeJobDetails] = useState(false);
   const [applyJobModal, setApplyJobModal] = useState(false);
   const [seeApplicants, setSeeApplicants] = useState(false);
   const [formattedDate, setFormattedDate] = useState("");
+
+  // to navigate to company profile
+  const navigate = useNavigate();
 
   // for cookies
   const cookies = new Cookies();
@@ -101,7 +105,14 @@ const Job = ({ job, profileData, isOwner }) => {
           <img src={job.company.image} alt="profile_picture" />
           <div className="postIdentity_text">
             <p className="postIdentity_name">{job.position}</p>
-            <p className="postIdentity_field">{job.company.name}</p>
+            <p
+              className="postIdentity_field"
+              onClick={() => {
+                navigate(`/company/${job.company._id}`);
+              }}
+            >
+              {job.company.name}
+            </p>
           </div>
         </div>
 
