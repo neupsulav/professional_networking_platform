@@ -57,4 +57,13 @@ const followCompany = catchAsync(async (req, res, next) => {
   }
 });
 
-module.exports = { followCompany };
+// to check if user is following a company
+const isFollowing = catchAsync(async (req, res, next) => {
+  const company = await Company.findById({ _id: req.params.id });
+
+  const isFollowing = company.followers.includes(req.user.userId);
+
+  res.status(200).send(isFollowing);
+});
+
+module.exports = { followCompany, isFollowing };
