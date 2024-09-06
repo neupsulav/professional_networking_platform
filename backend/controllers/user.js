@@ -224,7 +224,7 @@ const peopleYouMayKnow = catchAsync(async (req, res, next) => {
     uniqueRecommendations.map(async (recommendation) => {
       const recommendedUser = await User.findById(
         recommendation.recommendedUserId
-      ).select("image name username position _id");
+      ).select("image name username email position _id");
 
       const recommendingUser = await User.findById(
         recommendation.recommendedBy
