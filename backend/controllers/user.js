@@ -201,8 +201,11 @@ const peopleYouMayKnow = catchAsync(async (req, res, next) => {
 
   followedByMyFollowing.forEach((followingUser) => {
     followingUser.following.forEach((followedUserId) => {
-      if (followedUserId.toString() !== req.user.userId.toString()) {
-        // Exclude our own ID
+      // Exclude our own ID and users we are already following
+      if (
+        followedUserId.toString() !== req.user.userId.toString() &&
+        !user.following.includes(followedUserId.toString())
+      ) {
         recommendations.push({
           recommendedUserId: followedUserId,
           recommendedBy: followingUser._id,
