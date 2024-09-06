@@ -7,7 +7,7 @@ const ApplicantsList = ({ applicants }) => {
       {applicants.map((applicant, index) => (
         <div key={index} className="applicant-card">
           <img
-            src={applicant.image}
+            src={applicant.user.image}
             alt={applicant.name}
             className="applicant-image"
           />
@@ -18,7 +18,7 @@ const ApplicantsList = ({ applicants }) => {
           </div>
           <button
             className="view-cv-button"
-            onClick={() => window.open(applicant.cvLink, "_blank")}
+            onClick={() => window.open(applicant.user.cv, "_blank")}
           >
             View CV
           </button>
