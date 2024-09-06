@@ -45,7 +45,7 @@ const getApplicants = catchAsync(async (req, res, next) => {
 
   const applicants = await Applicant.find({ job: jobId }).populate({
     path: "user",
-    select: "cv",
+    select: "cv image",
   });
 
   res.status(200).send(applicants);
