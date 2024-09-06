@@ -154,7 +154,13 @@ const Settings = ({ userType, selectedPath, setSelectedPath }) => {
                   <h3>Log Out</h3>
                   <div className="appearance-options">
                     <div>
-                      <button className="logout-button">
+                      <button
+                        className="logout-button"
+                        onClick={() => {
+                          cookies.remove("jwtToken", { path: "/" });
+                          window.location.reload();
+                        }}
+                      >
                         <FaSignOutAlt /> Logout
                       </button>
                     </div>
