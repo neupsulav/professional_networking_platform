@@ -5,6 +5,7 @@ import Cookies from "universal-cookie";
 import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const CompanyProfile = () => {
   // to store company profile data
@@ -17,6 +18,15 @@ const CompanyProfile = () => {
   // for cookies
   const cookies = new Cookies();
   const cookie = cookies.get("jwtToken");
+
+  const navigate = useNavigate();
+
+  // for path protection
+  const protectPath = () => {
+    if (!cookie) {
+      navigate("/login");
+    }
+  };
 
   // get id from url
   const { id } = useParams();
@@ -88,6 +98,7 @@ const CompanyProfile = () => {
   };
 
   useEffect(() => {
+    protectPath();
     getProfileData();
     getSelfProfileData();
   }, [id]);

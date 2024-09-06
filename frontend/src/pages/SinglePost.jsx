@@ -14,6 +14,10 @@ const SinglePost = () => {
   // to navigate to user profile
   const navigate = useNavigate();
 
+  // for cookies
+  const cookies = new Cookies();
+  const cookie = cookies.get("jwtToken");
+
   const [seeComments, setSeeComments] = useState(false);
   const [showLikedByModal, setShowLikedByModal] = useState(false);
   const [likesCount, setLikesCount] = useState();
@@ -26,10 +30,6 @@ const SinglePost = () => {
 
   //   to store post details
   const [details, setDetails] = useState();
-
-  // for cookies
-  const cookies = new Cookies();
-  const cookie = cookies.get("jwtToken");
 
   // get id from url
   const { id } = useParams();
@@ -155,7 +155,15 @@ const SinglePost = () => {
   };
 
   useEffect(() => {
-    getPostData();
+    // for cookies
+    const cookies = new Cookies();
+    const cookie = cookies.get("jwtToken");
+
+    if (cookie) {
+      getPostData();
+    } else {
+      navigate("/login");
+    }
   }, []);
 
   return (

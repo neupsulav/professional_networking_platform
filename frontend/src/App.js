@@ -35,7 +35,7 @@ const App = () => {
         <Route path="/user/:id" element={<UsersProfile />} />
         <Route path="/post/:id" element={<SinglePost />} />
         <Route path="/company/:id" element={<CompaniesProfile />} />
-        <Route path="/settings" element={<Settings />} />
+        {/* <Route path="/settings" element={<Settings />} /> */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

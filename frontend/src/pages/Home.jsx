@@ -12,10 +12,10 @@ import CompanyProfile from "../components/CompanyProfile";
 import Settings from "../components/settings";
 import Cookies from "universal-cookie";
 import CompanyFollowers from "../components/CompanyFollowers";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [selectedPath, setSelectedPath] = useState(0);
   const [isSidebarActive, setIsSidebarActive] = useState(false);
@@ -31,6 +31,12 @@ const Home = () => {
       setSelectedPath(0);
     } else {
       setSelectedPath(1);
+    }
+
+    const cookieToken = cookies.get("jwtToken");
+
+    if (!cookieToken) {
+      navigate("/login");
     }
   }, []);
 

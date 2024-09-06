@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
   const [seeFollowersModal, setSeeFollowersModal] = useState(false);
@@ -30,6 +31,14 @@ const UserProfile = () => {
   // for cookies
   const cookies = new Cookies();
   const cookie = cookies.get("jwtToken");
+
+  const navigate = useNavigate();
+
+  const protectPath = () => {
+    if (!cookie) {
+      navigate("/login");
+    }
+  };
 
   // to get user profile data
   const getProfileData = async () => {
@@ -88,6 +97,7 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
+    protectPath();
     getProfileData();
   }, [id]);
 
