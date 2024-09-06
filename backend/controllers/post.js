@@ -190,6 +190,25 @@ const getComments = catchAsync(async (req, res, next) => {
   res.status(200).json({ Comments, commentsCount });
 });
 
+// to get single post data
+const getSinglePost = catchAsync(async (req, res, next) => {
+  const post = await Post.findById({ _id: req.params.id })
+    .populate({
+      path: "user",
+      select: "_id name username email image",
+    })
+    .populate({
+      path: "comments",
+      select: "_id name username email image content createdAt",
+    })
+    .populate({
+      path: "likes",
+      select: "_id name username email image ",
+    });
+
+  res.status(200).send(post);
+});
+
 module.exports = {
   createPost,
   likePost,
@@ -197,4 +216,5 @@ module.exports = {
   getPost,
   getLikesCount,
   getComments,
+  getSinglePost,
 };

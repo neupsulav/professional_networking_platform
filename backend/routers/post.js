@@ -8,6 +8,7 @@ const {
   getPost,
   getLikesCount,
   getComments,
+  getSinglePost,
 } = require("../controllers/post");
 
 const userAuthentication = require("../middlewares/userAuthentication");
@@ -24,5 +25,7 @@ router.get("/posts", userAuthentication, getPost);
 router.get("/getlikescount/:id", userAuthentication, getLikesCount);
 
 router.get("/getcomments/:id", getComments);
+
+router.get("/getsinglepost/:id", userAuthentication, getSinglePost);
 
 module.exports = router;
