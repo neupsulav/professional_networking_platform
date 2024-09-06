@@ -7,11 +7,15 @@ import { RxCross2 } from "react-icons/rx";
 import { MdOutlineWorkHistory } from "react-icons/md";
 import ApplicantsList from "./ApplicantLists";
 import moment from "moment";
+import Cookies from "universal-cookie";
 
 const ProfileJob = ({ job, profileData, isOwner }) => {
   const [seeJobDetails, setSeeJobDetails] = useState(false);
   const [seeApplicants, setSeeApplicants] = useState(false);
   const [formattedDate, setFormattedDate] = useState("");
+
+  //   to store applicants data
+  const [applicants, setApplicants] = useState();
 
   // to get the formatted date
   const getFormattedDate = (deadline) => {
@@ -20,8 +24,28 @@ const ProfileJob = ({ job, profileData, isOwner }) => {
     setFormattedDate(newDate);
   };
 
+  // for cookies
+  const cookies = new Cookies();
+  const cookie = cookies.get("jwtToken");
+
+  //   to get job applicants list
+  const getApplicants = async () => {
+    const res = await fetch(`/api/getapplicants/${job._id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${cookie}`,
+      },
+    });
+
+    const response = await res.json();
+    if (res.status === 200) {
+      setApplicants(response);
+    }
+  };
+
   useEffect(() => {
     getFormattedDate(job.deadline);
+    getApplicants();
   }, []);
 
   return (
@@ -112,7 +136,7 @@ const ProfileJob = ({ job, profileData, isOwner }) => {
               setSeeApplicants(false);
             }}
           />
-          <ApplicantsList />
+          <ApplicantsList applicants={applicants} />
         </div>
       )}
     </>

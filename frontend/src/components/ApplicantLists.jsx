@@ -1,84 +1,11 @@
 import React from "react";
 
-const applicants = [
-  {
-    id: 1,
-    name: "Sandip Neupane",
-    email: "sandipneupane@gmail.com",
-    phone: "+1234567890",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg",
-    cvLink:
-      "https://drive.google.com/file/d/1Nvh-qfR0SdmFOu-6ryRFv065q6xJMvLf/view?usp=sharing",
-  },
-  {
-    id: 1,
-    name: "Sandip Neupane",
-    email: "sandipneupane@gmail.com",
-    phone: "+1234567890",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg",
-    cvLink:
-      "https://drive.google.com/file/d/1Nvh-qfR0SdmFOu-6ryRFv065q6xJMvLf/view?usp=sharing",
-  },
-  {
-    id: 1,
-    name: "Sandip Neupane",
-    email: "sandipneupane@gmail.com",
-    phone: "+1234567890",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg",
-    cvLink:
-      "https://drive.google.com/file/d/1Nvh-qfR0SdmFOu-6ryRFv065q6xJMvLf/view?usp=sharing",
-  },
-  {
-    id: 1,
-    name: "Sandip Neupane",
-    email: "sandipneupane@gmail.com",
-    phone: "+1234567890",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg",
-    cvLink:
-      "https://drive.google.com/file/d/1Nvh-qfR0SdmFOu-6ryRFv065q6xJMvLf/view?usp=sharing",
-  },
-  {
-    id: 1,
-    name: "Sandip Neupane",
-    email: "sandipneupane@gmail.com",
-    phone: "+1234567890",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg",
-    cvLink:
-      "https://drive.google.com/file/d/1Nvh-qfR0SdmFOu-6ryRFv065q6xJMvLf/view?usp=sharing",
-  },
-  {
-    id: 1,
-    name: "Sandip Neupane",
-    email: "sandipneupane@gmail.com",
-    phone: "+1234567890",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg",
-    cvLink:
-      "https://drive.google.com/file/d/1Nvh-qfR0SdmFOu-6ryRFv065q6xJMvLf/view?usp=sharing",
-  },
-  {
-    id: 1,
-    name: "Sandip Neupane",
-    email: "sandipneupane@gmail.com",
-    phone: "+1234567890",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg",
-    cvLink:
-      "https://drive.google.com/file/d/1Nvh-qfR0SdmFOu-6ryRFv065q6xJMvLf/view?usp=sharing",
-  },
-];
-
-const ApplicantsList = () => {
+const ApplicantsList = ({ applicants }) => {
   return (
     <div className="applicants-list-container">
       <h1 className="applicants-list-title">List of Applicants</h1>
-      {applicants.map((applicant) => (
-        <div key={applicant.id} className="applicant-card">
+      {applicants.map((applicant, index) => (
+        <div key={index} className="applicant-card">
           <img
             src={applicant.image}
             alt={applicant.name}
