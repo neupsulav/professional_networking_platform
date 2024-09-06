@@ -10,6 +10,7 @@ import UsersProfile from "./pages/UsersProfile";
 import CompaniesProfile from "./pages/CompaniesProfile";
 import Settings from "./components/settings";
 import Header from "./components/searchbar";
+import SinglePost from "./pages/SinglePost";
 
 const App = () => {
   const location = useLocation();
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/signup-user" element={<SignupUser />} />
         <Route path="/signup-company" element={<SignupCompany />} />
         <Route path="/user/:id" element={<UsersProfile />} />
+        <Route path="/post/:id" element={<SinglePost />} />
         <Route path="/company/:id" element={<CompaniesProfile />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="*" element={<NotFound />} />

@@ -503,6 +503,20 @@ body::-webkit-scrollbar {
   }
 }
 
+/* for single post page post container */
+.singlePostContainer {
+  margin-top: 30px;
+  padding: 20px 10px 20px 10px;
+  height: auto;
+  width: 60%;
+  border-radius: 10px;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid var(--primary-color);
+}
+
 /* for post container */
 .postContainer {
   padding: 20px 10px 20px 10px;
