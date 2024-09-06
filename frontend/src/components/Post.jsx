@@ -6,7 +6,7 @@ import { CiShare2 } from "react-icons/ci";
 import { IoSend } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import Cookies from "universal-cookie";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const Post = ({ details }) => {
@@ -133,6 +133,7 @@ const Post = ({ details }) => {
   return (
     <>
       <div className="postContainer">
+        <ToastContainer />
         <div className="postIdentity">
           <img src={details.user.image} alt="profile_picture" />
           <div className="postIdentity_text">
