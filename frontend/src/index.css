@@ -236,12 +236,55 @@ body::-webkit-scrollbar {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
   gap: 15px;
   padding: 10px 5px 10px 10px;
 }
 
-.suggestionbar_item img {
+.suggestionbar_recommended_people {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 15px;
+  width: 90%;
+}
+
+.recommended_by_container {
+  width: 90%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: row;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.recommended_by_container div {
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: row;
+  gap: 6px;
+}
+
+.recommended_by_person_name {
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 12px;
+  color: black;
+}
+
+.recommended_by_person_image {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.suggestionbar_item_img {
   height: 60px;
   width: 60px;
   border-radius: 50%;
