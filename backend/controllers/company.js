@@ -14,10 +14,12 @@ const getCompanySelfProfileDetails = catchAsync(async (req, res, next) => {
 
   const followersCount = company.followers.length;
 
-  const companyJobs = await Job.find({ company: companyId }).populate({
-    path: "company",
-    select: "_id name image",
-  });
+  const companyJobs = await Job.find({ company: companyId })
+    .populate({
+      path: "company",
+      select: "_id name image",
+    })
+    .sort({ createdAt: -1 });
 
   res.status(200).send({ company, followersCount, companyJobs });
 });
