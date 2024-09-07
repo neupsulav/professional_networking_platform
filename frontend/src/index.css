@@ -229,6 +229,26 @@ body::-webkit-scrollbar {
   margin-bottom: 20px;
 }
 
+.suggestionbar_item_company {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 15px;
+  width: 100%;
+  margin-bottom: 20px;
+  border: 1px solid var(--primary-color);
+  width: 90%;
+  padding: 10px 5px 10px 15px;
+}
+
+.suggestionbar_item_company img {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .suggestionbar_item {
   border: 1px solid var(--primary-color);
   border-radius: 10px;
