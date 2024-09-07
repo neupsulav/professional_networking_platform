@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const NotificationItem = ({ details }) => {
+  const navigate = useNavigate();
   // const { type, user, post } = notification;
 
   // const getMessage = () => {
@@ -15,7 +17,12 @@ const NotificationItem = ({ details }) => {
   // };
 
   return (
-    <div className="notification-item">
+    <div
+      className="notification-item"
+      onClick={() => {
+        navigate(`/post/${details.post}`);
+      }}
+    >
       <p>{details.content}</p>
     </div>
   );
