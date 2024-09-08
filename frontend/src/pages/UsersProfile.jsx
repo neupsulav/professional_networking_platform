@@ -240,7 +240,7 @@ const UserProfile = () => {
                         </div>
                       );
                     })
-                  : "You have no followers yet"}
+                  : "This user have no followers yet"}
               </div>
             </div>
           )}
@@ -270,7 +270,7 @@ const UserProfile = () => {
                         </div>
                       );
                     })
-                  : "You are currently following no any users"}
+                  : "User is currently following no any other users"}
               </div>
             </div>
           )}
