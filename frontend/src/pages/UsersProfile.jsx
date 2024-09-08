@@ -108,6 +108,16 @@ const UserProfile = () => {
           <ToastContainer />
           <div className="userProfileContainer">
             <div className="profileDetails">
+              {profileData.userProfileData.cv && (
+                <button
+                  className="viewCv_btn_profile"
+                  onClick={() => {
+                    window.open(profileData.userProfileData.cv, "_blank");
+                  }}
+                >
+                  View CV
+                </button>
+              )}
               <button
                 className="follow_btn_profile"
                 onClick={() => {
@@ -116,6 +126,7 @@ const UserProfile = () => {
               >
                 {isFollowing ? "Unfollow" : "Follow"}
               </button>
+
               <img src={profileData.userProfileData.image} alt="user_img" />
               <div className="profileDetailsContent">
                 <p className="profile_name">

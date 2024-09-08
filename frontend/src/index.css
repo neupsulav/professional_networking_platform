@@ -1055,7 +1055,45 @@ body::-webkit-scrollbar {
   cursor: pointer;
 }
 
+.viewCv_btn_profile {
+  position: absolute;
+  top: 15px;
+  right: 150px;
+  width: 120px;
+  height: 30px;
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.viewCv_btn_selfprofile {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 100px;
+  height: 30px;
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
 .follow_btn_profile:hover {
+  background-color: white;
+  color: var(--primary-color);
+}
+
+.viewCv_btn_selfprofile:hover {
+  background-color: white;
+  color: var(--primary-color);
+}
+
+.viewCv_btn_profile:hover {
   background-color: white;
   color: var(--primary-color);
 }

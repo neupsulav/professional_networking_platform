@@ -51,6 +51,16 @@ const UserProfile = () => {
       {isDataFetched && (
         <div className="userProfileContainer">
           <div className="profileDetails">
+            {profileData.userProfileData.cv && (
+              <button
+                className="viewCv_btn_selfprofile"
+                onClick={() => {
+                  window.open(profileData.userProfileData.cv, "_blank");
+                }}
+              >
+                View CV
+              </button>
+            )}
             <img src={profileData.userProfileData.image} alt="user_img" />
             <div className="profileDetailsContent">
               <p className="profile_name">{profileData.userProfileData.name}</p>
