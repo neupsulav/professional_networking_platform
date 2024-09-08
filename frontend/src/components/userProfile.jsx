@@ -12,6 +12,7 @@ const UserProfile = () => {
   const [seeFollowingModal, setSeeFollowingModal] = useState(false);
   const [formattedDate, setFormattedDate] = useState("");
   const [isDataFetched, setIsDataFetched] = useState(false);
+  const [seeFollowingCompanies, setSeeFollowingCompanies] = useState(false);
 
   // for cookies
   const cookies = new Cookies();
@@ -104,6 +105,15 @@ const UserProfile = () => {
                     )
                   // profileData.userProfileData.skills[0].split(", ")
                 } */}
+              </div>
+              <div
+                className="following_companies_container"
+                onClick={() => {
+                  setSeeFollowingCompanies(true);
+                }}
+              >
+                Following {profileData.userProfileData.following_company.length}{" "}
+                companies
               </div>
             </div>
           </div>
@@ -198,6 +208,41 @@ const UserProfile = () => {
                   );
                 })
               : "You are currently following no any users"}
+          </div>
+        </div>
+      )}
+
+      {seeFollowingCompanies && (
+        <div className="overlay">
+          <div className="likedBYModalContainer">
+            <p className="likedBYModalContainer_title">Following Companies</p>
+            <RxCross2
+              className="closeModalBtn"
+              onClick={() => {
+                setSeeFollowingCompanies(false);
+              }}
+            />
+            {profileData.userProfileData.following_company.length > 0
+              ? profileData.userProfileData.following_company.map(
+                  (company, index) => {
+                    return (
+                      <div key={index} className="likedBYModalItems">
+                        <img src={company.image} alt="profile" />
+                        <div>
+                          <p className="likedByModalItem_name">
+                            {company.name}
+                          </p>
+                          <p className="likedByModal_position">
+                            {company.industry
+                              ? company.industry
+                              : company.email}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  }
+                )
+              : "You haven't followed any company yet"}
           </div>
         </div>
       )}
