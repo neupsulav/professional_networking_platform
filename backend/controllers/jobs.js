@@ -56,6 +56,10 @@ const appliedJobs = catchAsync(async (req, res, next) => {
   const applications = await applicants
     .find({ user: req.user.userId })
     .populate("job")
+    .populate({
+      path: "job",
+      populate: [{ path: "company", select: "_id name image email industry" }],
+    })
     .sort({ createdAt: -1 });
 
   res.status(200).send(applications);
