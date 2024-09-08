@@ -232,7 +232,14 @@ const UserProfile = () => {
                         <div key={index} className="likedBYModalItems">
                           <img src={user.image} alt="profile" />
                           <div>
-                            <p className="likedByModalItem_name">{user.name}</p>
+                            <p
+                              className="likedByModalItem_name"
+                              onClick={() => {
+                                navigate(`/user/${user._id}`);
+                              }}
+                            >
+                              {user.name}
+                            </p>
                             <p className="likedByModal_position">
                               {user.position ? user.position : user.email}
                             </p>
@@ -262,7 +269,14 @@ const UserProfile = () => {
                         <div key={index} className="likedBYModalItems">
                           <img src={user.image} alt="profile" />
                           <div>
-                            <p className="likedByModalItem_name">{user.name}</p>
+                            <p
+                              className="likedByModalItem_name"
+                              onClick={() => {
+                                navigate(`/user/${user._id}`);
+                              }}
+                            >
+                              {user.name}
+                            </p>
                             <p className="likedByModal_position">
                               {user.position ? user.position : user.email}
                             </p>
@@ -295,7 +309,12 @@ const UserProfile = () => {
                           <div key={index} className="likedBYModalItems">
                             <img src={company.image} alt="profile" />
                             <div>
-                              <p className="likedByModalItem_name">
+                              <p
+                                className="likedByModalItem_name"
+                                onClick={() => {
+                                  navigate(`/company/${company._id}`);
+                                }}
+                              >
                                 {company.name}
                               </p>
                               <p className="likedByModal_position">

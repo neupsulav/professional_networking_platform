@@ -6,8 +6,12 @@ import Post from "./Post";
 import { RxCross2 } from "react-icons/rx";
 import Cookies from "universal-cookie";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
+  // to navigate to user profile
+  const navigate = useNavigate();
+
   const [seeFollowersModal, setSeeFollowersModal] = useState(false);
   const [seeFollowingModal, setSeeFollowingModal] = useState(false);
   const [formattedDate, setFormattedDate] = useState("");
@@ -169,7 +173,14 @@ const UserProfile = () => {
                     <div key={index} className="likedBYModalItems">
                       <img src={user.image} alt="profile" />
                       <div>
-                        <p className="likedByModalItem_name">{user.name}</p>
+                        <p
+                          className="likedByModalItem_name"
+                          onClick={() => {
+                            navigate(`/user/${user._id}`);
+                          }}
+                        >
+                          {user.name}
+                        </p>
                         <p className="likedByModal_position">
                           {user.position ? user.position : user.email}
                         </p>
@@ -199,7 +210,14 @@ const UserProfile = () => {
                     <div key={index} className="likedBYModalItems">
                       <img src={user.image} alt="profile" />
                       <div>
-                        <p className="likedByModalItem_name">{user.name}</p>
+                        <p
+                          className="likedByModalItem_name"
+                          onClick={() => {
+                            navigate(`/user/${user._id}`);
+                          }}
+                        >
+                          {user.name}
+                        </p>
                         <p className="likedByModal_position">
                           {user.position ? user.position : user.email}
                         </p>
@@ -212,6 +230,7 @@ const UserProfile = () => {
         </div>
       )}
 
+      {/* following companies modal */}
       {seeFollowingCompanies && (
         <div className="overlay">
           <div className="likedBYModalContainer">
@@ -229,7 +248,12 @@ const UserProfile = () => {
                       <div key={index} className="likedBYModalItems">
                         <img src={company.image} alt="profile" />
                         <div>
-                          <p className="likedByModalItem_name">
+                          <p
+                            className="likedByModalItem_name"
+                            onClick={() => {
+                              navigate(`/company/${company._id}`);
+                            }}
+                          >
                             {company.name}
                           </p>
                           <p className="likedByModal_position">
