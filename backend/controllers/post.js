@@ -132,7 +132,11 @@ const getPost = catchAsync(async (req, res, next) => {
     })
     .populate({
       path: "comments",
-      select: "_id name username email image content createdAt",
+      select: "_id user name username email image content createdAt",
+      populate: {
+        path: "user",
+        select: "name email _id image",
+      },
     })
     .populate({
       path: "likes",
