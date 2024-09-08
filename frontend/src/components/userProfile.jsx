@@ -7,6 +7,7 @@ import { RxCross2 } from "react-icons/rx";
 import Cookies from "universal-cookie";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import Job from "./Job";
 
 const UserProfile = () => {
   // to navigate to user profile
@@ -17,6 +18,9 @@ const UserProfile = () => {
   const [formattedDate, setFormattedDate] = useState("");
   const [isDataFetched, setIsDataFetched] = useState(false);
   const [seeFollowingCompanies, setSeeFollowingCompanies] = useState(false);
+  const [seepost, setSeePost] = useState(true);
+  const [seeAppliedJobs, setSeeAppliedJobs] = useState(false);
+  const [appliedJobs, setAppliedJobs] = useState();
 
   // for cookies
   const cookies = new Cookies();
@@ -47,8 +51,22 @@ const UserProfile = () => {
     getFormattedDate(response.userProfileData.createdAt);
   };
 
+  // to get applied jobs
+  const getAppliedJobs = async () => {
+    const res = await fetch("/api/getappliedjobs", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${cookie}`,
+      },
+    });
+
+    const response = await res.json();
+    setAppliedJobs(response);
+  };
+
   useEffect(() => {
     getProfileData();
+    getAppliedJobs();
   }, []);
 
   return (
@@ -146,12 +164,59 @@ const UserProfile = () => {
           </div>
 
           <div className="profile_posts_container">
-            <p className="profile_posts_container_title">Posts</p>
-            {profileData.userPosts.length > 0
-              ? profileData.userPosts.map((post, index) => {
-                  return <Post key={index} details={post} />;
-                })
-              : "No posts yet"}
+            {/* <p className="profile_posts_container_title">Posts</p> */}
+
+            <div className="profile_posts_container_btns">
+              <button
+                className={
+                  seepost
+                    ? "profile_posts_container_btns_active"
+                    : "profile_posts_container_buttons"
+                }
+                onClick={() => {
+                  setSeePost(true);
+                  setSeeAppliedJobs(false);
+                }}
+              >
+                Post
+              </button>
+              <button
+                className={
+                  seeAppliedJobs
+                    ? "profile_posts_container_btns_active"
+                    : "profile_posts_container_buttons"
+                }
+                onClick={() => {
+                  setSeePost(false);
+                  setSeeAppliedJobs(true);
+                }}
+              >
+                Applied Jobs
+              </button>
+            </div>
+            {seepost &&
+              (profileData.userPosts.length > 0
+                ? profileData.userPosts.map((post, index) => {
+                    return <Post key={index} details={post} />;
+                  })
+                : "No posts yet")}
+
+            {!seepost &&
+              (appliedJobs.length > 0
+                ? appliedJobs
+                    .slice()
+                    .reverse()
+                    .map((job, index) => {
+                      return (
+                        <Job
+                          key={index}
+                          job={job.job}
+                          profileData={profileData}
+                          isOwner={false}
+                        />
+                      );
+                    })
+                : "No jobs applied yet")}
           </div>
         </div>
       )}
