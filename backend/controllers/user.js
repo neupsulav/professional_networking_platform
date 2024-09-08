@@ -26,7 +26,10 @@ const userProfileData = catchAsync(async (req, res, next) => {
       path: "following",
       select: "name username image _id email position",
     })
-    .populate({ path: "following_company", select: "name image _id" });
+    .populate({
+      path: "following_company",
+      select: "name image _id email industry",
+    });
 
   //   user's following and follow count
   const followersCount = userProfileData.followers.length;
@@ -81,7 +84,10 @@ const selfProfileData = catchAsync(async (req, res, next) => {
       path: "following",
       select: "name username image email position _id",
     })
-    .populate({ path: "following_company", select: "name image _id industry" });
+    .populate({
+      path: "following_company",
+      select: "name image _id industry email",
+    });
 
   //   user's following and follow count
   const followersCount = userProfileData.followers.length;
