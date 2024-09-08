@@ -1888,6 +1888,7 @@ body::-webkit-scrollbar {
   color: var(--text-color);
   height: 90vh;
   overflow-y: scroll;
+  width: 50%;
 }
 
 .settings-container::-webkit-scrollbar {

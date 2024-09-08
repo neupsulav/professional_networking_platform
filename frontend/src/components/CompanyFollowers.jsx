@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 const CompanyFollowers = () => {
   const navigate = useNavigate();
 
+  const [userType, setUserType] = useState("");
+
   // for cookies
   const cookies = new Cookies();
   const cookie = cookies.get("jwtToken");
@@ -23,8 +25,10 @@ const CompanyFollowers = () => {
     });
 
     const response = await res.json();
-    setFollowers(response.company.followers);
-    setIsDataFetched(true);
+    if (response.company) {
+      setFollowers(response.company.followers);
+      setIsDataFetched(true);
+    }
   };
 
   useState(() => {

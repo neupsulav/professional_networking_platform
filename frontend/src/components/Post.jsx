@@ -18,9 +18,10 @@ const Post = ({ details }) => {
   const [likesCount, setLikesCount] = useState(details.likes.length);
   const [isLiked, setIsLiked] = useState();
   const [comment, setComment] = useState("");
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState();
   const [commentsCount, setCommentsCount] = useState(details.comments.length);
   const [likedBy, setLikedBy] = useState(details.likes);
+  const [isCommentsFetched, setIsCommentsFetched] = useState(false);
 
   // for cookies
   const cookies = new Cookies();
@@ -122,6 +123,7 @@ const Post = ({ details }) => {
     const response = await res.json();
     setComments(response.Comments.comments);
     setCommentsCount(response.commentsCount);
+    setIsCommentsFetched(true);
   };
 
   useEffect(() => {
@@ -223,45 +225,48 @@ const Post = ({ details }) => {
         </div>
 
         {/* comment section */}
-        <div
-          className={
-            seeComments
-              ? "commentsContainer commentVisible"
-              : "commentsContainer"
-          }
-        >
-          <p className="commentsContainerTitle">Comments</p>
-          <div className="commentItems">
-            {comments.length > 0
-              ? comments.map((comment, index) => {
-                  return (
-                    <div className="commentItem" key={index}>
-                      <div>
-                        <img src={comment.user.image} alt="profile" />
+        {isCommentsFetched && (
+          <div
+            className={
+              seeComments
+                ? "commentsContainer commentVisible"
+                : "commentsContainer"
+            }
+          >
+            <p className="commentsContainerTitle">Comments</p>
+            <div className="commentItems">
+              {comments.length > 0
+                ? comments.map((comment, index) => {
+                    // Add a check to ensure comment.user is not null or undefined
+                    return comment.user ? (
+                      <div className="commentItem" key={index}>
                         <div>
-                          <p className="commentItem_name">
-                            {comment.user.name}{" "}
-                            <span>
-                              {calculateDaysSinceComment(comment.createdAt)}d
-                              ago
-                            </span>
-                          </p>
-                          <p className="commentItem_position">
-                            {comment.user.position
-                              ? comment.user.position
-                              : comment.user.email}
-                          </p>
+                          <img src={comment.user.image} alt="profile" />
+                          <div>
+                            <p className="commentItem_name">
+                              {comment.user.name}{" "}
+                              <span>
+                                {calculateDaysSinceComment(comment.createdAt)}d
+                                ago
+                              </span>
+                            </p>
+                            <p className="commentItem_position">
+                              {comment.user.position
+                                ? comment.user.position
+                                : comment.user.email}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="commentItem_content">
+                          {comment.content}
                         </div>
                       </div>
-                      <div className="commentItem_content">
-                        {comment.content}
-                      </div>
-                    </div>
-                  );
-                })
-              : "No comments yet"}
+                    ) : null; // Return null if comment.user is null or undefined
+                  })
+                : "No comments yet"}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* liked by list modal */}
