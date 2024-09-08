@@ -5,6 +5,7 @@ const Job = require("../models/job");
 const ErrorHandler = require("../middlewares/errorHandler");
 const catchAsync = require("../middlewares/catchAsync");
 const job = require("../models/job");
+const applicants = require("../models/applicants");
 
 // create a job vacancy
 const createJob = catchAsync(async (req, res, next) => {
@@ -50,4 +51,14 @@ const getJobs = catchAsync(async (req, res, next) => {
   res.status(200).send(jobs);
 });
 
-module.exports = { createJob, getJobs };
+// to get applied jobs list
+const appliedJobs = catchAsync(async (req, res, next) => {
+  const applications = await applicants
+    .find({ user: req.user.userId })
+    .populate("job")
+    .sort({ createdAt: -1 });
+
+  res.status(200).send(applications);
+});
+
+module.exports = { createJob, getJobs, appliedJobs };
