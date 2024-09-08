@@ -17,6 +17,7 @@ const UserProfile = () => {
   const [profileData, setProfileData] = useState();
   const [formattedDate, setFormattedDate] = useState("");
   const [isFollowing, setIsFollowing] = useState();
+  const [seeFollowingCompanies, setSeeFollowingCompanies] = useState(false);
 
   // to get the formatted date
   const getFormattedDate = (createdAt) => {
@@ -168,6 +169,16 @@ const UserProfile = () => {
                   <div className="skill_item">SQL</div>
                   <div className="skill_item">React</div>
                 </div>
+                <div
+                  className="following_companies_container"
+                  onClick={() => {
+                    setSeeFollowingCompanies(true);
+                  }}
+                >
+                  Following{" "}
+                  {profileData.userProfileData.following_company.length}{" "}
+                  companies
+                </div>
               </div>
             </div>
             <div className="follwing_followers_count">
@@ -234,7 +245,7 @@ const UserProfile = () => {
             </div>
           )}
 
-          {/* for followers modal */}
+          {/* for following modal */}
           {seeFollowingModal && (
             <div className="overlay">
               <div className="likedBYModalContainer">
@@ -260,6 +271,44 @@ const UserProfile = () => {
                       );
                     })
                   : "You are currently following no any users"}
+              </div>
+            </div>
+          )}
+
+          {/* for following companies modal */}
+          {seeFollowingCompanies && (
+            <div className="overlay">
+              <div className="likedBYModalContainer">
+                <p className="likedBYModalContainer_title">
+                  Following Companies
+                </p>
+                <RxCross2
+                  className="closeModalBtn"
+                  onClick={() => {
+                    setSeeFollowingCompanies(false);
+                  }}
+                />
+                {profileData.userProfileData.following_company.length > 0
+                  ? profileData.userProfileData.following_company.map(
+                      (company, index) => {
+                        return (
+                          <div key={index} className="likedBYModalItems">
+                            <img src={company.image} alt="profile" />
+                            <div>
+                              <p className="likedByModalItem_name">
+                                {company.name}
+                              </p>
+                              <p className="likedByModal_position">
+                                {company.industry
+                                  ? company.industry
+                                  : company.email}
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      }
+                    )
+                  : "User haven't followed any company yet"}
               </div>
             </div>
           )}

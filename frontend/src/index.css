@@ -1180,6 +1180,18 @@ body::-webkit-scrollbar {
   color: var(--primary-color);
 }
 
+.following_companies_container {
+  font-weight: bold;
+  padding-top: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.following_companies_container:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
 .follwing_followers_count {
   height: 100px;
   padding: 20px 0px 20px 0px;
