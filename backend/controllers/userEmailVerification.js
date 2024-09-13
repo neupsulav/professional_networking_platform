@@ -108,7 +108,7 @@ const userEmailVerification = catchAsync(async (req, res, next) => {
   // res
   //   .status(200)
   //   .send("Your email has been verified. You can now login to your account.");
-  res.redirect("http://localhost:3000/login");
+  res.redirect("http://localhost:3001/login");
 });
 
 module.exports = { sendVerificationMailUser, userEmailVerification };
