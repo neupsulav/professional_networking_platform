@@ -166,19 +166,25 @@ const CompanyProfile = () => {
             <div className="company-profile-content">
               <div className="company-profile-section">
                 <h2 className="company-profile-section-title">Overview</h2>
-                <p className="company-profile-section-text">
-                  {profileData.companyDetails.overview
-                    ? profileData.companyDetails.overview
-                    : "Not specified"}
-                </p>
+                <p
+                  className="company-profile-section-text"
+                  dangerouslySetInnerHTML={{
+                    __html: profileData.companyDetails.overview
+                      ? profileData.companyDetails.overview
+                      : "Not specified",
+                  }}
+                ></p>
               </div>
               <div className="company-profile-section">
                 <h2 className="company-profile-section-title">Services</h2>
-                <ul className="company-profile-section-list">
-                  {profileData.companyDetails.services
-                    ? profileData.companyDetails.services
-                    : "Not specified"}
-                </ul>
+                <p
+                  className="company-profile-section-list"
+                  dangerouslySetInnerHTML={{
+                    __html: profileData.companyDetails.services
+                      ? profileData.companyDetails.services
+                      : "Not specified",
+                  }}
+                ></p>
               </div>
               <div className="company-profile-section">
                 <h2 className="company-profile-section-title">
