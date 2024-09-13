@@ -112,31 +112,17 @@ const UserProfile = () => {
                   ? profileData.userProfileData.bio
                   : "No bio yet"}
               </div>
-              <div className="profile_skills">
-                <div className="skill_item">HTML5</div>
-                <div className="skill_item">CSS3</div>
-                <div className="skill_item">Javascript</div>
-                <div className="skill_item">Python</div>
-                <div className="skill_item">PHP</div>
-                <div className="skill_item">Github</div>
-                <div className="skill_item">SQL</div>
-                <div className="skill_item">React</div>
-              </div>
 
               <div className="profile_skills">
-                {/* {
-                  profileData.userProfileData.skills &&
-                    JSON.parse(profileData.userProfileData.skills[0]).map(
-                      (skill, index) => {
-                        return (
-                          <div key={index} className="skill_item">
-                            {skill}
-                          </div>
-                        );
-                      }
-                    )
-                  // profileData.userProfileData.skills[0].split(", ")
-                } */}
+                {profileData.userProfileData.skills
+                  ? profileData.userProfileData.skills.map((skill, index) => {
+                      return (
+                        <div key={index} className="skill_item">
+                          {skill}
+                        </div>
+                      );
+                    })
+                  : "Skills not yet updated"}
               </div>
               <div
                 className="following_companies_container"
