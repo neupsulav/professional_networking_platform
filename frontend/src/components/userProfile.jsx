@@ -112,6 +112,16 @@ const UserProfile = () => {
                   ? profileData.userProfileData.bio
                   : "No bio yet"}
               </div>
+              <div className="profile_skills">
+                <div className="skill_item">HTML5</div>
+                <div className="skill_item">CSS3</div>
+                <div className="skill_item">Javascript</div>
+                <div className="skill_item">Python</div>
+                <div className="skill_item">PHP</div>
+                <div className="skill_item">Github</div>
+                <div className="skill_item">SQL</div>
+                <div className="skill_item">React</div>
+              </div>
 
               <div className="profile_skills">
                 {/* {

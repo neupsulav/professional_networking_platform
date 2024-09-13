@@ -13,7 +13,10 @@ const UserSettingsForm = ({ profileData }) => {
     bio: profileData.userProfileData.bio,
     location: profileData.userProfileData.location,
     phone: profileData.userProfileData.phone,
-    skills: JSON.parse(profileData.userProfileData.skills[0]),
+    skills: profileData.userProfileData.skills.map((skill) => ({
+      value: skill,
+      label: skill,
+    })),
   });
 
   // for cookies
@@ -25,7 +28,6 @@ const UserSettingsForm = ({ profileData }) => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    // console.log(formData);
   };
 
   // to handle image
@@ -52,7 +54,10 @@ const UserSettingsForm = ({ profileData }) => {
   };
 
   const handleSkillsChange = (selectedOptions) => {
-    setFormData({ ...formData, skills: selectedOptions });
+    setFormData({
+      ...formData,
+      skills: selectedOptions ? selectedOptions : [],
+    });
   };
 
   const handleSubmit = async (event) => {
@@ -67,11 +72,13 @@ const UserSettingsForm = ({ profileData }) => {
     form.append("phone", formData.phone);
 
     if (formData.skills) {
-      form.append(
-        "skills",
-        JSON.stringify(formData.skills.map((skill) => skill.value))
-      );
+      let skillSet = [];
+      formData.skills.map((item) => {
+        return skillSet.push(item.value);
+      });
+      form.append("skills", skillSet);
     }
+
     if (image) {
       form.append("image", image);
     }
@@ -84,31 +91,16 @@ const UserSettingsForm = ({ profileData }) => {
     const res = await fetch(`/api/updateuser`, {
       method: "PATCH",
       headers: {
-        // "Content-Type": "application/json",
         Authorization: `Bearer ${cookie}`,
       },
       body: form,
     });
 
-    const response = await res.json();
-
     if (res.status === 200) {
       toast.success("Profile data updated");
-      // setFormData({
-      //   name: "",
-      //   email: "",
-      //   position: "",
-      //   bio: "",
-      //   location: "",
-      //   phone: "",
-      //   skills: [],
-      // });
     } else {
       toast.error("Something went wrong");
     }
-    // } catch (error) {
-    //   console.error("Error updating profile:", error);
-    // }
   };
 
   const skillOptions = [
@@ -183,6 +175,12 @@ const UserSettingsForm = ({ profileData }) => {
     { value: "Salesforce", label: "Salesforce" },
     { value: "SAP", label: "SAP" },
   ];
+
+  // Convert formData.skills (array of strings) to the format required by react-select
+  const defaultSkills = skillOptions.filter((option) =>
+    formData.skills.includes(option.value)
+  );
+  // setFormData({ ...formData, skills: defaultSkills });
 
   return (
     <div className="profile-setting-form-container">
