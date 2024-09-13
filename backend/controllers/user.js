@@ -74,7 +74,7 @@ const selfProfileData = catchAsync(async (req, res, next) => {
   //   user's profile data
   const userProfileData = await User.findOne({ _id: userId })
     .select(
-      "_id name username email image followers following following_company createdAt cv location bio skills position"
+      "_id name username email image followers following following_company createdAt cv location bio skills position phone"
     )
     .populate({
       path: "followers",
@@ -127,42 +127,12 @@ const selfProfileData = catchAsync(async (req, res, next) => {
 
 // update user profile
 const updateUserProfile = catchAsync(async (req, res, next) => {
-  // if cv is provided
-  // const file = req.file;
+  // extract data from req.body
+  const { skills, ...otherFields } = req.body;
 
-  // if (!file) {
-  //   const updateUser = await User.findByIdAndUpdate(
-  //     { _id: req.user.userId },
-  //     req.body,
-  //     {
-  //       new: true,
-  //     }
-  //   );
-
-  //   if (!updateUser) {
-  //     return next(new ErrorHandler("Something went wrong", 500));
-  //   }
-
-  //   res.status(201).send(updateUser);
-  // } else {
-  //   const fileUrl = `${req.protocol}://${req.get("host")}/public/uploads/cv${
-  //     file.filename
-  //   }`;
-
-  //   const updateUser = await User.findByIdAndUpdate(
-  //     { _id: req.user.userId },
-  //     { ...req.body, cv: fileUrl },
-  //     {
-  //       new: true,
-  //     }
-  //   );
-
-  //   if (!updateUser) {
-  //     return next(new ErrorHandler("Something went wrong", 500));
-  //   }
-
-  //   res.status(201).send(updateUser);
-  // }
+  // Check if skills is a string and convert to an array
+  const formattedSkills =
+    typeof skills === "string" ? skills.split(",") : skills;
 
   const fileUrls = {};
 
@@ -180,7 +150,7 @@ const updateUserProfile = catchAsync(async (req, res, next) => {
 
   const updateUser = await User.findByIdAndUpdate(
     { _id: req.user.userId },
-    { ...req.body, ...fileUrls },
+    { ...otherFields, skills: formattedSkills, ...fileUrls },
     {
       new: true,
     }

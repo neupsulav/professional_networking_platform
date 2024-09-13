@@ -64,11 +64,9 @@ const userSchema = new mongoose.Schema({
   bio: {
     type: String,
   },
-  skills: [
-    {
-      type: String,
-    },
-  ],
+  skills: {
+    type: [String],
+  },
   cv: {
     type: String,
   },
