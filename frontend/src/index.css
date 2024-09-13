@@ -1757,6 +1757,10 @@ body::-webkit-scrollbar {
   padding-bottom: 5px;
 }
 
+.company-profile-section-content {
+  margin-left: 10px;
+}
+
 .company-profile-section-text,
 .company-profile-section-list {
   margin: 10px 0;

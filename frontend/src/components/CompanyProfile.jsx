@@ -88,19 +88,25 @@ const CompanyProfile = () => {
           <div className="company-profile-content">
             <div className="company-profile-section">
               <h2 className="company-profile-section-title">Overview</h2>
-              <p className="company-profile-section-text">
-                {selfProfileData.company.overview
-                  ? selfProfileData.company.overview
-                  : "Not specified"}
-              </p>
+              <p
+                className="company-profile-section-text"
+                dangerouslySetInnerHTML={{
+                  __html: selfProfileData.company.overview
+                    ? selfProfileData.company.overview
+                    : "No yet specified",
+                }}
+              ></p>
             </div>
             <div className="company-profile-section">
               <h2 className="company-profile-section-title">Services</h2>
-              <ul className="company-profile-section-list">
-                {selfProfileData.company.services
-                  ? selfProfileData.company.services
-                  : "Not specified"}
-              </ul>
+              <p
+                className="company-profile-section-content"
+                dangerouslySetInnerHTML={{
+                  __html: selfProfileData.company.services
+                    ? selfProfileData.company.services
+                    : "No yet specified",
+                }}
+              ></p>
             </div>
             <div className="company-profile-section">
               <h2 className="company-profile-section-title">
