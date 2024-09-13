@@ -46,8 +46,26 @@ const Settings = ({ userType, selectedPath, setSelectedPath }) => {
     setProfileData(response);
   };
 
+  // to store company profile data
+  const [companyData, setCompanyData] = useState();
+
+  // to get company's profile data
+  const companyProfileData = async () => {
+    const res = await fetch("/api/getcompanyselfprofile", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${cookie}`,
+      },
+    });
+
+    const response = await res.json();
+
+    setCompanyData(response);
+  };
+
   useEffect(() => {
     getProfileData();
+    companyProfileData();
   }, []);
 
   //   to return components
@@ -64,6 +82,7 @@ const Settings = ({ userType, selectedPath, setSelectedPath }) => {
           <CompanySettingsForm
             selectedPath={selectedPath}
             setSelectedPath={setSelectedPath}
+            companyData={companyData}
           />
         );
 
