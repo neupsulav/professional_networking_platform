@@ -27,6 +27,7 @@ const SinglePost = () => {
   const [commentsCount, setCommentsCount] = useState();
   const [likedBy, setLikedBy] = useState();
   const [isDataFetched, setIsDataFetched] = useState(false);
+  const [isCommentsFetched, setIsCommentsFetched] = useState(false);
 
   //   to store post details
   const [details, setDetails] = useState();
@@ -152,6 +153,7 @@ const SinglePost = () => {
     const response = await res.json();
     setComments(response.Comments.comments);
     setCommentsCount(response.commentsCount);
+    setIsCommentsFetched(true);
   };
 
   useEffect(() => {
@@ -268,36 +270,38 @@ const SinglePost = () => {
             }
           >
             <p className="commentsContainerTitle">Comments</p>
-            <div className="commentItems">
-              {comments.length > 0
-                ? comments.map((comment, index) => {
-                    return (
-                      <div className="commentItem" key={index}>
-                        <div>
-                          <img src={comment.user.image} alt="profile" />
+            {isCommentsFetched && (
+              <div className="commentItems">
+                {comments.length > 0
+                  ? comments.map((comment, index) => {
+                      return (
+                        <div className="commentItem" key={index}>
                           <div>
-                            <p className="commentItem_name">
-                              {comment.user.name}{" "}
-                              <span>
-                                {calculateDaysSinceComment(comment.createdAt)}d
-                                ago
-                              </span>
-                            </p>
-                            <p className="commentItem_position">
-                              {comment.user.position
-                                ? comment.user.position
-                                : comment.user.email}
-                            </p>
+                            <img src={comment.user.image} alt="profile" />
+                            <div>
+                              <p className="commentItem_name">
+                                {comment.user.name}{" "}
+                                <span>
+                                  {calculateDaysSinceComment(comment.createdAt)}
+                                  d ago
+                                </span>
+                              </p>
+                              <p className="commentItem_position">
+                                {comment.user.position
+                                  ? comment.user.position
+                                  : comment.user.email}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="commentItem_content">
+                            {comment.content}
                           </div>
                         </div>
-                        <div className="commentItem_content">
-                          {comment.content}
-                        </div>
-                      </div>
-                    );
-                  })
-                : "No comments yet"}
-            </div>
+                      );
+                    })
+                  : "No comments yet"}
+              </div>
+            )}
           </div>
         </div>
       )}
