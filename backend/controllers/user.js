@@ -16,7 +16,7 @@ const userProfileData = catchAsync(async (req, res, next) => {
   const user = await User.findOne({ _id: userId });
   const userProfileData = await User.findOne({ _id: userId })
     .select(
-      "_id name username bio location skills email image cv followers following following_company createdAt"
+      "_id name username bio position location skills email image cv followers following following_company createdAt"
     )
     .populate({
       path: "followers",
