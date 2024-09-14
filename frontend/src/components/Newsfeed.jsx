@@ -22,6 +22,24 @@ const Newsfeed = () => {
     setCaption(value);
   };
 
+  // to store user profile data
+  const [profileData, setProfileData] = useState({});
+  const [isDataFetched, setIsDataFetched] = useState(false);
+
+  // to get user's profile data
+  const getProfileData = async () => {
+    const res = await fetch("/api/selfuser", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${cookie}`,
+      },
+    });
+
+    const response = await res.json();
+    setProfileData(response);
+    setIsDataFetched(true);
+  };
+
   // to create a new post
   const postData = async (e) => {
     e.preventDefault();
@@ -64,40 +82,47 @@ const Newsfeed = () => {
 
   useEffect(() => {
     getPosts();
+    getProfileData();
   }, []);
 
   return (
-    <div className="newsfeed_container">
-      <ToastContainer />
-      <div className="createPostContainer">
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-          alt="profilePic"
-        />
-        <input
-          type="text"
-          name="post"
-          id="post"
-          placeholder="What's new?"
-          value={caption}
-          onChange={handleInputs}
-        />
-        <button onClick={postData}>Post</button>
-      </div>
+    <>
+      {isDataFetched && (
+        <div className="newsfeed_container">
+          <ToastContainer />
+          <div className="createPostContainer">
+            <img src={profileData.userProfileData.image} alt="profilePic" />
+            <input
+              type="text"
+              name="post"
+              id="post"
+              placeholder="What's new?"
+              value={caption}
+              onChange={handleInputs}
+            />
+            <button onClick={postData}>Post</button>
+          </div>
 
-      {/* to display all the posts */}
-      {posts.length > 0 ? (
-        posts.map((post, index) => {
-          return <Post key={index} details={post} />;
-        })
-      ) : (
-        <p
-          style={{ fontWeight: "bold", fontSize: "20px", textAlign: "center" }}
-        >
-          No posts yet. Please follow people to create network and view posts.
-        </p>
+          {/* to display all the posts */}
+          {posts.length > 0 ? (
+            posts.map((post, index) => {
+              return <Post key={index} details={post} />;
+            })
+          ) : (
+            <p
+              style={{
+                fontWeight: "bold",
+                fontSize: "20px",
+                textAlign: "center",
+              }}
+            >
+              No posts yet. Please follow people to create network and view
+              posts.
+            </p>
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 };
 
