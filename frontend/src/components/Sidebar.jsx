@@ -8,6 +8,9 @@ import {
   FaBell,
   FaCog,
 } from "react-icons/fa";
+// import { BsSearch } from "react-icons/bs";
+// import { GrFormSearch } from "react-icons/gr";
+import { GrSearch } from "react-icons/gr";
 import { RxCross1 } from "react-icons/rx";
 
 // create a leftsidebar
@@ -126,6 +129,20 @@ const Sidebar = ({
           >
             <FaCog className="sidebar-icon" />
             Settings
+          </div>
+        </li>
+        <li
+          className={
+            selectedPath === 6 ? "active-link sidebar-item" : "sidebar-item"
+          }
+        >
+          <div
+            onClick={() => {
+              setSelectedPath(6);
+            }}
+          >
+            <GrSearch className="sidebar-icon" />
+            Search
           </div>
         </li>
       </ul>

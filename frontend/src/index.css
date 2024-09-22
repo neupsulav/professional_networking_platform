@@ -2664,3 +2664,132 @@ input {
   gap: 20px;
   width: 100%;
 }
+
+/* for search page */
+.search_page_container {
+  width: 52%;
+  height: 100%;
+  border-radius: 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  overflow-y: scroll;
+  background-color: white;
+}
+
+.search_page_container::-webkit-scrollbar {
+  visibility: hidden;
+}
+
+.search_page_title {
+  font-size: 23px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.search_page_bar {
+  height: 35px;
+  width: 90%;
+  /* font-weight: bold; */
+  /* padding: 0px 0px 0px 20px; */
+  border-radius: 30px;
+  /* text-align: center; */
+  outline: none;
+  border: none;
+  font-size: 18px;
+}
+
+.search_page_icon {
+  font-size: 25px;
+  cursor: pointer;
+  color: var(--primary-color);
+  transition: 0.5s;
+}
+
+.search_page_icon:hover {
+  color: black;
+}
+
+.search_bar_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+  width: 65%;
+  border: 1px solid black;
+  border-radius: 25px;
+  padding: 0px 15px 0px 15px;
+}
+
+.search_result_container_title {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 35px;
+  margin-bottom: 45px;
+}
+
+.search_result_people {
+  font-size: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  /* transition: 0.5s; */
+  transition: 0.5s;
+}
+
+.search_result_people:hover {
+  /* font-weight: bold; */
+  color: var(--primary-color);
+}
+
+.search_result_company {
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+  font-weight: bold;
+}
+
+.search_result_company:hover {
+  /* font-weight: bold; */
+  color: var(--primary-color);
+}
+
+.search_result_title_icon {
+  margin-top: 5px;
+  font-size: 20px;
+}
+
+.search_result_main_container {
+  /* border: 1px solid red; */
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.suggestionbar_item_company_search {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 15px;
+  /* width: 100%; */
+  width: 500px;
+  margin-bottom: 20px;
+  border: 1px solid var(--primary-color);
+  /* width: 90%; */
+  padding: 10px 5px 10px 15px;
+}
+
+.suggestionbar_item_company_search img {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}

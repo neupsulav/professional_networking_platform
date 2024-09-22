@@ -14,6 +14,7 @@ import Cookies from "universal-cookie";
 import CompanyFollowers from "../components/CompanyFollowers";
 import { useNavigate } from "react-router-dom";
 import RecommendationPage from "../components/Recommendation";
+import SearchPage from "../components/Search";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -64,6 +65,9 @@ const Home = () => {
             setSelectedPath={setSelectedPath}
           />
         );
+
+      case 6:
+        return <SearchPage />;
 
       default:
         break;
