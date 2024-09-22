@@ -2793,3 +2793,32 @@ input {
   border-radius: 50%;
   object-fit: cover;
 }
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: white; 
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  height: 50px;
+}
+
+.navbar-logo img {
+  height: 50px; 
+}
+
+.navbar-links {
+  margin-right: 20px;
+}
+
+.login-link {
+  font-size: 16px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-link:hover {
+  color: #0056b3;
+}
+

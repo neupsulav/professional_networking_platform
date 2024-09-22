@@ -4,6 +4,7 @@ import SignupCompany from "./SignupCompany";
 import companyImage from "./images/co.png";
 import userImage from "./images/user.png";
 import { IoMdArrowBack } from "react-icons/io";
+import Navbar from "../components/Navbar";
 
 const SignupOptions = () => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -13,6 +14,8 @@ const SignupOptions = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="signup-options-container">
       {selectedOption === null ? (
         <div className="options">
@@ -59,6 +62,7 @@ const SignupOptions = () => {
         </>
       )}
     </div>
+    </>
   );
 };
 
