@@ -6,7 +6,8 @@ import { CiShare2 } from "react-icons/ci";
 import { IoSend } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import Cookies from "universal-cookie";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
 const Post = ({ details }) => {
@@ -106,11 +107,11 @@ const Post = ({ details }) => {
     });
 
     if (res.status === 201) {
-      toast.success("Commented created");
+      // toast.success("Commented created");
       setComment("");
       getComments(details._id);
     } else {
-      toast.error("Something went wrong");
+      // toast.error("Something went wrong");
     }
   };
 

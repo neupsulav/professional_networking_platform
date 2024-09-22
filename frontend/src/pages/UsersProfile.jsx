@@ -70,12 +70,10 @@ const UserProfile = () => {
 
     const response = await res.json();
     if (response.msg === "User followed") {
-      toast.success(
-        `You are now following ${profileData.userProfileData.name}`
-      );
+      // toast.success("You're now following the user");
       checkFollowing();
     } else {
-      toast.success(`You have unfollowed ${profileData.userProfileData.name}`);
+      // toast.success("You've now unfollowed the user");
       checkFollowing();
     }
   };
