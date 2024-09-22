@@ -56,16 +56,42 @@ const getJobRecommendations = catchAsync(async (req, res, next) => {
     }
 
     // Fetch all jobs
-    const jobs = await Job.find();
+    const jobs = await Job.find().populate("company");
 
     // Compute the skill match score for each job
     const jobRecommendations = jobs.map((job) => {
       const skillMatchCount = calculateSkillMatch(userSkills, job);
       return {
-        jobId: job._id,
-        jobTitle: job.title, // Assuming job has a 'title' field
+        _id: job._id,
+        company: job.company
+          ? {
+              _id: job.company._id,
+              name: job.company.name,
+              email: job.company.email,
+              image: job.company.image,
+              isVerified: job.company.isVerified,
+              accountType: job.company.accountType,
+              followers: job.company.followers,
+              phone: job.company.phone,
+              bio: job.company.bio,
+              employees: job.company.employees,
+              industry: job.company.industry,
+              location: job.company.location,
+              overview: job.company.overview,
+              services: job.company.services,
+            }
+          : null, // Handle case when company is null
+        position: job.position,
+        intro: job.intro,
+        location: job.location,
+        salary: job.salary,
+        deadline: job.deadline,
+        noOfPost: job.noOfPost,
+        requirements: job.requirements,
+        responsibilities: job.responsibilities,
+        type: job.type,
+        createdAt: job.createdAt,
         matchScore: skillMatchCount,
-        jobDetails: job, // Add other details if needed
       };
     });
 
