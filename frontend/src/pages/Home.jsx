@@ -13,6 +13,7 @@ import Settings from "../components/settings";
 import Cookies from "universal-cookie";
 import CompanyFollowers from "../components/CompanyFollowers";
 import { useNavigate } from "react-router-dom";
+import RecommendationPage from "../components/Recommendation";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -50,6 +51,9 @@ const Home = () => {
 
       case 2:
         return <Jobs />;
+
+      case 3:
+        return <RecommendationPage />;
       case 4:
         return <Notifications />;
       case 5:

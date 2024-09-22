@@ -2632,3 +2632,35 @@ input {
   padding: 3px 7px;
   font-size: 12px;
 }
+
+/* for job recommendation page */
+.recommendation_page_container {
+  width: 55%;
+  height: 100%;
+  border-radius: 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  overflow-y: scroll;
+}
+
+.recommendation_page_container::-webkit-scrollbar {
+  visibility: hidden;
+}
+
+.recommendation_page_title {
+  font-size: 23px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.recommended_jobs_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
