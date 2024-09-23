@@ -7,7 +7,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Cookies from "universal-cookie";
 import Navbar from "../components/Navbar";
-import logo from "./images/logo.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -76,7 +75,7 @@ const Login = () => {
         <div className="login_Container">
           <form className="login_form" onSubmit={postData}>
             <div className="login_image">
-              <img src={logo} alt="login" />
+              <img src="https://www.go.ooo/img/bg-img/Login.jpg" alt="login" />
             </div>
             <div className="form">
               <div className="heading">
