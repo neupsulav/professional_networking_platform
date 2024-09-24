@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Company = require("./company");
 const Job = require("./job");
+const User = require("./user");
 
 const companyNotificationSchema = new mongoose.Schema({
   company: {
@@ -17,6 +18,10 @@ const companyNotificationSchema = new mongoose.Schema({
   job: {
     type: mongoose.Schema.Types.ObjectId,
     ref: Job,
+  },
+  currentUser: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: User,
   },
 });
 

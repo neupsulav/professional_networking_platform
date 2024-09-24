@@ -37,8 +37,10 @@ const applyJob = catchAsync(async (req, res, next) => {
   // to push the notification
   const job = await Job.findById(jobId);
   const company = await Company.findById(job.company);
+  const currentUser = await User.findOne({ email: email });
 
   const createNotification = await CompanyNotfication.create({
+    currentUser: currentUser,
     company: company._id,
     content: `${name} applied to job vacancy for ${job.position}`,
     job: job._id,
