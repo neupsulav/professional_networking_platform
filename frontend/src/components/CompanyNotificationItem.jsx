@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
-const NotificationItem = ({ details }) => {
-  const navigate = useNavigate();
+const CompanyNotificationItem = ({ details }) => {
+  //   const navigate = useNavigate();
 
   //   to store difference in days
   const [time, setTime] = useState();
@@ -30,7 +30,7 @@ const NotificationItem = ({ details }) => {
   return (
     <div
       className="notification-item-container"
-      onClick={() => navigate(`/post/${details.post}`)}
+      //   onClick={() => navigate(`/post/${details.post}`)}
     >
       <div className="notification-avatar">
         <img src={details.currentUser.image} alt={`${details.user}'s img`} />
@@ -43,4 +43,4 @@ const NotificationItem = ({ details }) => {
   );
 };
 
-export default NotificationItem;
+export default CompanyNotificationItem;
