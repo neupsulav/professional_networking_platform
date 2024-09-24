@@ -4,6 +4,8 @@ const Company = require("../models/company");
 const Applicant = require("../models/applicants");
 const ErrorHandler = require("../middlewares/errorHandler");
 const catchAsync = require("../middlewares/catchAsync");
+const Job = require("../models/job");
+const CompanyNotfication = require("../models/companyNotification");
 
 // for user applying job
 const applyJob = catchAsync(async (req, res, next) => {
@@ -32,6 +34,19 @@ const applyJob = catchAsync(async (req, res, next) => {
 
   newApplication.save();
 
+  // to push the notification
+  const job = await Job.findById(jobId);
+  const company = await Company.findById(job.company);
+
+  const createNotification = await CompanyNotfication.create({
+    company: company._id,
+    content: `${name} applied to job vacancy for ${job.position}`,
+    job: job._id,
+  });
+
+  createNotification.save();
+
+  // return response
   res.status(201).send(newApplication);
 });
 
