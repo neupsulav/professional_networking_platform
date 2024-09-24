@@ -2799,13 +2799,13 @@ input {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: white; 
+  background-color: white;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   height: 50px;
 }
 
 .navbar-logo img {
-  height: 50px; 
+  height: 50px;
 }
 
 .navbar-links {
@@ -2822,3 +2822,43 @@ input {
   color: #0056b3;
 }
 
+/* for user notification item */
+.notification-item-container {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.notification-item-container:hover {
+  background-color: #eaeaea;
+}
+
+.notification-avatar img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.notification-content {
+  flex-grow: 1;
+}
+
+.notification-message {
+  font-size: 16px;
+  color: #333;
+  margin: 0;
+}
+
+.notification-time {
+  font-size: 12px;
+  color: #777;
+  margin-top: 5px;
+  display: block;
+}
