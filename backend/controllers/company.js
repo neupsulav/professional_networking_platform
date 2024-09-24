@@ -2,6 +2,7 @@ const catchAsync = require("../middlewares/catchAsync");
 const ErrorHandler = require("../middlewares/errorHandler");
 const Company = require("../models/company");
 const Job = require("../models/job");
+const CompanyNotification = require("../models/companyNotification");
 
 // get company self profile details
 const getCompanySelfProfileDetails = catchAsync(async (req, res, next) => {
@@ -100,8 +101,22 @@ const updateCompanyProfile = catchAsync(async (req, res, next) => {
   }
 });
 
+// to get company notification
+const getCompanyNotification = catchAsync(async (req, res, next) => {
+  const companyId = req.user.userId;
+
+  const notifications = await CompanyNotification.find({
+    company: companyId,
+  }).sort({
+    createdAt: -1,
+  });
+
+  res.status(200).send(notifications);
+});
+
 module.exports = {
   getCompanySelfProfileDetails,
   getOtherCompanyProfileDetails,
   updateCompanyProfile,
+  getCompanyNotification,
 };

@@ -35,6 +35,7 @@ const {
   getCompanySelfProfileDetails,
   getOtherCompanyProfileDetails,
   updateCompanyProfile,
+  getCompanyNotification,
 } = require("../controllers/company");
 
 // routes
@@ -55,6 +56,12 @@ router.patch(
   companyAuthentication,
   uploadOptions.single("image"),
   updateCompanyProfile
+);
+
+router.get(
+  "/getcompanynptifications/",
+  userAuthentication,
+  getCompanyNotification
 );
 
 module.exports = router;
