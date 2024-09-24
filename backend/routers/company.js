@@ -59,7 +59,7 @@ router.patch(
 );
 
 router.get(
-  "/getcompanynptifications/",
+  "/getcompanynotifications/",
   userAuthentication,
   getCompanyNotification
 );
