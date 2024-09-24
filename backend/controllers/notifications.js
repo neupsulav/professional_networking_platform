@@ -11,7 +11,7 @@ const getNotifications = catchAsync(async (req, res, next) => {
   const userId = req.user.userId;
 
   const notifications = await Notification.find({ user: userId })
-    .populate("user")
+    .populate("currentUser")
     .sort({
       createdAt: -1,
     });

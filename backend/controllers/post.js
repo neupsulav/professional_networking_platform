@@ -52,6 +52,7 @@ const likePost = catchAsync(async (req, res, next) => {
     const currentUser = await User.findById({ _id: req.user.userId });
 
     const createNotification = await Notification.create({
+      currentUser: req.user.userId,
       user: getPost.user,
       content: `${currentUser.name} liked your post`,
       post: getPost._id,
@@ -110,13 +111,14 @@ const createComment = catchAsync(async (req, res, next) => {
   const getPost = await Post.findOne({ _id: postId });
   const currentUser = await User.findById({ _id: req.user.userId });
 
-  const createNotification = await Notification.create({
+  await Notification.create({
+    currentUser: req.user.userId,
     user: getPost.user,
     content: `${currentUser.name} commented your post`,
     post: getPost._id,
   });
 
-  createNotification.save();
+  // createNotification.save();
 
   res.status(201).json({ success: true });
 });

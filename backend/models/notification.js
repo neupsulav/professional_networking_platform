@@ -18,6 +18,10 @@ const notificationSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: Post,
   },
+  currentUser: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: User,
+  },
 });
 
 module.exports = mongoose.model("Notification", notificationSchema);
