@@ -10,7 +10,7 @@ const NotificationItem = ({ details }) => {
       onClick={() => navigate(`/post/${details.post}`)}
     >
       <div className="notification-avatar">
-        <img src={details.user.image} alt={`${details.user}'s img`} />
+        <img src={details.currentUser.image} alt={`${details.user}'s img`} />
       </div>
       <div className="notification-content">
         <p className="notification-message">{details.content}</p>
